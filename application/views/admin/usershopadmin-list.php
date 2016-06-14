@@ -114,7 +114,7 @@
       <tr>
         <td colspan='2'>
           <a title="编辑" href="javascript:;" onclick="member_edit('修改店铺信息','/admin/getShopDataEdit','','','550')" style="text-align:center;">
-            <div style="text-align:center;"><img src="http://127.0.0.1/assets/images/shangpintupian.png" width="80" /></div>
+            <div style="text-align:center;"><img src="http://shop.fengdukeji.com/assets/images/shangpintupian.png" width="80" /></div>
           </a>
         </td>   
       </tr>

@@ -1212,10 +1212,9 @@ class Admin extends CI_Controller {
 		$header=array();
         $param=array();
         $goodsJSON=httpGet($goodsurl,$header,$param);
-        if(!empty($goodsJSON) && isset($goodsJSON))
-        {
-        	$goods = json_decode($goodsJSON)->data;
-        }  
+        
+        $goods = json_decode($goodsJSON)->data;
+        //var_dump($goodsJSON); 
 
 	    /*根据title 将数据存到不同得页面*/
 	    if($title == '分类特征')
@@ -1225,7 +1224,7 @@ class Admin extends CI_Controller {
 			'data'=>array('goods'=>$goods,'shopdata'=>$shopdata)
 			);
 	    }
-	    else
+	    elseif($title == '商品图片')
 	    {
 	    	$parameters=array(
 			'view'=>'shopgoods-pic',

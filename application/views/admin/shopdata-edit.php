@@ -126,7 +126,7 @@
   </form>
 </div>
 </div>
-<!-- <form id="uploadImgThumb1" enctype="multipart/form-data">
+<form id="uploadImgThumb1" enctype="multipart/form-data">
     <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
 </form>
 <form id="uploadImgThumb2" enctype="multipart/form-data">
@@ -144,7 +144,7 @@
 </form>
 <form id="uploadImgThumb" enctype="multipart/form-data">
     <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
-</form> -->
+</form> 
 <script type="text/javascript" src="/assets/lib/icheck/jquery.icheck.min.js"></script>
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">
