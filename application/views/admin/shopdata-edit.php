@@ -160,12 +160,17 @@ $(function(){
 		callback:function(form){
 			//form[0].submit();
       saveShopData(function(){
-        alert('保存成功！即将退出页面，请联系审核员尽快通过审核');
+        alert('保存成功！');
+        /*这个是修改之后直接退出*/
         // parent.window.location.replace('/adminajax/logout');
-        parent.window.location.href="/adminajax/logout";
-        window.history.go(-1);
-        var index = parent.layer.getFrameIndex(window.name);
+        // parent.window.location.href="/adminajax/logout";
+        // window.history.go(-1);
+        // var index = parent.layer.getFrameIndex(window.name);
         // parent.window.location.reload(); 
+        // parent.layer.close(index);
+
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.window.location.reload();
         parent.layer.close(index);
         
       });
