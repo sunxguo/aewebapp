@@ -892,8 +892,28 @@ class Common extends CI_Controller {
 				if(isset($data->shopQrcode)){
 					$info['shopQrcode']=$data->shopQrcode;
 				}
+				if(isset($data->thumbnail)){
+					$info['shopLogo']=strstr($data->thumbnail,'http')?$data->thumbnail:SERVER_IP.($data->thumbnail);
+				}
+
 				if(isset($data->thumbnail1)){
-					$info['businessLogo']=strstr($data->thumbnail1,'http')?$data->thumbnail1:SERVER_IP.($data->thumbnail1);
+					$info['shopTopPic1']=strstr($data->thumbnail1,'http')?$data->thumbnail1:SERVER_IP.($data->thumbnail1);
+				}
+
+				if(isset($data->thumbnail2)){
+					$info['shopTopPic2']=strstr($data->thumbnail2,'http')?$data->thumbnail2:SERVER_IP.($data->thumbnail2);
+				}
+
+				if(isset($data->thumbnail3)){
+					$info['shopTopPic3']=strstr($data->thumbnail3,'http')?$data->thumbnail3:SERVER_IP.($data->thumbnail3);
+				}
+
+				if(isset($data->thumbnail4)){
+					$info['shopTopPic4']=strstr($data->thumbnail4,'http')?$data->thumbnail4:SERVER_IP.($data->thumbnail4);
+				}
+
+				if(isset($data->thumbnail5)){
+					$info['shopTopPic5']=strstr($data->thumbnail5,'http')?$data->thumbnail5:SERVER_IP.($data->thumbnail5);
 				}
 
 				if(isset($data->shopProvince)){
