@@ -90,6 +90,7 @@ class Adminajax extends CI_Controller {
 			//通过user_id判断是否开通店铺  若未开通 则无法进入后台
 			$shop=$this->getdata->getContentAdvance('usershop',array('shop_user_id'=>$admin->user_id));
             if(!empty($shop->shop_id) && $shop->shop_status == 0 && $shop->shop_audit_status == 1)
+
             {
             	$_SESSION=array();
             	$_SESSION['nickname']=$admin->user_nickname;
@@ -108,9 +109,6 @@ class Adminajax extends CI_Controller {
 		echo json_encode(array("result"=>"success","message"=>"登录成功!"));
 	}
 	public function logout(){
-		// unset($_SESSION["username"]);
-		// unset($_SESSION["userid"]);
-		// unset($_SESSION["usertype"]);
 		$_SESSION=array();
 		$this->load->view('redirect',array("url"=>"/admin/login"));
 	}

@@ -109,12 +109,13 @@
     </div>
 
     <div class="row cl">
+
       <label class="form-label col-3"><span class="c-red">*</span>营业时间结束：</label>
       <div class="formControls col-5">
         <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
       </div>
     </div> 
-     
+  
    
     <div class="row cl">
       <div class="col-9 col-offset-3">
