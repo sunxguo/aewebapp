@@ -1416,7 +1416,8 @@ class GetData{
 		//输出图片地址
 		$dstLocation='/uploads/2dcode/'.$appid.'withlogo.png';
 		//输出图片   
-		imagepng($QR,$_SERVER['DOCUMENT_ROOT'].$dstLocation);   
+		// imagepng($QR,$_SERVER['DOCUMENT_ROOT'].$dstLocation);  
+		imagepng($QR,'http://shop.fengdukeji.com'.$dstLocation);  
 		return  $dstLocation; 
 	}
 
