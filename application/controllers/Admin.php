@@ -1051,16 +1051,13 @@ class Admin extends CI_Controller {
         $param=array();
         $shopdataJSON=httpGet($url,$header,$param);
         $shopdatas = json_decode($shopdataJSON);
-<<<<<<< HEAD
+
         $shopdata='';
         if(!empty($shopdatas->data) && isset($shopdatas->data))
         {
         	$shopdata = $shopdatas->data;
         }
-=======
-        //var_dump($shopdatas);
-	    $shopdata = $shopdatas->data;
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
+
 	    $parameters=array(
 			'view'=>'usershopadmin-list',
 			'data'=>array('shopdata'=>$shopdata)
@@ -1072,24 +1069,18 @@ class Admin extends CI_Controller {
 	public function getShopBasicDataByUserId()
 	{
         $shopid=$_SESSION['userid'];
-<<<<<<< HEAD
-=======
-        //var_dump($user_id);
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
+
         $url=API_IP.'AEWebApp/userShop/getUserIsShop?userId='.$shopid;
         $header=array();
         $param=array();
         $shopdataJSON=httpGet($url,$header,$param);
         $shopdatas = json_decode($shopdataJSON);
-<<<<<<< HEAD
         $shopdata='';
         if(!empty($shopdatas->data) && isset($shopdatas->data))
         {
         	$shopdata = $shopdatas->data;
         }
-=======
-        
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
+
 	    $shopdata = $shopdatas->data;
 	    $parameters=array(
 			'view'=>'userbasicshopadmin-list',
@@ -1107,7 +1098,7 @@ class Admin extends CI_Controller {
         $param=array();
         $shopdataJSON=httpGet($url,$header,$param);
         $shopdatas = json_decode($shopdataJSON);
-<<<<<<< HEAD
+
         $shopdata='';
         if(!empty($shopdatas) && isset($shopdatas))
         {
@@ -1115,10 +1106,6 @@ class Admin extends CI_Controller {
         }
 	    $shopdata = $shopdatas->data;
 	    
-=======
-	    $shopdata = $shopdatas->data;
-	   // var_dump($shopdata);
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
 	    $parameters=array(
 			'view'=>'shopdata-edit',
 			'data'=>array('shopdata'=>$shopdata)
@@ -1134,16 +1121,13 @@ class Admin extends CI_Controller {
         $header=array();
         $param=array();
         $goodsJSON=httpGet($url,$header,$param);
-<<<<<<< HEAD
+
         $goodsdata='';
         if(!empty(json_decode($goodsJSON)->data) && isset(json_decode($goodsJSON)->data))
         {
         	 $goodsdata = json_decode($goodsJSON)->data;
         }
-=======
-	    $goodsdata = json_decode($goodsJSON)->data;
 
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
 	    /*分页效果*/
 	    $amoun=count($goodsdata);
 		$baseUrl='/admin/getShopGoodsAll?placeholder=true';
@@ -1228,22 +1212,17 @@ class Admin extends CI_Controller {
 	    /*查出商品信息*/
 		$goodsid=$_GET['id'];
 		$title=$_GET['title'];
-<<<<<<< HEAD
-=======
-		//var_dump($title);
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
+
 		$goodsurl=API_IP.'AEWebApp/userShop/queryGoodsListByGoodsid?goodsId='.$goodsid;
 		$header=array();
         $param=array();
         $goodsJSON=httpGet($goodsurl,$header,$param);
-<<<<<<< HEAD
+
         if(!empty($goodsJSON) && isset($goodsJSON))
         {
         	$goods = json_decode($goodsJSON)->data;
         }  
-=======
-	    $goods = json_decode($goodsJSON)->data;
->>>>>>> 0a8d797bcdcca0c013b664cb0e56c46aa0a4da90
+
 	    /*根据title 将数据存到不同得页面*/
 	    if($title == '分类特征')
 	    {
