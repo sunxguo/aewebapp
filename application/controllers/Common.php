@@ -1262,7 +1262,6 @@ class Common extends CI_Controller {
 					(	
 						"describe_shop"=>$data->describe_shop,
 						"name"=>$data->name,
-						
 						"status"=>$data->status,
 						"twoid"=>$data->twoid,
 						"addtime"=>$time,
@@ -1349,8 +1348,8 @@ class Common extends CI_Controller {
 	}
 	public function uploadImage(){
 		$result=upload("image");
-		echo(786451);
-		echo json_decode($result);
+		var_dump($result);
+		echo json_encode($result);
 
 	}
 	public function setLanguage(){

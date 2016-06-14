@@ -129,7 +129,6 @@
         <form id="uploadImgThumb4" enctype="multipart/form-data">
             <input onchange="return uploadThumb4()" name="image" type="file" id="file4" style="display:none;" accept="image/*">
         </form>
-
         <form id="uploadImgThumb5" enctype="multipart/form-data">
             <input onchange="return uploadThumb5()" name="image" type="file" id="file5" style="display:none;" accept="image/*">
         </form>

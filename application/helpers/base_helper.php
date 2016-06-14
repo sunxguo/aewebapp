@@ -76,16 +76,10 @@ function httpGet($url, $param = array(), $header = array()) {
 		$header[] = "Accept-Language: en-us,en;q=0.5";   
 		$header[] = "Pragma: ";
 	}
-	if(!empty($param))
-	{
-		$ch = curl_init($url.$paramString);
-	}
-	else
-	{
-		$ch = curl_init();
-	}
 	
-	curl_setopt($ch, CURLOPT_URL, $url);
+	//$ch = curl_init($url.$paramString);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url.$paramString);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
