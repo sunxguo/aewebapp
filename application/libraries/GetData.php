@@ -1391,8 +1391,8 @@ class GetData{
 		$value = $text; //二维码内容   
 		$errorCorrectionLevel = 'H';//容错级别   
 		$matrixPointSize = 10;//生成图片大小    
-		$QR = $_SERVER['DOCUMENT_ROOT'].'/uploads/2dcode/'.$appid.'qrcode.png';//已经生成的原始二维码图    
-		
+		//$QR = $_SERVER['DOCUMENT_ROOT'].'/uploads/2dcode/'.$appid.'qrcode.png';//已经生成的原始二维码图    
+		$QR = $_SERVER['DOCUMENT_ROOT'].'/uploads/2dcode/'.$appid.'qrcode.png';
 		//生成二维码图片
 		QRcode::png($value,$QR, $errorCorrectionLevel, $matrixPointSize, 2);
 		$logo = $_SERVER['DOCUMENT_ROOT'].$logoSrc;//准备好的logo图片 
