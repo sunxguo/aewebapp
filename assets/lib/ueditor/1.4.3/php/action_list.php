@@ -82,7 +82,8 @@ function getfiles($path, $allowFiles, &$files = array())
             } else {
                 if (preg_match("/\.(".$allowFiles.")$/i", $file)) {
                     $files[] = array(
-                        'url'=> substr($path2, strlen($_SERVER['DOCUMENT_ROOT'])),
+                        // 'url'=> substr($path2, strlen($_SERVER['DOCUMENT_ROOT'])),
+                        'url'=> substr($path2, strlen('http://shop.fengdukeji.com/uploads/')),
                         'mtime'=> filemtime($path2)
                     );
                 }
