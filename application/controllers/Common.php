@@ -1349,7 +1349,7 @@ class Common extends CI_Controller {
 	}
 	public function uploadImage(){
 		$result=upload("image");
-		echo json_encode($result);
+		var_dump($result);
 
 	}
 	public function setLanguage(){

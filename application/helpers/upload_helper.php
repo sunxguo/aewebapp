@@ -1,9 +1,8 @@
 <?php
 function upload($upload_file_name="files"){
 	//文件保存目录路径
-	//$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
-	$save_path = 'http://shop.fengdukeji.com/uploads/';
-	//var_dump(456456465);
+	$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+	//$save_path = 'http://shop.fengdukeji.com/uploads/';
 	
 	//文件保存目录URL
 	$save_url = '/uploads/';

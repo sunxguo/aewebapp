@@ -30,8 +30,8 @@ $start = isset($_GET['start']) ? htmlspecialchars($_GET['start']) : 0;
 $end = $start + $size;
 
 /* 获取文件列表 */
-// $path = $_SERVER['DOCUMENT_ROOT'] . (substr($path, 0, 1) == "/" ? "":"/") . $path;
-$path = 'http://shop.fengdukeji.com' . (substr($path, 0, 1) == "/" ? "":"/") . $path;
+$path = $_SERVER['DOCUMENT_ROOT'] . (substr($path, 0, 1) == "/" ? "":"/") . $path;
+//$path = 'http://shop.fengdukeji.com' . (substr($path, 0, 1) == "/" ? "":"/") . $path;
 $files = getfiles($path, $allowFiles);
 if (!count($files)) {
     return json_encode(array(
@@ -82,8 +82,8 @@ function getfiles($path, $allowFiles, &$files = array())
             } else {
                 if (preg_match("/\.(".$allowFiles.")$/i", $file)) {
                     $files[] = array(
-                        // 'url'=> substr($path2, strlen($_SERVER['DOCUMENT_ROOT'])),
-                        'url'=> substr($path2, strlen('http://shop.fengdukeji.com/uploads/')),
+                         'url'=> substr($path2, strlen($_SERVER['DOCUMENT_ROOT'])),
+                        //'url'=> substr($path2, strlen('http://shop.fengdukeji.com/uploads/')),
                         'mtime'=> filemtime($path2)
                     );
                 }

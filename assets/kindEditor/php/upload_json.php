@@ -13,9 +13,9 @@ $php_path = dirname(__FILE__) . '/';
 $php_url = dirname($_SERVER['PHP_SELF']) . '/';
 
 //文件保存目录路径
-//$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
 //$save_path = $php_path . '../attached/';
-$save_path = 'http://shop.fengdukeji.com/uploads/';
+//$save_path = 'http://shop.fengdukeji.com/uploads/';
 //文件保存目录URL
 $save_url = '/uploads/';
 //$save_url = $php_url . '../attached/';
