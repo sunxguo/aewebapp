@@ -1121,7 +1121,6 @@ class Admin extends CI_Controller {
         $header=array();
         $param=array();
         $goodsJSON=httpGet($url,$header,$param);
-
         $goodsdata='';
         if(!empty(json_decode($goodsJSON)->data) && isset(json_decode($goodsJSON)->data))
         {
