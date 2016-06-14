@@ -1348,7 +1348,7 @@ class Common extends CI_Controller {
 	}
 	public function uploadImage(){
 		$result=upload("image");
-		var_dump($result);
+		//var_dump($result);
 		echo json_encode($result);
 
 	}
