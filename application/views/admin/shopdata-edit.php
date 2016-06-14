@@ -114,29 +114,28 @@
       <div class="formControls col-5">
         <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
       </div>
-    </div> 
-    <!-- 上传图片 -->
-    <form id="uploadImgThumb1" enctype="multipart/form-data">
-        <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
-    </form>
-    <form id="uploadImgThumb2" enctype="multipart/form-data">
-        <input onchange="return uploadThumb2()" name="image" type="file" id="file2" style="display:none;" accept="image/*">
-    </form>
-    <form id="uploadImgThumb3" enctype="multipart/form-data">
-        <input onchange="return uploadThumb3()" name="image" type="file" id="file3" style="display:none;" accept="image/*">
-    </form>
-    <form id="uploadImgThumb4" enctype="multipart/form-data">
-        <input onchange="return uploadThumb4()" name="image" type="file" id="file4" style="display:none;" accept="image/*">
-    </form>
-
-    <form id="uploadImgThumb5" enctype="multipart/form-data">
-        <input onchange="return uploadThumb5()" name="image" type="file" id="file5" style="display:none;" accept="image/*">
-    </form>
-    <form id="uploadImgThumb" enctype="multipart/form-data">
-        <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
-    </form> 
-   
+    </div>  
     <div class="row cl">
+        <!-- 上传图片 -->
+        <form id="uploadImgThumb1" enctype="multipart/form-data">
+            <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
+        </form>
+        <form id="uploadImgThumb2" enctype="multipart/form-data">
+            <input onchange="return uploadThumb2()" name="image" type="file" id="file2" style="display:none;" accept="image/*">
+        </form>
+        <form id="uploadImgThumb3" enctype="multipart/form-data">
+            <input onchange="return uploadThumb3()" name="image" type="file" id="file3" style="display:none;" accept="image/*">
+        </form>
+        <form id="uploadImgThumb4" enctype="multipart/form-data">
+            <input onchange="return uploadThumb4()" name="image" type="file" id="file4" style="display:none;" accept="image/*">
+        </form>
+
+        <form id="uploadImgThumb5" enctype="multipart/form-data">
+            <input onchange="return uploadThumb5()" name="image" type="file" id="file5" style="display:none;" accept="image/*">
+        </form>
+        <form id="uploadImgThumb" enctype="multipart/form-data">
+            <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
+        </form> 
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
       </div>
