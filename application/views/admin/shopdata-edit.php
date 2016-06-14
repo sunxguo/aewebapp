@@ -23,7 +23,6 @@
         <img src="<?php echo $shopdata->shopLogo;?>" id="thumbnail" style="max-width:90%;max-height:100px;">
         <span class="btn-upload form-group">
           <a href="javascript:$('#file').click();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 选择图片</a>
-          <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
         </span>
       </div>
       <div class="col-4"> </div>
@@ -116,7 +115,26 @@
         <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
       </div>
     </div> 
-  
+    <!-- 上传图片 -->
+    <form id="uploadImgThumb1" enctype="multipart/form-data">
+        <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
+    </form>
+    <form id="uploadImgThumb2" enctype="multipart/form-data">
+        <input onchange="return uploadThumb2()" name="image" type="file" id="file2" style="display:none;" accept="image/*">
+    </form>
+    <form id="uploadImgThumb3" enctype="multipart/form-data">
+        <input onchange="return uploadThumb3()" name="image" type="file" id="file3" style="display:none;" accept="image/*">
+    </form>
+    <form id="uploadImgThumb4" enctype="multipart/form-data">
+        <input onchange="return uploadThumb4()" name="image" type="file" id="file4" style="display:none;" accept="image/*">
+    </form>
+
+    <form id="uploadImgThumb5" enctype="multipart/form-data">
+        <input onchange="return uploadThumb5()" name="image" type="file" id="file5" style="display:none;" accept="image/*">
+    </form>
+    <form id="uploadImgThumb" enctype="multipart/form-data">
+        <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
+    </form> 
    
     <div class="row cl">
       <div class="col-9 col-offset-3">
@@ -126,25 +144,7 @@
   </form>
 </div>
 </div>
-<form id="uploadImgThumb1" enctype="multipart/form-data">
-    <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
-</form>
-<form id="uploadImgThumb2" enctype="multipart/form-data">
-    <input onchange="return uploadThumb2()" name="image" type="file" id="file2" style="display:none;" accept="image/*">
-</form>
-<form id="uploadImgThumb3" enctype="multipart/form-data">
-    <input onchange="return uploadThumb3()" name="image" type="file" id="file3" style="display:none;" accept="image/*">
-</form>
-<form id="uploadImgThumb4" enctype="multipart/form-data">
-    <input onchange="return uploadThumb4()" name="image" type="file" id="file4" style="display:none;" accept="image/*">
-</form>
 
-<form id="uploadImgThumb5" enctype="multipart/form-data">
-    <input onchange="return uploadThumb5()" name="image" type="file" id="file5" style="display:none;" accept="image/*">
-</form>
-<form id="uploadImgThumb" enctype="multipart/form-data">
-    <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
-</form> 
 <script type="text/javascript" src="/assets/lib/icheck/jquery.icheck.min.js"></script>
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">
