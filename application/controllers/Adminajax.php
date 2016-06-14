@@ -76,7 +76,7 @@ class Adminajax extends CI_Controller {
 				$admin=$this->getdata->getContentAdvance('user',array('user_phone'=>$username));
 
 				if(!property_exists($admin,'user_phone')){
-					echo json_encode(array("result"=>"failed","message"=>"用户不存在123!"));
+					echo json_encode(array("result"=>"failed","message"=>"用户不存在!"));
 					return false;
 				}
             }
@@ -89,7 +89,7 @@ class Adminajax extends CI_Controller {
 			}
 			//通过user_id判断是否开通店铺  若未开通 则无法进入后台
 			$shop=$this->getdata->getContentAdvance('usershop',array('shop_user_id'=>$admin->user_id));
-            if(!empty($shop->shop_id) && $shop->shop_status == 0 && $shop->shop_audit_status == 1)
+            if(!empty($shop->shop_id))
 
             {
             	$_SESSION=array();
