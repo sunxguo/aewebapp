@@ -62,9 +62,9 @@ function createCookieArray($key, $value, $expire) {
  * @return html return
  */
 function httpGet($url, $param = array(), $header = array()) {
-	// $paramString = "?";
-	// foreach ($param as $key => $value) $paramString = $paramString.$key."=".$value."&";
-	// if($paramString != "") $paramString[strlen($paramString) - 1] = '';
+	$paramString = "?";
+	foreach ($param as $key => $value) $paramString = $paramString.$key."=".$value."&";
+	if($paramString != "") $paramString[strlen($paramString) - 1] = '';
 
 	if (count($header) == 0) {
 		$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";   
@@ -76,9 +76,15 @@ function httpGet($url, $param = array(), $header = array()) {
 		$header[] = "Accept-Language: en-us,en;q=0.5";   
 		$header[] = "Pragma: ";
 	}
+	if(!empty($param))
+	{
+		$ch = curl_init($url.$paramString);
+	}
+	else
+	{
+		$ch = curl_init();
+	}
 	
-	//$ch = curl_init($url.$paramString);
-	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);

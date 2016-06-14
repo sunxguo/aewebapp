@@ -1121,11 +1121,7 @@ class Admin extends CI_Controller {
         $header=array();
         $param=array();
         $goodsJSON=httpGet($url,$header,$param);
-        $goodsdata='';
-        if(!empty(json_decode($goodsJSON)->data) && isset(json_decode($goodsJSON)->data))
-        {
-        	 $goodsdata = json_decode($goodsJSON)->data;
-        }
+        $goodsdata = json_decode($goodsJSON)->data;
 
 	    /*分页效果*/
 	    $amoun=count($goodsdata);
@@ -1216,7 +1212,6 @@ class Admin extends CI_Controller {
 		$header=array();
         $param=array();
         $goodsJSON=httpGet($goodsurl,$header,$param);
-
         if(!empty($goodsJSON) && isset($goodsJSON))
         {
         	$goods = json_decode($goodsJSON)->data;
