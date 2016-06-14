@@ -4,7 +4,7 @@
 <body>
 <div class="pd-20">
 
-  <form class="form form-horizontal" id="form-member-add">
+  <form class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
     <input id="type" value="1" type="hidden">
     <input id="shopId" value="<?php echo $shopdata->shopId?>" type="hidden" >
     
@@ -23,6 +23,7 @@
         <img src="<?php echo $shopdata->shopLogo;?>" id="thumbnail" style="max-width:90%;max-height:100px;">
         <span class="btn-upload form-group">
           <a href="javascript:$('#file').click();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 选择图片</a>
+          <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
         </span>
       </div>
       <div class="col-4"> </div>
@@ -125,7 +126,7 @@
   </form>
 </div>
 </div>
-<form id="uploadImgThumb1" enctype="multipart/form-data">
+<!-- <form id="uploadImgThumb1" enctype="multipart/form-data">
     <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
 </form>
 <form id="uploadImgThumb2" enctype="multipart/form-data">
@@ -143,7 +144,7 @@
 </form>
 <form id="uploadImgThumb" enctype="multipart/form-data">
     <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
-</form>
+</form> -->
 <script type="text/javascript" src="/assets/lib/icheck/jquery.icheck.min.js"></script>
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">
