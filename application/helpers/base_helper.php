@@ -63,8 +63,8 @@ function createCookieArray($key, $value, $expire) {
  */
 function httpGet($url, $param = array(), $header = array()) {
 	// $paramString = "?";
-	foreach ($param as $key => $value) $paramString = $paramString.$key."=".$value."&";
-	if($paramString != "") $paramString[strlen($paramString) - 1] = '';
+	// foreach ($param as $key => $value) $paramString = $paramString.$key."=".$value."&";
+	// if($paramString != "") $paramString[strlen($paramString) - 1] = '';
 
 	if (count($header) == 0) {
 		$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";   
