@@ -3,7 +3,7 @@
 <body>
 <div class="pd-20" style="padding-top:20px;">
   <p class="f-20 text-success">店铺信息管理<span class="f-14"></span></p>
-
+  
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>

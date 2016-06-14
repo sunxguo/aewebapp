@@ -1,10 +1,10 @@
 <?php
 function upload($upload_file_name="files"){
 	//文件保存目录路径
-	$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
-	//$save_path = 'http://shop.fengdukeji.com/uploads/';
-	var_dump(456456465);
-	var_dump($_SERVER['DOCUMENT_ROOT']);
+	//$save_path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+	$save_path = 'http://182.92.156.106:8080/aewebapp/uploads/';
+	//var_dump(456456465);
+	
 	//文件保存目录URL
 	$save_url = '/uploads/';
 	//定义允许上传的文件扩展名
