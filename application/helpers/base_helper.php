@@ -83,7 +83,7 @@ function httpGet($url, $param = array(), $header = array()) {
 	}
 	else
 	{
-		$ch = curl_init();
+		$ch = curl_init($url);
 	}
 	
 	curl_setopt($ch, CURLOPT_URL, $url.$paramString);
