@@ -4,7 +4,7 @@
 <body>
 <div class="pd-20">
 
-  <form class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
+  <form class="form form-horizontal" id="form-member-add" >
     <input id="type" value="1" type="hidden">
     <input id="shopId" value="<?php echo $shopdata->shopId?>" type="hidden" >
     
@@ -49,6 +49,8 @@
       </div>
       <div class="col-4"> </div>
     </div>
+
+    
 
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>头部轮播图3：</label>
@@ -115,9 +117,16 @@
         <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
       </div>
     </div>  
-    <div class="row cl">
+    
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+<div class="row cl">
         <!-- 上传图片 -->
-        <form id="uploadImgThumb1" enctype="multipart/form-data">
+         <form id="uploadImgThumb1" enctype="multipart/form-data">
             <input onchange="return uploadThumb1()" name="image" type="file" id="file1" style="display:none;" accept="image/*">
         </form>
         <form id="uploadImgThumb2" enctype="multipart/form-data">
@@ -136,13 +145,6 @@
             <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
         </form> 
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
-      </div>
-    </div>
-  </form>
-</div>
-</div>
-
 <script type="text/javascript" src="/assets/lib/icheck/jquery.icheck.min.js"></script>
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">

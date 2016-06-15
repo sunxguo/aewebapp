@@ -49,7 +49,7 @@ function checkListStyle(){
 
 function uploadThumb(){
     uploadImage("#uploadImgThumb",beforeUpload,successHandler);
-    // console.log();
+
 }
 function beforeUpload(){
     $("#thumbnail").attr('src','/assets/images/loading.gif');
@@ -60,9 +60,8 @@ function successHandler(src){
 
 //上传第一张图片
 function uploadThumb1(){
-
     uploadImage("#uploadImgThumb1",beforeUpload1,successHandler1);
-   
+    // console.log();
 }
 function beforeUpload1(){
     $("#thumbnail1").attr('src','/assets/images/loading.gif');
