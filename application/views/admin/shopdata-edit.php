@@ -116,8 +116,9 @@
       <div class="formControls col-5">
         <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
       </div>
-    </div>  
-    
+    </div> 
+     <div class="row cl">
+      <div class="col-9 col-offset-3"> 
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
       </div>
     </div>
