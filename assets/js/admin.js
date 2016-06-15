@@ -62,7 +62,7 @@ function successHandler(src){
 function uploadThumb1(){
 
     uploadImage("#uploadImgThumb1",beforeUpload1,successHandler1);
-    console.log();
+   
 }
 function beforeUpload1(){
     $("#thumbnail1").attr('src','/assets/images/loading.gif');
