@@ -260,14 +260,15 @@ function member_start(obj,id){
 	layer.confirm('确认要通过审核吗？',function(index){
 		var shop = new Object(); 
 	    shop.infoType = 'shop';
-	    shop.id = id;
-	    shop.status = 0;
+	    shop.shopid = id;
+	    shop.shopApply = 1;
 	    dataHandler('/common/modifyInfo',shop,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');
 			$(obj).remove();
-			layer.msg('已启用!',{icon: 6,time:1000});
+			layer.msg('已审核!',{icon: 6,time:1000});
 		},false,false);
+		location.reload();
 	});
 }
 /*用户-编辑*/

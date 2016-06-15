@@ -621,7 +621,7 @@ class GetData{
 				$condition['where']['shop_addtime <=']=$parameters['time']['end'];
 			}
 		}
-		$condition['where']['shop_apply']='0';
+		$condition['where']['shop_apply']='1';
 		$buyers=$this->getData($condition);
         if($parameters['result']=='data'){
 			foreach ($buyers as $key => $value) {
@@ -660,7 +660,7 @@ class GetData{
 				$condition['where']['shop_addtime <=']=$parameters['time']['end'];
 			}
 		}
-		$condition['where']['shop_apply']='1';
+		$condition['where']['shop_apply']='2';
 		$buyers=$this->getData($condition);
         if($parameters['result']=='data'){
 			foreach ($buyers as $key => $value) {

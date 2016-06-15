@@ -819,6 +819,25 @@ class Common extends CI_Controller {
 
 			break;
 
+			case "adstop":
+
+				$info=array('adSpotId'=>$data->adSpotId);
+				
+				$info['adSpotStatus']=$data->adSpotStatus;
+				$info['adSpotAdminId']=$_SESSION['userid'];
+				
+                
+				$adSpot=new stdClass;
+                $adSpot->adSpot=$info;
+				$url=API_IP."AEWebApp/advertis/modifyAdSpot";
+ 				$partam='adSpot='.json_encode($adSpot);
+ 				$header = array();
+				$marquee = httpPost($url,$partam,$header);
+				$results = json_decode($marquee);
+				$result=$results->data;
+
+			break;
+
 			case "businessdistrict":
 				$table="businessdistrict";
 				$info=array('businessId'=>$data->businessId);
@@ -956,6 +975,24 @@ class Common extends CI_Controller {
 				$result=$results->data;
                 
 			break;
+
+            case "shop":
+				$info=array('shopId'=>$data->shopid);
+				if(isset($data->shopApply)){
+					$info['shopApply']=$data->shopApply;
+				}
+				
+				$usershop=new stdClass;
+                $usershop->shop=$info;
+				$url=API_IP."AEWebApp/userShop/modifyShop";
+ 				$partam='shop='.json_encode($usershop);
+ 				$header = array();
+				$marquee = httpPost($url,$partam,$header);
+				$results = json_decode($marquee);
+				$result=$results->data;
+                
+			break;
+
 			case "sortord":
 				$info=array();
 				if(isset($data->price_status)){
