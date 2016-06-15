@@ -77,16 +77,17 @@ function httpGet($url, $param = array(), $header = array()) {
 		$header[] = "Pragma: ";
 	}
 	
+	
+	$ch = curl_init();
 	if(!empty($param) && isset($param))
 	{
-		$ch = curl_init($url.$paramString);
+		curl_setopt($ch, CURLOPT_URL, $url.$paramString);
 	}
 	else
 	{
-		$ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_URL, $url);
 	}
 	
-	curl_setopt($ch, CURLOPT_URL, $url.$paramString);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
