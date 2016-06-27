@@ -166,7 +166,6 @@ function uploadImage(formId,beforeUpload,successHandler){
 		type: 'POST',
 		beforeSubmit: function () {
 			beforeUpload();
-			alert($formId);
 		}
 	});
 	return false;
