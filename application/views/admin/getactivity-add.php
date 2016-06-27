@@ -42,7 +42,7 @@
       <div class="col-4"> </div>
     </div>
 
-    <div class="row cl">
+    <!-- <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>位置</label>
       <div class="formControls col-5">
           <select id="site" class="select" size="1" name="site" datatype="*" nullmsg="请选择活动显示位置">
@@ -53,7 +53,7 @@
           </select>
       </div>
       <div class="col-4"> </div>
-    </div>
+    </div> -->
 
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>有效期始：</label>

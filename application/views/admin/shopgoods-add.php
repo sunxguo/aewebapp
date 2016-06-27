@@ -197,26 +197,26 @@
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	$("#form-member-add").Validform({
+  $('.skin-minimal input').iCheck({
+    checkboxClass: 'icheckbox-blue',
+    radioClass: 'iradio-blue',
+    increaseArea: '20%'
+  });
+  
+  $("#form-member-add").Validform({
     
-		tiptype:2,
-		callback:function(form){
+    tiptype:2,
+    callback:function(form){
       //alert('ok');
-			// form[0].submit();
+      // form[0].submit();
       saveShopGoods(true,function(){
         alert('添加成功！');
         var index = parent.layer.getFrameIndex(window.name);
         parent.window.location.reload();
         parent.layer.close(index);
       });
-		}
-	});
+    }
+  });
 });
 </script>
 </body>

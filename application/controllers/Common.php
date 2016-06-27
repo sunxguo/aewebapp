@@ -163,7 +163,7 @@ class Common extends CI_Controller {
 						"businessAddress"=>$data->business_address,
 						"businessComments"=>$data->business_comments,
 						"businessStreet"=>$data->business_street,
-						"businessLogo"=>strstr($data->thumbnail1,'http')?$data->thumbnail1:SERVER_IP.($data->thumbnail1),
+						"businessLogo"=>strstr($data->thumbnail,'http')?$data->thumbnail:SERVER_IP.($data->thumbnail),
 						"businessMart"=>$data->business_mart,
 						"businessLng"=>$data->business_lng,
 						"businessLat"=>$data->business_lat,
@@ -174,6 +174,79 @@ class Common extends CI_Controller {
 					$url=API_IP.'AEWebApp/common/addBusiness';
 	                $partam='business='.$business;
 
+	                $header = array();
+					$coupon = httpPost($url,$partam,$header);
+					$results = json_decode($coupon);
+					$result=$results->data;
+			break;
+            
+            /*口令分类*/
+			case "wordsort":
+					
+					$object['wordSort']=array();
+					$object['wordSort']=array(
+						"wordSortName"=>$data->word_sort_name	
+					);
+					
+					$wordsort=json_encode($object);
+					$url=API_IP.'AEWebApp/userShop/insertWordSort';
+	                $partam='wordSort='.$wordsort;
+	                $header = array();
+					$coupon = httpPost($url,$partam,$header);
+					$results = json_decode($coupon);
+					$result=$results->data;
+			break;
+
+			 /*今日市价*/
+			case "todayprice":
+					
+					$object['todayPrice']=array();
+					$object['todayPrice']=array(
+						"todayGoodsName"=>$data->today_goods_name,
+						"todayMinPrice"=>$data->today_min_price,
+						"todayMaxPrice"=>$data->today_max_price,
+						"todayOrders"=>$data->today_orders
+					);
+					
+					$todayPrice=json_encode($object);
+					$url=API_IP.'AEWebApp/nearby/addTodayPrice';
+	                $partam='todayPrice='.$todayPrice;
+	                //var_dump($partam);
+	                $header = array();
+					$coupon = httpPost($url,$partam,$header);
+					$results = json_decode($coupon);
+					$result=$results->data;
+			break;
+            /*口令分类详情*/
+			case "worditem":
+					
+					$object['wordItem']=array();
+					$object['wordItem']=array(
+						"wordItemSortId"=>$data->word_item_sort_id,
+						"wordItemName"=>$data->word_item_name
+					);
+					
+					$wordItem=json_encode($object);
+					$url=API_IP.'AEWebApp/userShop/insertWordItem';
+	                $partam='wordItem='.$wordItem;
+	                $header = array();
+					$coupon = httpPost($url,$partam,$header);
+					$results = json_decode($coupon);
+					$result=$results->data;
+			break;
+
+			 /*口令分类详情*/
+			case "worditemadd":
+					
+					$object['wordItem']=array();
+					$object['wordItem']=array(
+						"wordItemShopId"=>$_SESSION['shopid'],
+						"wordItemName"=>$data->word_item_name
+					);
+					
+					$wordItem=json_encode($object);
+					$url=API_IP.'AEWebApp/userShop/insertWordItem';
+	                $partam='wordItem='.$wordItem;
 	                $header = array();
 					$coupon = httpPost($url,$partam,$header);
 					$results = json_decode($coupon);
@@ -213,18 +286,18 @@ class Common extends CI_Controller {
 				    $table="categoryfeature"; 
                     $time=date("Y-m-d H:i:s");
                     /*根据分类id查出分类下的所有分类特征*/
-                    $cateid=$data->feature_category_id;
-                    $parameters=array(
-                        'cateid'=>$cateid,
-                        'result'=>'count'
-                    	);
-                    $feature=$this->getdata->getCateFeature($parameters);
+                    // $cateid=$data->feature_category_id;
+                    // $parameters=array(
+                    //     'cateid'=>$cateid,
+                    //     'result'=>'count'
+                    // 	);
+                    // $feature=$this->getdata->getCateFeature($parameters);
 
-                    if($feature >= 5)
-                    {
-                    	echo json_encode(array("result"=>"failed","message"=>"该分类下的分类特征已经达到上限！,请重新添加"));
-                    	return false;
-                    }
+                    // if($feature >= 5)
+                    // {
+                    // 	echo json_encode(array("result"=>"failed","message"=>"该分类下的分类特征已经达到上限！,请重新添加"));
+                    // 	return false;
+                    // }
                     /*判断添加的分类特征是否存在*/ 
 					if($this->getdata->isExist('categoryfeature',array('feature_name'=>$data->feature_name))){
 						echo json_encode(array("result"=>"failed","message"=>"该分类特征已存在！"));
@@ -233,7 +306,6 @@ class Common extends CI_Controller {
 
 					$object=array();
 					$object=array(
-						"feature_category_id"=>$data->feature_category_id,
 						"feature_name"=>$data->feature_name,
 						"feature_addtime"=>$time
 						);
@@ -265,19 +337,41 @@ class Common extends CI_Controller {
 			case "catefeatureval":
 				    $table="categoryeigenvalue"; 
                     $time=date("Y-m-d H:i:s");
-					if($this->getdata->isExist('categoryeigenvalue',array('eigenvalue_name'=>$data->eigenvalue_name))){
+					if($this->getdata->isExist('categoryeigenvalue',array('eigen_name'=>$data->eigenvalue_name))){
 						echo json_encode(array("result"=>"failed","message"=>"该分类特征值已存在！"));
 						return false;
 					}
 
 					$object=array();
 					$object=array(
-						"feature_id"=>$data->feature_id,
-						"eigenvalue_name"=>$data->eigenvalue_name,
-						"eigenvalue_addtime"=>$time
+						"eigen_feature_id"=>$data->feature_id,
+						"eigen_name"=>$data->eigenvalue_name,
+						"eigen_addtime"=>$time,
+						"eigen_eidttime"=>$time
 						);
 
 					$result=$this->dbHandler->insertData($table,$object);
+
+			break;
+
+			/*添加平台提示信息*/
+			case "reminder":
+				    
+                    $time=date("Y-m-d H:i:s");
+
+					$object['reminder']=array();
+					$object['reminder']=array(
+						"msgContent"=>$data->msg_content,
+						"msgStatus"=>$data->msg_status
+						
+						);
+                    $reminder=json_encode($object);
+					$url=API_IP.'AEWebApp/common/insertReminder';
+	                $partam='reminder='.$reminder;
+	                $header = array();
+					$reminderJSON = httpPost($url,$partam,$header);
+					$results = json_decode($reminderJSON);
+					$result=$results->data;
 
 			break;
 			
@@ -379,7 +473,7 @@ class Common extends CI_Controller {
 		$data=json_decode($_POST['data']);
 		$info=array();
 		switch($data->infoType){
-			case "coupons":
+			case "coupons": 
 				$table="coupon";
 				$time=date("Y-m-d H:i:s");
 				$objects['coupon']=array();
@@ -408,11 +502,10 @@ class Common extends CI_Controller {
 					"wordDiscount"=>$data->word_discount,
 					"wordGood"=>$data->word_good,
 					"wordPrimeCost"=>$data->word_prime_cost,
-					"wordContent"=>$data->word_content,
+					"wordContentItemId"=>$data->word_content,
 					"wordBegintime"=>$data->word_begintime,
 					"wordEndtime"=>$data->word_endtime
-					
-					
+	
 				);
 				$word=json_encode($objects);
 				$url=API_IP.'AEWebApp/userShop/insertWord';
@@ -641,10 +734,24 @@ class Common extends CI_Controller {
 				if(isset($data->activity_endtime)){
 					$info['activity_endtime']=$data->activity_endtime;
 				}
-				if(isset($data->status)){
+				if(isset($data->status)){ 
 					$info['status']=$data->status;
 				}
-                
+                $info['audit_status']='0';
+                $result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+               
+			break;
+
+			case "reminder":
+				$table="reminder";
+				$where=array('msg_id'=>$data->msg_id);
+				$info=array('msg_edittime'=>date("Y-m-d H:i:s"));
+				if(isset($data->msg_content)){ 
+					$info['msg_content']=$data->msg_content;
+				}
+				if(isset($data->msg_status)){
+					$info['msg_status']=$data->msg_status; 
+				}
                 $result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
                
 			break;
@@ -657,7 +764,7 @@ class Common extends CI_Controller {
 					$info['name']=$data->name;
 				}
 
-                if(isset($data->twoid)){
+                if(isset($data->twoid)){ 
 					$info['twoid']=$data->twoid;
 				}
 				else
@@ -771,6 +878,50 @@ class Common extends CI_Controller {
 
 			break;
 
+			case "catefeature":
+				
+				$table='categoryfeature';
+				$where=array('feature_id'=>$data->feature_id);
+				$info=array('feature_edittime'=>date("Y-m-d H:i:s"));
+				if(isset($data->feature_name)){
+					$info['feature_name']=$data->feature_name;
+				}
+				
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+
+			break;
+
+			case "catefeatureval":
+				
+				$table='categoryeigenvalue';
+				$where=array('eigen_id'=>$data->eigen_id);
+				$info=array('eigen_eidttime'=>date("Y-m-d H:i:s"));
+				if(isset($data->eigenvalue_name)){
+					$info['eigen_name']=$data->eigenvalue_name;
+				}
+
+				if(isset($data->feature_id)){
+					$info['eigen_feature_id']=$data->feature_id;
+				}
+				
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+
+			break;
+			case "stick":
+				
+				$table='stickshop';
+				$where=array('stick_id'=>$data->stick_id);
+				$info=array('stick_edittime'=>date("Y-m-d H:i:s"));
+				
+
+				if(isset($data->stick_status)){
+					$info['stick_status']=$data->stick_status;
+				}
+				
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+
+			break;
+
 			case "category":
 				$table="category";
 				$info=array('categoryId'=>$data->categoryId);
@@ -795,6 +946,73 @@ class Common extends CI_Controller {
 				$marquee = httpPost($url,$partam,$header);
 				$results = json_decode($marquee);
 				//var_dump($results);
+				$result=$results->data;
+
+			break;
+
+			case "todayprice":
+				$info=array('todayId'=>$data->todayId);
+				if(isset($data->today_goods_name)){
+					$info['todayGoodsName']=$data->today_goods_name;
+				}
+				if(isset($data->today_min_price)){
+					$info['todayMinPrice']=$data->today_min_price;
+				}
+				if(isset($data->today_max_price)){
+					$info['todayMaxPrice']=$data->today_max_price;
+				}
+				if(isset($data->today_orders)){
+					$info['todayOrders']=$data->today_orders;
+				}
+                
+				$todayPrice =new stdClass;
+                $todayPrice ->todayPrice =$info;
+				$url=API_IP."AEWebApp/nearby/modifyTodayPrice";
+ 				$partam='todayPrice='.json_encode($todayPrice);
+ 				$header = array();
+				$todayPriceJSON = httpPost($url,$partam,$header);
+				//var_dump($todayPriceJSON);
+				$results = json_decode($todayPriceJSON);
+				$result=$results->data;
+
+			break;
+
+			case "wordsort":
+				
+				$info=array('wordSortId'=>$data->wordSortId);
+				if(isset($data->word_sort_name)){
+					$info['wordSortName']=$data->word_sort_name;
+				}
+				if(isset($data->word_sort_status)){
+					$info['wordSortStatus']=$data->word_sort_status;
+				}
+                
+				$wordSort=new stdClass;
+                $wordSort->wordSort=$info;
+				$url=API_IP."AEWebApp/userShop/modifyWordSort";
+ 				$partam='wordSort='.json_encode($wordSort);
+ 				$header = array();
+				$marquee = httpPost($url,$partam,$header);
+				$results = json_decode($marquee);
+				$result=$results->data;
+
+			break;
+
+			case "worditem":
+				
+				$info=array('wordItemId'=>$data->word_item_id);
+				if(isset($data->word_item_name)){
+					$info['wordItemName']=$data->word_item_name;
+				}
+				
+                
+				$wordItem=new stdClass;
+                $wordItem->wordItem=$info;
+				$url=API_IP."AEWebApp/userShop/modifyWordItem";
+ 				$partam='wordItem='.json_encode($wordItem);
+ 				$header = array();
+				$marquee = httpPost($url,$partam,$header);
+				$results = json_decode($marquee);
 				$result=$results->data;
 
 			break;
@@ -949,15 +1167,38 @@ class Common extends CI_Controller {
 					$info['shopDetailAddress']=$data->shopDetailAddress;
 				}
 
+				if(isset($data->shopWifiStatus)){
+					$info['shopWifiStatus']=$data->shopWifiStatus;
+				}
+
 				if(isset($data->shopWifiUsername)){
 					$info['shopWifiUsername']=$data->shopWifiUsername;
 				}
 				if(isset($data->shopWifiPassword)){
 					$info['shopWifiPassword']=$data->shopWifiPassword;
 				}
-				if(isset($data->shopTel)){
+				if(isset($data->shopTel)){	
 					$info['shopTel']=$data->shopTel;
 				}
+				if(!empty($data->amstart) && !empty($data->amstop)){
+					$shopBusinessHours=$data->amstart.'-'.$data->amstop;
+				}
+				
+				if(!empty($data->pmstart) && !empty($data->pmstop)){
+					$shopBusinessHour=$data->pmstart.'-'.$data->pmstop;
+				}
+				if(!empty($shopBusinessHours) && !empty($shopBusinessHour)){
+					$info['shopBusinessHours']=$shopBusinessHours.','.$shopBusinessHour;
+				}
+				elseif(!empty($shopBusinessHours))
+				{
+					$info['shopBusinessHours']=$shopBusinessHours;
+				}
+				elseif(!empty($shopBusinessHour))
+				{
+					$info['shopBusinessHour']=$shopBusinessHour;
+				}
+				
 				if(isset($data->shopLng)){
 					$info['shopLng']=$data->shopLng;
 				}
@@ -1152,6 +1393,22 @@ class Common extends CI_Controller {
 				$condition['table']="activity";
 				$condition['where']=array("id"=>$data->id);
 			break;
+			case 'worditem':
+				$condition['table']="worditem";
+				$condition['where']=array("word_item_id"=>$data->id);
+			break;
+			case 'todayprice':
+				$condition['table']="todayprice";
+				$condition['where']=array("today_id"=>$data->today_id);
+			break;
+			case 'reminder':
+				$condition['table']="reminder";
+				$condition['where']=array("msg_id"=>$data->id);
+			break;
+			case 'stick':
+				$condition['table']="stickshop";
+				$condition['where']=array("stick_id"=>$data->id);
+			break;
 			// case 'photo':
 			// 	$condition['table']="goods";
 			// 	$condition['where']=array("id"=>$data->id);
@@ -1319,46 +1576,28 @@ class Common extends CI_Controller {
 		$data=json_decode($_POST['data']);
 		$result=array();
 		switch($data->infoType){
-			// case 'essay':
-			// 	$result=$this->getdata->getContent('essay',$data->id);
-			// break;
-			// case 'login':
-			// 	if(property_exists($data, "email") && property_exists($data, "password")){
-			// 		$email=$data->email;
-			// 		$password=$data->password;
-			// 		$info=$this->getdata->getContentAdvance('user',array('email'=>$email));
-			// 		if(property_exists($info,'email')){
-			// 			$post_pwd=MD5("SXJY".$password);
-			// 			$db_pwd=$info->password;
-			// 			if($post_pwd==$db_pwd){
-			// 				$_SESSION['useremail']=$info->email;
-			// 				$_SESSION['userid']=$info->id;
-			// 				$_SESSION['usertype']="user";
-			// 				echo json_encode(array("result"=>"success","message"=>"登录成功!"));
-			// 				return false;
-			// 			}
-			// 			else{
-			// 				echo json_encode(array("result"=>"failed","message"=>"密码错误!"));
-			// 				return false;
-			// 			}
-			// 		}
-			// 		else{
-			// 			echo json_encode(array("result"=>"failed","message"=>"用户名不存在!"));
-			// 			return false;
-			// 		}
-			// 	}else{
-			// 		echo json_encode(array("result"=>"failed","message"=>"请输入用户名和密码!"));
-			// 		return false;
-			// 	}
-			// break;
+			
 			case 'logout':
 				unset($_SESSION["useremail"]);
 				unset($_SESSION["userid"]);
 				unset($_SESSION["usertype"]);
 				$result='成功退出！';
 			break;
-			case 'subSupermarkets':
-				$result=$this->getdata->getSubSupermarkets($data->id);
+			case 'wordsort':
+			    $wordid=$data->id;
+				$url=API_IP.'AEWebApp/userShop/getWordItem?wordItemSortId='.$wordid;
+		        $header=array();
+		        $param=array();
+		        $itemJSON=httpGet($url,$header,$param);
+		        $result = json_decode($itemJSON)->data;
+			break;
+			case 'shopcategory':
+			    $categoryid=$data->id;
+				$url=API_IP.'AEWebApp/userShop/queryGoodsListByCategoryId?categoryShopId='.$categoryid;
+		        $header=array();
+		        $param=array();
+		        $shopJSON=httpGet($url,$header,$param);
+		        $result = json_decode($shopJSON)->data;
 			break;
 			case 'supermarket':
 				$result=$this->getdata->getContent('supermarket',$data->id);
@@ -1376,7 +1615,7 @@ class Common extends CI_Controller {
 				$result=$this->getdata->getSupCategory(
 					array(
 						'result'=>'data',
-						'sid'=>$data->id		
+						'sid'=>$data->id
 					)
 				);
 			break;
@@ -1385,7 +1624,6 @@ class Common extends CI_Controller {
 	}
 	public function uploadImage(){
 		$result=upload("image");
-		//var_dump(78964456);
 		echo json_encode($result);
 
 	}

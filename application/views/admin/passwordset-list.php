@@ -1,16 +1,9 @@
-<title>审核员管理</title>
+<title>口令集管理</title>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 附近审核管理 <span class="c-gray en">&gt;</span> 口令集信息列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<!-- <div class="text-c"> 添加时间：
-		<input type="text" value="<?php echo isset($_GET['startTime'])?$_GET['startTime']:'';?>" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" value="<?php echo isset($_GET['endTime'])?$_GET['endTime']:'';?>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-		 
-		<input type="text" value="<?php echo isset($_GET['keywords'])?$_GET['keywords']:'';?>" id="keywords" class="input-text" style="width:250px" placeholder="输入用户昵称、手机"name="">
-		<button onclick="searchBuyer();" type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div> --> 
+	
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
 			<!-- <a href="javascript:;" onclick="member_add('添加管理员','/admin/adminadd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加添加管理员</a> -->
@@ -73,8 +66,8 @@
 				</td>
 
 				<td>
-					<?php if(!empty($word->word_content)):?>
-						<?php echo $word->word_content;?>
+					<?php if(!empty($word->worditem->word_item_name)):?>
+						<?php echo $word->worditem->word_item_name;?>
 					<?php else:?>
 						暂无口令内容
 					<?php endif;?>

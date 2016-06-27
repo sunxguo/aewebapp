@@ -10,8 +10,14 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>口令集折扣</label>
       <div class="formControls col-5">
-        <!-- <span id="supermarketname"></span> -->
-        <input type="text" class="input-text" value="" placeholder="" id="word_discount" name="word_discount" datatype="*2-16" nullmsg="优惠券面值不能为空">
+        <span class="select-box">
+          <select id="word_discount" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择口令折扣">
+            <option value="" selected>请选择口令折扣</option>
+              <?php for($i=1;$i<10;$i+=0.5):?>
+                 <option value="<?php echo $i;?>"><?php echo $i;?></option>
+              <?php endfor;?>
+          </select>
+        </span>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -19,45 +25,86 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>商品原价</label>
       <div class="formControls col-5">
-        <!-- <span id="supermarketname"></span> -->
-        <input type="text" class="input-text" value="" placeholder="" id="word_prime_cost" name="word_prime_cost" datatype="*2-16" nullmsg="使用价格
+        <input type="text" class="input-text" value="" placeholder="" id="word_prime_cost" name="word_prime_cost" datatype="*2-16" nullmsg="商品价格
         不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>口令商品</label>
+      <label class="form-label col-3"><span class="c-red">*</span>商品分类</label>
       <div class="formControls col-5">
-        <!-- <span id="supermarketname"></span> -->
-        <input type="text" class="input-text" value="" placeholder="" id="word_good" name="word_good" datatype="*2-16" nullmsg="使用价格
-        不能为空">
+        <span class="select-box">
+          <select id="shopcategory" onchange="getshopcategory();" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择商品分类">
+            <option value="" selected>请选择商品分类</option>
+            <?php foreach($shopCategory as $category):?>
+              <option value="<?php echo $category->categoryId;?>"><?php echo $category->name;?></option>
+            <?php endforeach;?>
+          </select>
+        </span>
       </div>
       <div class="col-4"> </div>
     </div>
-
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>口令内容</label>
-      <div class="formControls col-5">
-        <!-- <span id="supermarketname"></span> -->
-        <input type="text" class="input-text" value="" placeholder="" id="word_content" name="word_content" datatype="*2-16" nullmsg="使用价格
-        不能为空">
+        <label class="form-label col-3"><span class="c-red">*</span>口令商品：</label>
+        <div class="formControls col-5"> <span class="select-box">
+          <select id="shopgoods" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择口令商品">
+            <option value="" selected>请选择口令商品</option>
+          </select>
+          </span> </div>
+        <div class="col-4"> </div>
       </div>
-      <div class="col-4"> </div>
-    </div>
+
+    <?php if($count == 'select'):?>
+      <div class="row cl">
+        <label class="form-label col-3"><span class="c-red">*</span>口令内容分类：</label>
+        <div class="formControls col-5"> <span class="select-box">
+          <select id="wordsort" onchange="getwordstor();" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择口令分类">
+            <option value="" selected>请选择分类</option>
+            <?php foreach($wordsort as $word):?>
+              <option value="<?php echo $word->wordSortId;?>"><?php echo $word->wordSortName;?></option>
+            <?php endforeach;?>
+          </select>
+          </span> </div>
+        <div class="col-4"> </div>
+      </div>
+    
+      <div class="row cl">
+        <label class="form-label col-3"><span class="c-red">*</span>口令内容：</label>
+        <div class="formControls col-5"> <span class="select-box" style="height:150px;">
+          <select id="worditem" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择口令内容">
+            <option value="" selected>请选择口令详情</option>
+          </select>
+          </span> </div>
+        <div class="col-4"> </div>
+      </div>
+    <?php else:?>
+      <div class="row cl">
+        <label class="form-label col-3"><span class="c-red">*</span>口令内容：</label>
+        <div class="formControls col-5"> <span class="select-box" style="height:150px;">
+          <select id="worditem" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择口令分类">
+            <option value="" selected>请选择内容</option>
+            <?php foreach($shopItem as $word):?>
+              <option value="<?php echo $word->wordItemId;?>"><?php echo $word->wordItemName;?></option>
+            <?php endforeach;?>
+          </select>
+          </span> </div>
+        <div class="col-4"> </div>
+      </div>
+    <?php endif;?>
 
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>有效期始：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'word_endtime\')}'})" id="word_begintime" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd ',minDate:'#F{$dp.$D(\'word_endtime\')}'})" id="word_begintime" class="input-text Wdate">
       </div>
     </div>
 
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>有效期止：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'word_begintime\')}'})" id="word_endtime" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd ',minDate:'#F{$dp.$D(\'word_begintime\')}'})" id="word_endtime" class="input-text Wdate">
       </div>
     </div>
 

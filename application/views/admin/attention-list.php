@@ -46,11 +46,12 @@
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i>关注审核管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe60d;</i>用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/getattentionAll" href="javascript:;">关注信息列表</a></li>
-					<li><a _href="/admin/getCollectAll" href="javascript:;">收藏信息列表</a></li>
+					<li><a _href="/admin/getattentionAll" href="javascript:;">关注列表</a></li>
+					<li><a _href="/admin/getCollectAll" href="javascript:;">收藏列表</a></li>
+					<li><a _href="/admin/getAllStickI" href="javascript:;">置顶列表</a></li>
 				</ul>
 			</dd>
 		</dl>

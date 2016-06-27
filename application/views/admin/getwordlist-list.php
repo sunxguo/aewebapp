@@ -1,40 +1,13 @@
-<title>口令集管理</title>
+<title>口令集</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠券管理 <span class="c-gray en">&gt;</span> 口令集管理 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 插件管理 <span class="c-gray en">&gt;</span> 口令集 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<div class="text-c">
-		<!-- 店铺：
-		<select id="supermarket" onchange="getSelectCategories();" class="select" style="height:31px;width:inherit;vertical-align:middle;">
-          <option value="-1">所有</option>
-          <?php foreach($supermarkets as $sm):?>
-          <optgroup label="<?php echo $sm->name;?>">
-            <?php foreach($sm->subSupermarkets as $ssm):?>
-            <option value="<?php echo $ssm->id;?>" <?php echo isset($_GET['sid']) && $_GET['sid']==$ssm->id?'selected':'';?>><?php echo $ssm->sname;?></option>
-            <?php endforeach;?>
-          </optgroup>
-          <?php endforeach;?>
-        </select> 
-		  分类：
-		<select id="category" class="select" style="height:31px;width:inherit;vertical-align:middle;">
-          <option value="-1">所有</option>
-          <?php foreach($categories as $category):?>
-          	<option value="<?php echo $category->id;?>" <?php echo isset($_GET['categoryid']) && $_GET['categoryid']==$category->id?'selected':'';?>><?php echo $category->name;?></option>
 
-          <?php endforeach;?>
-        </select>
-         添加时间：
-		<input type="text" value="<?php echo isset($_GET['startTime'])?$_GET['startTime']:'';?>" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" value="<?php echo isset($_GET['endTime'])?$_GET['endTime']:'';?>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-		
-		<input type="text" value="<?php echo isset($_GET['keywords'])?$_GET['keywords']:'';?>" id="keywords" class="input-text" style="width:250px" placeholder="输入商品名称"name="">
-		<button onclick="searchProduct();" type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜商品</button> -->
-	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
-			<!-- <a href="javascript:;" onclick="member_del_bulk()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
-			<a href="javascript:;" onclick="member_add('添加口令集','/admin/getWordlistadd','','550')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加口令集</a>
+			<a href="javascript:;" onclick="member_add('添加口令集','/admin/getWordlistadd?count=add','','550')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>自定义发布</a>
+			<a href="javascript:;" onclick="member_add('添加口令集','/admin/getWordlistadd?count=select','','550')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>用平台口令发布</a>
 		</span> 
 		<span class="r">共有数据：<strong><?php echo $pageInfo['amount'];?></strong> 条</span> 
 	</div>
@@ -53,6 +26,7 @@
 				<th width="80">有效期止</th>
 				<th width="80">添加时间</th>
 				<th width="80">修改时间</th>
+				<th width="50">审核状态</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -65,15 +39,24 @@
 				<td><?php echo $word->word_discount;?></td>
 				<td><?php echo $word->word_good;?></td>
 				<td><?php echo $word->word_prime_cost;?></td>
-				<td><?php echo $word->word_content;?></td>
+				<td><?php echo $word->count->word_item_name;?></td>
 				<td><?php echo $word->word_begintime;?></td>
 				<td><?php echo $word->word_endtime;?></td>
 				<td><?php echo $word->word_addtime;?></td>
 				<td><?php echo $word->word_eidttime;?></td>
-				<?php if($word->word_status=='0'):?>
-				<td class="td-status"><span class="label label-success radius">已使用</span></td>
+
+				<?php if($word->audit_status=='0'):?>
+				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
 				<?php else:?>
-				<td class="td-status"><span class="label label-defaunt radius">未使用</span></td>
+				<td class="td-status"><span class="label label-success radius">已审核</span></td>
+				<?php endif;?>
+
+				<?php if($word->word_status=='0'):?>
+				<td class="td-status"><span class="label label-defaunt radius">待发布</span></td>
+				<?php elseif($word->word_status=='1'):?>
+				<td class="td-status"><span class="label label-success radius">已发布</span></td>
+				<?php elseif($word->word_status=='2'):?>
+				<td class="td-status"><span class="label label-defaunt radius">已过期</span></td>
 				<?php endif;?>
 				<td class="td-manage">
 				    
@@ -87,7 +70,7 @@
 	</table>
 	</div>
 </div>
-<!-- <script type="text/javascript" src="/assets/lib/laypage/1.2/laypage.js"></script>   API_IP.'AEWebApp/userShop/queryGoodsList  -->
+
 <script type="text/javascript">
  
 $(function(){
@@ -115,7 +98,7 @@ function member_add(title,url,w,h){
 }
 /*用户-查看*/
 function member_show(title,url,id,w,h){
-	layer_show(title,url+'?id='+id,w,h);
+	layer_show(title,url,w,h);
 }
 /*用户-停用*/
 function member_stop(obj,id){

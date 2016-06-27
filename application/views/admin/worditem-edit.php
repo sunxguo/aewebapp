@@ -1,38 +1,23 @@
-<title>添加分类特征</title>
+<title>修改口令分类详情</title>
 <link href="/assets/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="pd-20">
   <form class="form form-horizontal" id="form-member-add">
     <input id="role" value="0" type="hidden">
-    <div class="row cl">
-    
-    <!-- <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>选择分类：</label>
-      <div class="formControls col-5">
-        <span class="select-box">
-          <select id="feature_category_id" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择分类！">
-              <option value="" selected>请选择分类</option>
-              <?php foreach($category as $cate):?>
-                 <option value="<?php echo $cate->id;?>"><?php echo $cate->name;?></option>
-              <?php endforeach;?>
-          </select>
-        </span> 
-      </div>
-      <div class="col-4"> </div>
-    </div> -->
+    <input id="itemid" value="<?php echo $worditem->wordItemId;?>" type="hidden">
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>分类特征名：</label>
-        <div class="formControls col-5">
-          <input type="text" class="input-text" value="" placeholder="" id="feature_name" name="feature_name" datatype="*2-16" nullmsg="分类特征不能为空">
-        </div>
+      <label class="form-label col-3"><span class="c-red">*</span>口令详情内容</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="<?php echo $worditem->wordItemName?>" placeholder="" id="word_item_name" name="word_sort_name" datatype="*1-100000" nullmsg="口令详情内容不能为空">
+      </div>
       <div class="col-4"> </div>
     </div>
 
     <div class="row cl">
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;">
       </div>
     </div>
   </form>
@@ -54,8 +39,8 @@ $(function(){
     callback:function(form){
       // alert('ok');
       // form[0].submit();
-      saveCateFeature(true,function(){
-        alert('添加成功！');
+    editworditem(true,function(){
+        alert('提交成功！');
         var index = parent.layer.getFrameIndex(window.name);
         // parent.$('.btn-refresh').click();
         parent.window.location.reload();

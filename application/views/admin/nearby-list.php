@@ -55,20 +55,13 @@
 <aside class="Hui-aside">
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
-		<!-- <dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> Banner管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="/admin/bannerlist" href="javascript:void(0)">Banner管理</a></li>
-				</ul>
-			</dd>
-		</dl> -->
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i>附近审核管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/getWordlist" href="javascript:;">口令集列表</a></li>
-					<li><a _href="/admin/getCouponlist" href="javascript:;">优惠券列表</a></li>
+					<li><a _href="/admin/getWordlist" href="javascript:;">口令集</a></li>
+					<li><a _href="/admin/getCouponlist" href="javascript:;">优惠券</a></li>
+					<li><a _href="/admin/todayPricelist" href="javascript:;">今日市价</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -108,19 +101,13 @@
 <aside class="Hui-aside">
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
-		<!-- <dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> Banner管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="/admin/bannerlist" href="javascript:void(0)">Banner管理</a></li>
-				</ul>
-			</dd>
-		</dl> -->
+		
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i>附近审核员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/nearbyaudit" href="javascript:;">附近审核员列表</a></li>	
+					<li><a _href="/admin/nearbyaudit" href="javascript:;">附近审核员列表</a></li>
+					<li><a _href="/admin/wordsortlist" href="javascript:;">口令分类</a></li>					
 				</ul>
 			</dd>
 		</dl>

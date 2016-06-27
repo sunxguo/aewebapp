@@ -205,6 +205,15 @@ class GetData{
 		);
 		return $this->getOneData($condition);
 	}
+	public function worditem($type,$contentId){
+		$condition=array(
+			'table'=>$type,
+			'result'=>'data',
+			'where'=>array('word_item_id'=>$contentId)
+
+		);
+		return $this->getOneData($condition);
+	}
 	public function getAdmintype($type,$contentId){
 		$condition=array(
 			'table'=>$type,
@@ -246,6 +255,17 @@ class GetData{
 		);
 		return $this->getOneData($condition);
 	}
+
+	 //根据分类id查出口令分类
+	public function getworitem($type,$contentId){
+		$condition=array(
+			'table'=>$type,
+			'result'=>'data',
+			'where'=>array('word_item_id'=>$contentId)
+		);
+		return $this->getOneData($condition);
+	}
+
 
 	//根据订单id查出订单详情
 	public function getorderdetails($type,$contentId){
@@ -378,35 +398,12 @@ class GetData{
 			'table'=>'wordlist',
 			'result'=>$parameters['result']
 		);
-		if(isset($parameters['sid'])){
-			$condition['where']['sid']=$parameters['sid'];
-		}
-		if(isset($parameters['buyerid'])){
-			$condition['where']['buyerid']=$parameters['buyerid'];
-		}
-		if(isset($parameters['orderBy'])){
-			$condition['order_by']=$parameters['orderBy'];
-		}
-		// if(isset($parameters['keywords'])){
-		// 	$condition['or_like_bracket']['orderno']=$parameters['keywords'];
-		// 	$condition['or_like_bracket']['content']=$parameters['keywords'];
-		// }
-		if(isset($parameters['limit'])){
-			$condition['limit']=$parameters['limit'];
-		}
-		if(isset($parameters['time'])){
-			if(isset($parameters['time']['begin'])){
-				$condition['where']['word_addtime >=']=$parameters['time']['begin'];
-			}
-			if(isset($parameters['time']['end'])){
-				$condition['where']['word_addtime <=']=$parameters['time']['end'];
-			}
-		}
+		
 		$coupons=$this->getData($condition);
 		if($parameters['result']=='data'){
 			foreach ($coupons as $key => $value) {
 				$value->usershop=$this->getContent('usershop',$value->word_shop_id);
-				// $value->buyer=$this->getContent('buyer',$value->buyerid);
+				$value->content=$this->getworitem('worditem',$value->word_content_item_id);
 			}
 		}
 		return $coupons;
@@ -799,7 +796,7 @@ class GetData{
 	public function getCategoryAlls($withSub=false,$asArray=false){
 		$parameters=array(
 			'result'=>'data',
-			'orderBy'=>array('addtime'=>'ASC')
+			'orderBy'=>array('addtime'=>'ASC')	
 		);
 		$category=$this->getCategoriesAll($parameters);
 		
@@ -833,18 +830,43 @@ class GetData{
 		if(isset($parameters['cateid'])){
 			$condition['where']['feature_category_id']=$parameters['cateid'];
 		}
+		if(isset($parameters['feature_id'])){
+			$condition['where']['feature_id']=$parameters['feature_id'];
+		}
 		$catefeature=$this->getData($condition);
 
         /*遍历分类Id 查出是哪个分类下的特征*/
-		if($parameters['result']=='data'){
-			foreach ($catefeature as $key => $value) {
-				$catename=$this->getCategory('category',$value->feature_category_id);
-				if(isset($catename)){
-						$value->category=$catename;
-				}
+		// if($parameters['result']=='data'){
+		// 	foreach ($catefeature as $key => $value) {
+		// 		$catename=$this->getCategory('category',$value->feature_category_id);
+		// 		if(isset($catename)){
+		// 				$value->category=$catename;
+		// 		}
 				
-			}
-		}
+		// 	}
+		// }
+		return $catefeature;
+	}
+
+	//查出所有的平台提示
+	public function getReminderCount($parameters){
+		$condition=array(
+			'table'=>'reminder',
+			'result'=>$parameters['result']	
+		);
+		
+		$catefeature=$this->getData($condition);
+         
+        /*遍历分类Id 查出是哪个分类下的特征*/
+		// if($parameters['result']=='data'){
+		// 	foreach ($catefeature as $key => $value) {
+		// 		$catename=$this->getCategory('category',$value->feature_category_id);
+		// 		if(isset($catename)){
+		// 				$value->category=$catename;
+		// 		}
+				
+		// 	}
+		// }
 		return $catefeature;
 	}
 
@@ -986,6 +1008,23 @@ class GetData{
 		return $buyers;
 	}
 
+	//置顶信息列表
+	public function getAllStickI($parameters){
+		$condition=array(
+			'table'=>'stickshop',
+			'result'=>$parameters['result']
+		);
+		
+		$buyers=$this->getData($condition);
+        if($parameters['result']=='data'){
+			foreach ($buyers as $key => $value) {
+				$value->shopname=$this->getusershop('usershop',$value->stick_shop_id);
+                $value->username=$this->getUser('user',$value->stick_user_id);
+			}
+		}
+		return $buyers;
+	}
+
 	//收藏信息列表
 	public function getCollectAll($parameters){
 		$condition=array(
@@ -1012,8 +1051,9 @@ class GetData{
 		
 		$buyers=$this->getData($condition);
         if($parameters['result']=='data'){
-			foreach ($buyers as $key => $value) {
+			foreach ($buyers as $key => $value){
 				$value->shopname=$this->getusershop('usershop',$value->word_shop_id);
+				$value->worditem=$this->getworitem('worditem',$value->word_content_item_id);
 			}
 		}
 		return $buyers;
@@ -1150,6 +1190,12 @@ class GetData{
 		
 		$condition['where']['word_shop_id']= $parameters['word_shop_id'];
 		$collectUser=$this->getData($condition);
+		if($parameters['result']=='data'){
+			foreach($collectUser as $word)
+			{
+				$word->count = $this->worditem('worditem',$word->word_content_item_id);
+			}
+		}	
 		return $collectUser;
     }
     
@@ -1218,7 +1264,7 @@ class GetData{
 		return $catefeature;
 	}
 
-	 //查出关注店铺的所有用户  根据店铺id
+	//查出关注店铺的所有用户  根据店铺id
     public function getfollowAllById($parameters)
     {
     	$condition=array(
@@ -1230,10 +1276,28 @@ class GetData{
 		$collectUser=$this->getData($condition);
 		if($parameters['result']=='data'){
 			foreach ($collectUser as $key => $value) {
-				$value->username=$this->getUser('user',$value->follow_user_id)->user_nickname;
+				$value->username=$this->getUser('user',$value->follow_user_id);
 			}
 		}
 		return $collectUser;
+    }
+
+    //查出所有置顶用户  根据店铺id
+    public function getAllStickIById($parameters)
+    {
+    	$condition=array(
+			'table'=>'stickshop',
+			'result'=>$parameters['result']
+		);
+		
+		$condition['where']['stick_shop_id']= $parameters['stick_shop_id'];
+		$stick=$this->getData($condition);
+		if($parameters['result']=='data'){
+			foreach ($stick as $key => $value) {
+				$value->username=$this->getUser('user',$value->stick_user_id);
+			}
+		}
+		return $stick;
     }
 
 
@@ -1260,6 +1324,29 @@ class GetData{
 			}
 		}
 		return $orders;
+	}
+
+	/*查出所有的平台提示信息*/
+	public function getreminder($parameters){
+		$condition=array(
+			'table'=>'reminder',
+			'result'=>$parameters['result']
+		);
+		
+		$reminder=$this->getData($condition);
+		return $reminder;
+	}
+
+	/*查出所有的平台提示信息*/
+	public function getReminderById($parameters){
+		$condition=array(
+			'table'=>'reminder',
+			'result'=>$parameters['result']
+		);
+		$condition['where']['msg_id']=$parameters['id'];
+		
+		$reminder=$this->getData($condition);
+		return $reminder;
 	}
 
 

@@ -1,17 +1,16 @@
 <title>添加商圈</title>
 <link href="/assets/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/assets/js/jsAddress.js"></script>
 </head>
 <body>
 <div class="pd-20">
   <form class="form form-horizontal" id="form-member-add">
     <input id="type" value="1" type="hidden">
-    
 
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>省</label>
       <div class="formControls col-5">
-        
-        <input type="text" class="input-text" value="" placeholder="" id="business_province" name="business_province" datatype="*2-16" nullmsg="身份不能为空">
+        <select id="cmbProvince" nullmsg="省份必须选择"></select>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -19,8 +18,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>市</label>
       <div class="formControls col-5">
-        
-        <input type="text" class="input-text" value="" placeholder="" id="business_city" name="business_city" datatype="*2-16" nullmsg="市区不能为空">
+        <select id="cmbCity" nullmsg="市区不能为空"></select>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -28,8 +26,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>区</label>
       <div class="formControls col-5">
-        
-        <input type="text" class="input-text" value="" placeholder="" id="business_area" name="business_area" datatype="*2-16" nullmsg="地区不能为空">
+        <select id="cmbArea" nullmsg="地区不能为空"></select>   
       </div>
       <div class="col-4"> </div>
     </div>
@@ -122,7 +119,7 @@
       </div>
       <div class="col-4"> </div>
     </div>
-
+    
    
     <div class="row cl">
       <div class="col-9 col-offset-3">
@@ -135,9 +132,11 @@
 <form id="uploadImgThumb" enctype="multipart/form-data">
     <input onchange="return uploadThumb()" name="image" type="file" id="file" style="display:none;" accept="image/*">
 </form>
+
 <script type="text/javascript" src="/assets/lib/icheck/jquery.icheck.min.js"></script>
 <script charset="utf-8" src="/assets/js/jquery.form.js"></script>
 <script type="text/javascript">
+addressInit('cmbProvince', 'cmbCity', 'cmbArea', '山西', '太原市', '小店区');
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',

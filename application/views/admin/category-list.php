@@ -19,7 +19,7 @@
 				<th width="120">序号</th>
 				<th width="120">添加时间</th>
 				<th width="120">修改时间</th>
-				<th width="100">添加分类特征</th>
+				<!-- <th width="100">添加分类特征</th> -->
 				<th width="120">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -33,13 +33,13 @@
 				<td><?php echo $category->orders;?></td>
 				<td><?php echo $category->addtime;?></td>
 				<td><?php echo $category->edittime;?></td>
-				<td>
+				<!-- <td>
 					<a href="javascript:;" onclick="feature_add('添加分类特征','/admin/catefeatureaddByid','<?php echo $category->id;?>','500','300')" class="ml-5" style="text-decoration:none">
 					    <span class="label label-success radius">
 					    	添加
 					    </span>
 					</a>    
-				</td>
+				</td> -->
 				<?php if($category->status=='0'):?>
 					<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>

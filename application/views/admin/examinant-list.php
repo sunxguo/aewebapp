@@ -104,7 +104,8 @@
 			<dd>
 				<ul>
 					<li><a _href="/admin/shopauditall" href="javascript:;">店铺审核员列表</a></li>
-					<li><a _href="/admin/businessdistrict" href="javascript:;">商圈列表</a></li>	
+					<li><a _href="/admin/businessdistrict" href="javascript:;">商圈列表</a></li>
+					<li><a _href="/admin/reminderlist" href="javascript:;">平台提示消息</a></li>	
 					<li><a _href="/admin/categorylistAll" href="javascript:;">店铺一级分类列表</a></li>	
 					<li><a _href="/admin/subcategorylist" href="javascript:;">店铺二级分类列表</a></li>
 					<li><a _href="/admin/categoryfeature" href="javascript:;">分类特征列表管理</a></li>

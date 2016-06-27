@@ -23,7 +23,7 @@
 				<th width="80">活动关键字</th>
 				<th width="80">简介图</th>
 				<th width="80">内容</th>
-				<th width="80">位置</th>
+				<!-- <th width="80">位置</th> -->
 				<th width="80">活动开始时间</th>
 				<th width="80">活动结束时间</th>
 				<th width="80">添加时间</th>
@@ -41,7 +41,7 @@
 					<td><?php echo $activity->activityKeyword;?></td>
 					<td><img src="<?php echo $activity->thumbnail1;?>" width="100"></td>
 					<td><?php echo $activity->content;?></td>
-					<td><?php echo $activity->site;?></td>
+					<!-- <td><?php echo $activity->site;?></td> -->
 					<td><?php echo $activity->activityBegintime;?></td>
 					<td><?php echo $activity->activityEndtime;?></td>
 					<td><?php echo $activity->addtime;?></td>

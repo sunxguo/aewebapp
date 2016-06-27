@@ -65,12 +65,12 @@
 		</dl>
 
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 关注管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe620;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/collectAllById" href="javascript:void(0)">收藏用户列表</a></li>
-					<li><a _href="/admin/followAllById" href="javascript:void(0)">关注用户列表</a></li>
-					
+					<li><a _href="/admin/collectAllById" href="javascript:void(0)">收藏用户</a></li>
+					<li><a _href="/admin/followAllById" href="javascript:void(0)">关注用户</a></li>
+					<li><a _href="/admin/getAllStickIById" href="javascript:void(0)">置顶用户</a></li>
 
 				</ul>
 			</dd>
@@ -87,18 +87,19 @@
 		</dl>
 	
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe6ca;</i> 优惠券管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe6ca;</i> 插件管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/getDiscountListById" href="javascript:;">优惠券管理</a></li>
-					<li><a _href="/admin/getWordListById" href="javascript:;">口令集管理</a></li>
+					<li><a _href="/admin/getDiscountListById" href="javascript:;">优惠券</a></li>
+					<li><a _href="/admin/getWordListById" href="javascript:;">口令集</a></li>
+					<li><a _href="/admin/getCustomCount" href="javascript:;">自定义口令内容</a></li>
 					
 				</ul>
 			</dd>
 		</dl>
 	
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe6ca;</i> 优惠管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe6ca;</i> 活动管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="/admin/getActivityListById" href="javascript:void(0)">优惠活动</a></li>

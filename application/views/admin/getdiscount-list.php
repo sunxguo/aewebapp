@@ -1,35 +1,9 @@
-<title>商品管理</title>
+<title>优惠券</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 插件管理 <span class="c-gray en">&gt;</span> 优惠券 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
 	<div class="text-c">
-		<!-- 店铺：
-		<select id="supermarket" onchange="getSelectCategories();" class="select" style="height:31px;width:inherit;vertical-align:middle;">
-          <option value="-1">所有</option>
-          <?php foreach($supermarkets as $sm):?>
-          <optgroup label="<?php echo $sm->name;?>">
-            <?php foreach($sm->subSupermarkets as $ssm):?>
-            <option value="<?php echo $ssm->id;?>" <?php echo isset($_GET['sid']) && $_GET['sid']==$ssm->id?'selected':'';?>><?php echo $ssm->sname;?></option>
-            <?php endforeach;?>
-          </optgroup>
-          <?php endforeach;?>
-        </select> 
-		  分类：
-		<select id="category" class="select" style="height:31px;width:inherit;vertical-align:middle;">
-          <option value="-1">所有</option>
-          <?php foreach($categories as $category):?>
-          	<option value="<?php echo $category->id;?>" <?php echo isset($_GET['categoryid']) && $_GET['categoryid']==$category->id?'selected':'';?>><?php echo $category->name;?></option>
-
-          <?php endforeach;?>
-        </select>
-         添加时间：
-		<input type="text" value="<?php echo isset($_GET['startTime'])?$_GET['startTime']:'';?>" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" value="<?php echo isset($_GET['endTime'])?$_GET['endTime']:'';?>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-		
-		<input type="text" value="<?php echo isset($_GET['keywords'])?$_GET['keywords']:'';?>" id="keywords" class="input-text" style="width:250px" placeholder="输入商品名称"name="">
-		<button onclick="searchProduct();" type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜商品</button> -->
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">

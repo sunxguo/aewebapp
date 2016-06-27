@@ -31,7 +31,7 @@
 				<td><?php echo $cate->eigen_name;?></td>
 				<td><?php echo $cate->eigen_addtime;?></td>
 				<td class="td-manage">
-					<a title="编辑" href="javascript:;" onclick="member_edit('修改活动信息','/admin/activityedit','<?php echo $cate->eigen_id;?>','','550')" class="ml-5" style="text-decoration:none">
+					<a title="编辑" href="javascript:;" onclick="member_edit('修改活动信息','/admin/catevalueedit','<?php echo $cate->eigen_id;?>','','550')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
 					<a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $cate->eigen_id;?>')" class="ml-5" style="text-decoration:none">
@@ -106,7 +106,7 @@ function member_start(obj,id){
 }
 /*用户-编辑*/
 function member_edit(title,url,id,w,h){
-	layer_show(title,url+'?activity_id='+id,w,h);
+	layer_show(title,url+'?eigen_id='+id,w,h);
 }
 /*图片-编辑*/
 function product_edit(title,url,id){

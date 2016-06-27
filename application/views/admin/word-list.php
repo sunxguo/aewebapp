@@ -1,7 +1,7 @@
-<title>口令集管理</title>
+<title>口令集</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 口令集管理 <span class="c-gray en">&gt;</span> 口令集列表 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 口令集 <span class="c-gray en">&gt;</span> 口令集 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
 	 
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
@@ -19,6 +19,7 @@
 				<th width="80">口令内容</th>
 				<th width="80">添加时间</th>
 				<th width="130">修改时间</th>
+				<th width="130">审核状态</th>
 				<th width="130">口令状态</th>
 				
 			</tr>
@@ -31,13 +32,24 @@
 				<td><?php echo $coupon->word_discount;?></td>
 				<td><?php echo $coupon->word_good;?></td>
 				<td><?php echo $coupon->word_prime_cost;?></td>
-				<td><?php echo $coupon->word_content;?></td>
+				<td>
+				    <?php if(!empty($coupon->content->word_item_name)):?>
+						<?php echo $coupon->content->word_item_name;?>
+					<?php endif;?>	
+				</td>
 				<td><?php echo $coupon->word_addtime;?></td>
 				<td><?php echo $coupon->word_eidttime;?></td>
-				<?php if($coupon->word_status=='0'):?>
-				<td class="td-status"><span class="label label-defaunt radius">已使用</span></td>
+				<?php if($coupon->audit_status=='0'):?>
+				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
 				<?php else:?>
-				<td class="td-status"><span class="label label-success radius">未使用</span></td>
+				<td class="td-status"><span class="label label-success radius">已审核</span></td>
+				<?php endif;?>
+				<?php if($coupon->word_status=='0'):?>
+				<td class="td-status"><span class="label label-defaunt radius">待发布</span></td>
+				<?php elseif($coupon->word_status=='1'):?>
+				<td class="td-status"><span class="label label-success radius">已发布</span></td>
+			<?php elseif($coupon->word_status=='2'):?>
+				<td class="td-status"><span class="label label-success radius">已过期</span></td>
 				<?php endif;?>
 			</tr>
 			<?php endforeach;?> 

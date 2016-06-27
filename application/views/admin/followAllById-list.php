@@ -30,8 +30,8 @@
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $user->follow_id;?>" name="id"></td>
 				<td>
-					<?php if(!empty($user->username)):?>
-						<?php echo $user->username;?>
+					<?php if(!empty($user->username->user_nickname)):?>
+						<?php echo $user->username->user_nickname;?>
 					<?php else:?>
 				    	暂无用户昵称
 				    <?php endif;?>

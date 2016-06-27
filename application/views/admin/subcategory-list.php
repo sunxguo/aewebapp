@@ -3,14 +3,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 店铺管理 <span class="c-gray en">&gt;</span> 二级分类分类管理 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<!-- <div class="text-c">
-		  添加时间：
-		<input type="text" value="<?php echo isset($_GET['startTime'])?$_GET['startTime']:'';?>" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" value="<?php echo isset($_GET['endTime'])?$_GET['endTime']:'';?>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" value="<?php echo isset($_GET['keywords'])?$_GET['keywords']:'';?>" id="keywords" class="input-text" style="width:250px" placeholder="输入分类名称"name="">
-		<button onclick="searchCategory();" type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜分类</button>
-	</div> -->
+	
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
 			<a href="javascript:;" onclick="member_add('添加管理员','/admin/subcategoryAdd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加二级分类</a>
@@ -28,7 +21,7 @@
 				<th width="120">分类描述</th>
 				<th width="120">添加时间</th>
 				<th width="120">修改时间</th>
-                <th width="100">添加分类特征</th>
+                <!-- <th width="100">添加分类特征</th> -->
 				<th width="120">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -42,13 +35,13 @@
 				<td><?php echo $category->describe_shop;?></td>
 				<td><?php echo $category->addtime;?></td>
 				<td><?php echo $category->edittime;?></td>
-				<td>
+				<!-- <td>
 					<a href="javascript:;" onclick="feature_add('添加分类特征','/admin/featureaddByChoice','<?php echo $category->twoid;?>','800','500','<?php echo $category->id;?>')" class="ml-5" style="text-decoration:none">
 					    <span class="label label-success radius">
 					    	添加
 					    </span>
 					</a>    
-				</td>
+				</td> -->
 				<?php if($category->status=='0'):?>
 					<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>

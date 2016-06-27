@@ -436,6 +436,31 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
 	}
 
+     //查出置顶列表
+    public function getAllStickI(){
+
+		$bannerParameters=array(
+			'result'=>'count',
+			'orderBy'=>array('follow_addtime'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getAllStickI($bannerParameters);
+		$baseUrl='/admin/getAllStickI?placeholder=true';
+		$selectUrl='/admin/getAllStickI?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$bannerParameters['result']='data';
+		$admins=$this->getdata->getAllStickI($bannerParameters);
+
+		$parameters=array(
+			'view'=>'StickI_list',
+			'data'=>array('admins'=>$admins,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
 	//查出收藏列表
     public function getCollectAll(){
 
@@ -461,7 +486,9 @@ class Admin extends CI_Controller {
 
 		$this->adminCommonHandler($parameters);
 	}
-    
+
+	
+
 
     //查出商铺关键词列表
     public function shopSearchlist(){
@@ -497,8 +524,8 @@ class Admin extends CI_Controller {
 		);
 		$bannerParameters['audit_status']=$audit_status;
 		$amount=$this->getdata->getGoodSearchAll($bannerParameters);
-		$baseUrl='/admin/getattentionAll?placeholder=true';
-		$selectUrl='/admin/getattentionAll?placeholder=true';
+		$baseUrl='/admin/goodSearchlist?placeholder=true';
+		$selectUrl='/admin/goodSearchlist?placeholder=true';
 		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 		$amountPerPage=20;
 		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
@@ -557,6 +584,7 @@ class Admin extends CI_Controller {
 		$bannerParameters['result']='data';
 		// $bannerParameters['limit']=$pageInfo['limit'];
 		$admins=$this->getdata->getWordAll($bannerParameters);
+		//var_dump($admins->worditem);
 		$parameters=array(
 			'view'=>'passwordset-list',
 			'data'=>array('admins'=>$admins,'pageInfo'=>$pageInfo)
@@ -588,6 +616,66 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
 	}
 
+	//今日市价
+	public function todayPricelist(){
+		/*查出今日市价*/
+		$url=API_IP.'AEWebApp/nearby/queryTodayPriceListAll';
+        $header=array();
+        $param=array();
+        $priceJSON=httpGet($url,$header,$param);
+        $todayprice = json_decode($priceJSON)->data;
+        /*分页*/
+		$amount=count($todayprice);
+		$baseUrl='/admin/couponlist?placeholder=true';
+		$selectUrl='/admin/couponlist?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters=array(
+			'view'=>'todayprice-list',
+			'data'=>array('todayprice'=>$todayprice,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	//今日市价
+	public function todaypriceadd(){
+
+		$parameters=array(
+			'view'=>'todayprice-add',
+			'data'=>array()
+		);
+
+		$this->adminCommonHandler($parameters);
+	}	
+	//今日市价
+	public function todaypriceedit(){
+		if(isset($_GET['todayId']))
+		{
+			$todayId=$_GET['todayId'];
+			unset($_SESSION['todayId']);
+            $_SESSION['todayId']=$todayId;
+		}
+		else
+		{
+			$todayId=$_SESSION['todayId'];
+		}
+        
+        $url=API_IP.'AEWebApp/nearby/queryTodayPriceListById?todayId='.$todayId;
+        $header=array();
+        $param=array();
+        $priceJSON=httpGet($url,$header,$param);
+        $todayprice = json_decode($priceJSON)->data;
+        //var_dump($todayprice);
+		$parameters=array(
+			'view'=>'todayprice-edit',
+			'data'=>array('todayprice'=>$todayprice)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}	
+
 	//查出所有的附近审核员
     public function nearbyaudit(){
 
@@ -613,6 +701,137 @@ class Admin extends CI_Controller {
 
 		$this->adminCommonHandler($parameters);
 	}
+
+	//查出所有口令分类
+    public function wordsortlist(){
+
+		$url=API_IP.'AEWebApp/userShop/getWordSort';
+        $header=array();
+        $param=array();
+        $sortJSON=httpGet($url,$header,$param);
+        $wordsort = json_decode($sortJSON)->data;
+
+	    /*分页效果*/
+	    $amoun=count($wordsort);
+		$baseUrl='/admin/getShopGoodsAll?placeholder=true';
+		$selectUrl='/admin/getShopGoodsAll?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amoun);
+
+	    $parameters=array(
+			'view'=>'wordsort-list',
+			'data'=>array('wordsort'=>$wordsort,'pageInfo'=>$pageInfo)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+	//添加口令分类
+	public function wordsortadd(){
+		$parameters=array(
+			'view'=>'wordsort-add',
+			'data'=>array()
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+	//修改口令分类
+	public function wordsortedit(){
+		if(isset($_GET['wordId']))
+		{
+			$wordId=$_GET['wordId'];
+			unset($_SESSION['wordId']);
+            $_SESSION['wordId']=$wordId;
+		}
+		else
+		{
+			$wordId=$_SESSION['wordId'];
+		}
+        $url=API_IP.'AEWebApp/userShop/getWordSortById?wordSortId='.$wordId;
+        $header=array();
+        $param=array();
+        $sortJSON=httpGet($url,$header,$param);
+        $wordsort = json_decode($sortJSON)->data;
+        //var_dump($wordsort);
+		$parameters=array(
+			'view'=>'wordsort-edit',
+			'data'=>array('wordsort'=>$wordsort)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+	//修改口令分类详情
+	public function worditemedit(){
+		if(isset($_GET['itemId']))
+		{
+			$itemId=$_GET['itemId'];
+			unset($_SESSION['itemId']);
+            $_SESSION['itemId']=$itemId;
+		}
+		else
+		{
+			$itemId=$_SESSION['itemId'];
+		}
+        $url=API_IP.'AEWebApp/userShop/getWordItemById?wordItemId='.$itemId;
+        $header=array();
+        $param=array();
+        $sortJSON=httpGet($url,$header,$param);
+        $worditem = json_decode($sortJSON)->data;
+        //var_dump($wordsort);
+		$parameters=array(
+			'view'=>'worditem-edit',
+			'data'=>array('worditem'=>$worditem)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+	//添加口令分类
+	public function worditemadd(){
+		
+		if(isset($_GET['wordId']))
+		{
+			$wordId=$_GET['wordId'];
+			unset($_SESSION['wordId']);
+            $_SESSION['wordId']=$wordId;
+		}
+		else
+		{
+			$wordId=$_SESSION['wordId'];
+		}
+		$parameters=array(
+			'view'=>'worditem-add',
+			'data'=>array('wordId'=>$wordId)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+
+
+	//查出所有口令分类详情
+    public function worditemlist(){
+        $wordid=$_GET['wordid'];
+		$url=API_IP.'AEWebApp/userShop/getWordItem?wordItemSortId='.$wordid;
+        $header=array();
+        $param=array();
+        $itemJSON=httpGet($url,$header,$param);
+        $worditem = json_decode($itemJSON)->data;
+
+	    /*分页效果*/
+	    $amoun=count($worditem);
+		$baseUrl='/admin/getShopGoodsAll?placeholder=true';
+		$selectUrl='/admin/getShopGoodsAll?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amoun);
+
+	    $parameters=array(
+			'view'=>'worditem-list',
+			'data'=>array('worditem'=>$worditem,'pageInfo'=>$pageInfo)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+
 
 	public function welcome(){
 		$parameters=array(
@@ -1098,17 +1317,24 @@ class Admin extends CI_Controller {
         $param=array();
         $shopdataJSON=httpGet($url,$header,$param);
         $shopdatas = json_decode($shopdataJSON);
-
+        $time=$shopdatas->data->shopBusinessHours;
+        $hello = explode(',',$time); 
+        $amtime=$hello[0];
+        $pmtime=$hello[1];
+        $am=explode('-',$amtime);
+        $pm=explode('-',$pmtime);
+        
+        
+        //var_dump($amstart); 
         $shopdata='';
-        if(!empty($shopdatas) && isset($shopdatas))
+        if(!empty($shopdatas->data) && isset($shopdatas->data))
         {
         	$shopdata = $shopdatas->data;
         }
-	    $shopdata = $shopdatas->data;
 	    
 	    $parameters=array(
 			'view'=>'shopdata-edit',
-			'data'=>array('shopdata'=>$shopdata)
+			'data'=>array('shopdata'=>$shopdata,'am'=>$am,'pm'=>$pm)
 		);
 		$this->adminCommonHandler($parameters);
 	}
@@ -1239,7 +1465,7 @@ class Admin extends CI_Controller {
 	public function getcategorybyshopid(){
 		/*调用接口查询商品分类*/
 		$shopid=$_SESSION['shopid'];
-		$url=API_IP.'AEWebApp/userShop/queryShopCategoryListByShopId?categoryShopId='.$shopid;
+		$url=API_IP.'AEWebApp/userShop/queryShopCategoryListByShopId?shopId='.$shopid;
 		$header=array();
         $param=array();
         $shopcateJSON=httpGet($url,$header,$param);
@@ -1346,6 +1572,31 @@ class Admin extends CI_Controller {
 			'data'=>array('useries'=>$useries,'pageInfo'=>$pageInfo)
 		);
 
+		$this->adminCommonHandler($parameters);
+	}
+
+	//查出置顶列表根据店铺id
+    public function getAllStickIById(){
+		/*查出所有的置顶用户*/
+		$shopid=$_SESSION['shopid'];
+		$parameters=array(
+			'result'=>'count',
+			'stick_shop_id'=>$shopid,
+			'orderBy'=>array('stick_addtime'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getAllStickIById($parameters);
+		$baseUrl='/admin/getAllStickIById?placeholder=true';
+		$selectUrl='/admin/getAllStickIById?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+        $sticki=$this->getdata->getAllStickIById($parameters);
+		$parameters=array(
+			'view'=>'sticki-list',
+			'data'=>array('sticki'=>$sticki,'pageInfo'=>$pageInfo)
+		);
 		$this->adminCommonHandler($parameters);
 	}
 
@@ -1472,8 +1723,63 @@ class Admin extends CI_Controller {
 	/*添加口令集*/
     public function getWordlistadd()
     {
+    	$count=$_GET['count']; 
+    	/*查出所有的口令分类详情 */
+    	$url=API_IP.'AEWebApp/userShop/getWordSort';
+        $header=array();
+        $param=array();
+        $sortJSON=httpGet($url,$header,$param);
+	    $wordsort = json_decode($sortJSON)->data;
+
+        /*查出所有的商铺分类*/
+        $shopid=$_SESSION['shopid'];
+		$url=API_IP.'AEWebApp/userShop/queryShopCategoryListByShopId?shopId='.$shopid;
+		$header=array();
+        $param=array();
+        $shopcateJSON=httpGet($url,$header,$param);
+	    $shopCategory = json_decode($shopcateJSON)->data;
+
+        /*根据商铺id查出商铺添加的口令内容*/
+        $shopid=$_SESSION['shopid'];
+        $url=API_IP.'AEWebApp/userShop/getWordItemByShopId?shopId='.$shopid;
+		$header=array();
+        $param=array();
+        $shopitemJSON=httpGet($url,$header,$param);
+	    $shopItem = json_decode($shopitemJSON)->data;
+
     	$parameters=array(
 			'view'=>'getwordlist-add',
+			'data'=>array('wordsort'=>$wordsort,'count'=>$count,'shopCategory'=>$shopCategory,'shopItem'=>$shopItem)
+		);
+
+		$this->adminCommonHandler($parameters);
+    }
+
+    /*添加自定义口令内容*/
+    public function getCustomCount()
+    {
+        /*查出所有的商铺分类*/
+        $shopid=$_SESSION['shopid'];
+		$url=API_IP.'AEWebApp/userShop/getWordItemByShopId?shopId='.$shopid;
+		$header=array();
+        $param=array();
+        $wordItemJSON=httpGet($url,$header,$param);
+	    $wordItem = json_decode($wordItemJSON)->data;
+
+    	$parameters=array(
+			'view'=>'getcustom-list',
+			'data'=>array('wordItem'=>$wordItem)
+		);
+
+		$this->adminCommonHandler($parameters);
+    }
+
+    /*添加自定义口令内容*/
+    public function getcustomadd()
+    {
+        /*查出所有的商铺分类*/
+    	$parameters=array(
+			'view'=>'getcustom-add',
 			'data'=>array()
 		);
 
@@ -1639,6 +1945,69 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
 	}
 
+	/*平台提示消息*/    
+	public function reminderlist(){
+
+		$categoryParameters=array(
+			'result'=>'count',
+			'orderBy'=>array('business_addtime'=>'DESC')
+		);
+		
+		$amount=$this->getdata->getreminder($categoryParameters);
+		$baseUrl='/admin/reminderlist?placeholder=true';
+		$selectUrl='/admin/reminderlist?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$categoryParameters['result']='data';
+		$getreminder=$this->getdata->getreminder($categoryParameters);
+        //var_dump($getreminder);
+       
+		$parameters=array(
+			'view'=>'reminder-list',
+			
+			'data'=>array('getreminder'=>$getreminder,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	/*平台提示消息*/    
+	public function addreminder(){
+        
+
+		$parameters=array(
+			'view'=>'reminder-add',
+			'data'=>array()
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	/*平台提示消息*/    
+	public function reminderedit(){
+        if(!empty($_GET['msg_id']))
+        {
+        	$msg_id=$_GET['msg_id'];
+        	//将id存在session  返回页面时会用到
+        	unset($_SESSION['msg_id']);
+        	$_SESSION['msg_id']=$msg_id;
+        }
+        else
+        {
+			$msg_id=$_SESSION['msg_id'];
+        }
+        /*根据id查出平台提示信息*/
+        $parameters=array('id'=>$msg_id,'result'=>'data');
+        $reminder=$this->getdata->getReminderById($parameters);
+		$parameters=array(
+			'view'=>'reminder-edit',
+			'data'=>array('reminder'=>$reminder)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
 	/*添加商圈*/    
 	public function businessdistrictadd(){
 
@@ -1699,20 +2068,20 @@ class Admin extends CI_Controller {
 	/*添加分类特征根据id*/    
 	public function catefeatureaddByid(){
             
-            if(!empty($_GET['id']))
-            {
-            	$cateid=$_GET['id'];
-            	//将id存在session  返回页面时会用到
-            	unset($_SESSION['cateid']);
-            	$_SESSION['cateid']=$cateid;
-            }
-            else
-            {
-				$cateid=$_SESSION['cateid'];
-            }
+    //         if(!empty($_GET['id']))
+    //         {
+    //         	$cateid=$_GET['id'];
+    //         	//将id存在session  返回页面时会用到
+    //         	unset($_SESSION['cateid']);
+    //         	$_SESSION['cateid']=$cateid;
+    //         }
+    //         else
+    //         {
+				// $cateid=$_SESSION['cateid'];
+    //         }
 
-            $parameters=array('id'=>$cateid,'result'=>'data');
-			$category=$this->getdata->getCategoriesById($parameters);
+   //          $parameters=array('id'=>$cateid,'result'=>'data');
+			// $category=$this->getdata->getCategoriesById($parameters);
 			$parameters=array(
 				'view'=>'catefeaturebyid-add',
 				'data'=>array('category'=>$category)
@@ -1724,12 +2093,30 @@ class Admin extends CI_Controller {
     /*添加分类特征*/    
 	public function catefeatureadd(){
             
-            $parameters=array('result'=>'count');
-			$category=$this->getdata->getCategoryAlls(false,false);
+   //          $parameters=array('result'=>'count');
+			// $category=$this->getdata->getCategoryAlls(false,false);
 
 			$parameters=array(
 				'view'=>'catefeature-add',
-				'data'=>array('category'=>$category)
+				'data'=>array()
+			);
+            
+			$this->adminCommonHandler($parameters);
+	}
+
+	/*编辑分类特征*/    
+	public function catefeatureedit(){
+            $feature_id=$_GET['feature_id'];
+
+            $categoryParameters=array(
+				'result'=>'data',
+				'feature_id'=>$feature_id
+			);	
+			$catefeature=$this->getdata->getCateFeature($categoryParameters);
+			//var_dump($catefeature);
+			$parameters=array(
+				'view'=>'catefeature-edit',
+				'data'=>array('catefeature'=>$catefeature)
 			);
             
 			$this->adminCommonHandler($parameters);
@@ -1788,7 +2175,7 @@ class Admin extends CI_Controller {
 			$this->adminCommonHandler($parameters);
 	}
 
-	 /*添加分类特征*/    
+	/*添加分类特征*/    
 	public function catefeaturevalueadd(){
             
             $parameters=array('result'=>'count');
@@ -1797,6 +2184,23 @@ class Admin extends CI_Controller {
 			$parameters=array(
 				'view'=>'catefeaturevalue-add',
 				'data'=>array('category'=>$category)
+			);
+
+			$this->adminCommonHandler($parameters);
+	}
+
+	/*编辑分类特征*/    
+	public function catevalueedit(){
+            $parameters=array('result'=>'count');
+			$category=$this->getdata->getCatesFeature(false,false);
+            
+            $eigen_id=$_GET['eigen_id'];
+            $cateparameters=array('result'=>'data','eigen_id'=>$eigen_id);
+            $catefeature=$this->getdata->getCateFeatureValue($cateparameters);
+
+			$parameters=array(
+				'view'=>'catefeaturevalue-edit',
+				'data'=>array('category'=>$category,'catefeature'=>$catefeature)
 			);
 
 			$this->adminCommonHandler($parameters);
@@ -1893,6 +2297,18 @@ class Admin extends CI_Controller {
 		$parameters=array(
 			'view'=>'shopactivity-show',
 			'data'=>array('activitys'=>$activitys)
+		);
+
+		$this->adminCommonHandler($parameters);
+    }
+
+    /*查出商铺的活动*/
+    public function sendMessage()
+    {
+    	$phone=$_GET['phone'];
+		$parameters=array(
+			'view'=>'sendMessage-show',
+			'data'=>array('phone'=>$phone)
 		);
 
 		$this->adminCommonHandler($parameters);

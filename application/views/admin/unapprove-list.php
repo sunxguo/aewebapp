@@ -33,6 +33,7 @@
 				<th width="90">纬度</th>
 				<th width="130">添加时间</th>
 				<th width="130">更新时间</th>
+				<!-- <th width="130">发送审核消息</th> -->
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -178,6 +179,8 @@
 
 					<?php endif;?>
 				</td>
+
+				
 				
 				<td>
 					<?php if(!empty($shop->addtime)):?>
@@ -195,6 +198,10 @@
 					<?php endif;?>
 				</td>
 
+				<!-- <td>
+					<u style="cursor:pointer" class="text-primary" onclick="member_show('发送审核消息','/admin/sendMessage','<?$shop->shop_buinour_phone;?>','800','500')">发送审核消息</u>
+				</td>
+ -->
 				<td class="td-manage">
 					<?php if($shop->shop_status=='0'):?>
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $shop->shop_id;?>')" href="javascript:;" title="通过审核">
@@ -237,7 +244,7 @@ function member_add(title,url,w,h){
 /*用户-查看*/
 function member_show(title,url,shop_id,w,h){
 
-	layer_show(title,url+'?shop_id='+shop_id,w,h);
+	layer_show(title,url+'?phone='+shop_id,w,h);
 }
 /*用户-停用*/
 function member_stop(obj,id){

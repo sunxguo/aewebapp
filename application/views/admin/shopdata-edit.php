@@ -84,7 +84,21 @@
       </div>
       <div class="col-4"> </div>
     </div>
-
+    
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>wifi是否显示：</label>
+      <div class="formControls col-5 skin-minimal">
+        <div class="radio-box">
+          <input type="radio" id="shop_wifi_status-1" name="shopWifiStatus" value="1" datatype="*" <?php echo $shopdata->shopWifiStatus=='1'?'checked':'';?>>
+          <label for="shop_wifi_status-1">是</label>
+        </div>
+        <div class="radio-box">
+          <input type="radio" id="shop_wifi_status-2" name="shopWifiStatus" value="0" <?php echo $shopdata->shopWifiStatus=='0'?'checked':'';?>>
+          <label for="shop_wifi_status-2">否</label>
+        </div>
+      </div>
+      <div class="col-4"> </div>
+    </div>
    
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>wifi账号</label>
@@ -103,23 +117,39 @@
     </div>
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>营业时间开始：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>上午营业时间开始：</label>
       <div class="formControls col-5"> 
-        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="coupon_beginvalid" class="input-text Wdate" value="">
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="amstart" class="input-text Wdate" value="<?php echo $am[0]?>">
       </div>
       <div class="col-4"> </div>
     </div>
 
     <div class="row cl">
 
-      <label class="form-label col-3"><span class="c-red">*</span>营业时间结束：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>上午营业时间结束：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate" value="">
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="amstop" class="input-text Wdate" value="<?php echo $am[1]?>">
+      </div>
+    </div> 
+
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>下午营业时间开始：</label>
+      <div class="formControls col-5"> 
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="pmstart" class="input-text Wdate" value="<?php echo $pm[0]?>">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+
+    <div class="row cl">
+
+      <label class="form-label col-3"><span class="c-red">*</span>下午营业时间结束：</label>
+      <div class="formControls col-5">
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="pmstop" class="input-text Wdate" value="<?php echo $pm[1]?>">
       </div>
     </div> 
      <div class="row cl">
       <div class="col-9 col-offset-3"> 
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;">
       </div>
     </div>
   </form>
@@ -162,7 +192,7 @@ $(function(){
 		callback:function(form){
 			//form[0].submit();
       saveShopData(function(){
-        alert('保存成功！');
+        alert('提交成功！');
         /*这个是修改之后直接退出*/
         // parent.window.location.replace('/adminajax/logout');
         // parent.window.location.href="/adminajax/logout";

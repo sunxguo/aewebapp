@@ -17,7 +17,7 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>
-				<th width="100">所属分类</th>
+				
 				<th width="80">特征名称</th>
 				<th width="80">添加时间</th>
 				<th width="80">操作</th>
@@ -27,15 +27,10 @@
 			<?php foreach($catefeature as $cate):?>
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $cate->feature_id;?>" name="id"></td>
-				<td>
-				 	<?php if(!empty($cate->category->name)):?>
-						<?php echo $cate->category->name;?>
-					<?php endif;?>	
-				</td>
 				<td><?php echo $cate->feature_name;?></td>
 				<td><?php echo $cate->feature_addtime;?></td>
 				<td class="td-manage">
-					<a title="编辑" href="javascript:;" onclick="member_edit('修改活动信息','/admin/activityedit','<?php echo $cate->feature_id;?>','','550')" class="ml-5" style="text-decoration:none">
+					<a title="编辑" href="javascript:;" onclick="member_edit('修改分类特征','/admin/catefeatureedit','<?php echo $cate->feature_id;?>','','550')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
 					<a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $cate->feature_id;?>')" class="ml-5" style="text-decoration:none">
@@ -60,15 +55,6 @@ $(function(){
 		  {"orderable":false,"aTargets":[0]}// 制定列不参与排序
 		]
 	});
-	// $('.table-sort tbody').on( 'click', 'tr', function () {
-	// 	if ( $(this).hasClass('selected') ) {
-	// 		$(this).removeClass('selected');
-	// 	}
-	// 	else {
-	// 		table.$('tr.selected').removeClass('selected');
-	// 		$(this).addClass('selected');
-	// 	}
-	// });
 });
 /*用户-添加*/
 function member_add(title,url,w,h){
@@ -111,7 +97,7 @@ function member_start(obj,id){
 }
 /*用户-编辑*/
 function member_edit(title,url,id,w,h){
-	layer_show(title,url+'?activity_id='+id,w,h);
+	layer_show(title,url+'?feature_id='+id,w,h);
 }
 /*图片-编辑*/
 function product_edit(title,url,id){

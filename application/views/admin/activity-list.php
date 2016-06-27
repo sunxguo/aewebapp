@@ -1,10 +1,10 @@
-<title>优惠活动管理</title>
+<title>优惠活动</title>
 </head>
 <body>
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>
       首页 <span class="c-gray en">&gt;</span> 
-      优惠活动管理 <span class="c-gray en">&gt;</span> 
+      优惠活动 <span class="c-gray en">&gt;</span> 
       活动列表 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
     <i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
@@ -26,6 +26,7 @@
 				<th width="80">有效期始</th>
 				<th width="80">有效期止</th>
 				<th width="50">状态</th>
+				<th width="50">关键字审核状态</th>
 				
 			</tr>
 		</thead>
@@ -53,8 +54,11 @@
 					<td class="td-status"><span class="label label-success radius">进行中</span></td>
 				<?php elseif($coupon->status=='2'):?>
 					<td class="td-status"><span class="label label-defaunt radius">已过期</span></td>
-				<?php elseif($coupon->status=='3'):?>
-					<td class="td-status"><span class="label label-defaunt radius">已删除</span></td>		
+				<?php endif;?>
+				<?php if($coupon->audit_status=='0'):?>
+					<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
+				<?php else:?>
+					<td class="td-status"><span class="label label-success radius">已审核</span></td>	
 				<?php endif;?>
 			</tr>
 			<?php endforeach;?>

@@ -39,8 +39,8 @@
 				<td><?php echo $product->name;?></td>
 				<td><?php echo $product->detailedname;?></td>
 				<td><?php echo $product->keywords;?></td>
-				<td><span class=" label label-defaunt radius" onclick="member_show('商品图片','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</span></td>
-				<td><span class=" label label-defaunt radius" onclick="member_show('分类特征','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</span></td>
+				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('商品图片','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</u></td>
+				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('分类特征','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</u></td>
 				<td><?php echo $product->goodsCategory->name;?></td>
 				<td>￥ <?php echo $product->originalPrice;?></td>
 				<td>￥ <?php echo $product->price;?></td>

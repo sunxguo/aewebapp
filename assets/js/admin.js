@@ -697,14 +697,15 @@ function saveWord(isNew,callBack){
         alert('口令集截止时间必须添加');
         return false;
     }
-   
+
+
     showWait();
     var word = new Object(); 
     word.infoType = 'word';
     word.word_discount = $("#word_discount").val();
-    word.word_good = $("#word_good").val();
+    word.word_good = $("#shopgoods").val();
     word.word_prime_cost = $("#word_prime_cost").val();
-    word.word_content = $("#word_content").val();
+    word.word_content = $("#worditem").val();
     word.word_begintime = $("#word_begintime").val();
     word.word_endtime = $("#word_endtime").val();
   
@@ -1073,6 +1074,144 @@ function setSupermarketLogo(){
     
 //   }
 // }
+
+/*查出口令分类*/
+function getwordstor(){
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'wordsort';
+    word.id = $("#wordsort").val();
+    dataHandler('/common/getInfo',word,null,null,null,getworditem,false,false);
+}
+
+/*查出对应的详情*/
+function getworditem(worditem){
+    var htmlOption='<option value="" selected>请选择口令分类</option>';
+    for (var i = 0; i < worditem.length; i++) {
+        htmlOption+='<option value="'+worditem[i].wordItemId+'">'+worditem[i].wordItemName+'</option>'
+    };
+    $("#worditem").html(htmlOption);
+    closeWait();
+}
+
+/*查出商品分类*/
+function getshopcategory(){
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'shopcategory';
+    word.id = $("#shopcategory").val();
+    dataHandler('/common/getInfo',word,null,null,null,getshopgoods,false,false);
+}
+
+/*添加今日市价*/
+function addTodayprice(isNew,callBack){
+
+    var exp=/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+    var today_min_price=$("#today_min_price").val();
+    var today_max_price=$("#today_max_price").val();
+    var today_orders=$("#today_orders").val();
+    if(!exp.test(today_min_price))
+    {
+        alert('今日最低价必须为非负数');
+    }
+    if(!exp.test(today_max_price))
+    {
+        alert('今日最高价必须为非负数');
+    } 
+
+    if(isNaN(today_orders))
+    {
+        alert('序号必须为正整数');
+    }
+    showWait();
+    var todayprice = new Object(); 
+    todayprice.infoType = 'todayprice';
+    todayprice.today_goods_name = $("#today_goods_name").val();
+    todayprice.today_min_price = $("#today_min_price").val();
+    todayprice.today_max_price = $("#today_max_price").val();
+    todayprice.today_orders = $("#today_orders").val();
+    method = 'add';
+    if(!isNew){
+        todayprice.todayId=$("#todayId").val();
+        method = 'modify';
+    }
+    dataHandler('/common/'+method+'Info',todayprice,null,null,null,callBack,false,false);
+}
+
+/*查出对应的商品*/
+function getshopgoods(shopgoods){
+    var htmlOption='<option value="" selected>请选择口令商品</option>';
+    for (var i = 0; i < shopgoods.length; i++){
+        htmlOption+='<option value="'+shopgoods[i].detailedname+'">'+shopgoods[i].detailedname+'</option>'
+    };
+    $("#shopgoods").html(htmlOption);
+    closeWait();
+}
+
+//操作口令分类
+function addwordsort(isNew,callBack){
+
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'wordsort';
+    word.word_sort_name = $("#word_sort_name").val();
+    var method='add';
+    if(!isNew){
+        word.wordSortId=$("#wordSortId").val();
+        method = 'modify';
+    }
+    dataHandler('/common/'+method+'Info',word,null,null,null,callBack,false,false);
+    
+}
+
+//操作口令分类详情
+function addworditem(isNew,callBack){
+
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'worditem';
+    word.word_item_sort_id = $("#wordid").val();
+    word.word_item_name = $("#word_item_name").val();
+    var method='add';
+    if(!isNew){
+        word.word_item_id=$("#itemid").val();
+        method = 'modify';
+    }
+    dataHandler('/common/'+method+'Info',word,null,null,null,callBack,false,false);
+    
+}
+
+//操作口令分类详情
+function addworditemshop(isNew,callBack){
+
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'worditemadd';
+    word.word_item_name = $("#word_item_name").val();
+    var method='add';
+    if(!isNew){
+        word.word_item_id=$("#itemid").val();
+        method = 'modify';
+    }
+    dataHandler('/common/'+method+'Info',word,null,null,null,callBack,false,false);
+    
+}
+
+
+//操作口令分类详情
+function editworditem(isNew,callBack){
+
+    showWait();
+    var word = new Object(); 
+    word.infoType = 'worditem';
+    word.word_item_id = $("#itemid").val();
+    word.word_item_name = $("#word_item_name").val();
+    var method='modify';
+    dataHandler('/common/'+method+'Info',word,null,null,null,callBack,false,false);
+    
+}
+
+
 function getSupermarketSuccess(supermarket){
     $("#thumbnail").attr('src',supermarket.logo);
     closeWait();
@@ -1225,14 +1364,13 @@ function saveBusinessdistrict(isNew,callBack)
         alert('logo图必须添加');
         return false;
     }
-
     showWait();
     var businessdistrict = new Object(); 
     businessdistrict.infoType = 'businessdistrict';
-    businessdistrict.business_province = $("#business_province").val();
-    businessdistrict.business_city = $("#business_city").val();
-    businessdistrict.business_area = $("#business_area").val();
-    businessdistrict.thumbnail1 = $("#thumbnail").attr('src');
+    businessdistrict.business_province = $("#cmbProvince").val();
+    businessdistrict.business_city = $("#cmbCity").val();
+    businessdistrict.business_area = $("#cmbArea").val();
+    businessdistrict.thumbnail = $("#thumbnail").attr('src');
     businessdistrict.business_address = $("#business_address").val();
     businessdistrict.business_name = $("#business_name").val();
     businessdistrict.business_comments = $("#business_comments").val();
@@ -1258,7 +1396,7 @@ function saveBusinessdistrict(isNew,callBack)
         showWait();
         var catefeature = new Object(); 
         catefeature.infoType = 'catefeature';
-        catefeature.feature_category_id = $("#feature_category_id").val();
+        // catefeature.feature_category_id = $("#feature_category_id").val();
         catefeature.feature_name = $("#feature_name").val();     
         var method='add';
         if(!isNew){
@@ -1312,7 +1450,8 @@ function saveBusinessdistrict(isNew,callBack)
         catefeature.eigenvalue_name = $("#eigenvalue_name").val();     
         var method='add';
         if(!isNew){
-            catefeature.eigenvalue_id = $("#eigenvalue_id").val();
+            catefeature.eigen_id = $("#eigenvalue_id").val();
+            catefeature.feature_id = $("#feature_id").val();
             method = 'modify';
         }
 
@@ -1328,8 +1467,6 @@ function saveShopData(callBack)
     var value="";
     var thumbnail=$("#thumbnail").attr('src');
     //经度纬度
-    // var business_lng=$("#business_lng").attr('src');
-    // var business_lat=$("#business_lat").attr('src');
 
     if(thumbnail == value)
     {
@@ -1382,8 +1519,13 @@ function saveShopData(callBack)
     usershop.shopCity = $("#shopCity").val();
     usershop.shopArea = $("#shopArea").val();
     usershop.shopDetailAddress = $("#shopDetailAddress").val();
+    usershop.shopWifiStatus = $("input[name='shopWifiStatus']:checked").val();
     usershop.shopWifiUsername = $("#shopWifiUsername").val();
     usershop.shopWifiPassword = $("#shopWifiPassword").val();
+    usershop.amstart = $("#amstart").val();
+    usershop.amstop = $("#amstop").val();
+    usershop.pmstart = $("#pmstart").val();
+    usershop.pmstop = $("#pmstop").val();
     usershop.shopTel = $("#shopTel").val();
     usershop.shopLng = $("#shopLng").val();
     usershop.shopLat = $("#shopLat").val();
@@ -1392,6 +1534,35 @@ function saveShopData(callBack)
 
     dataHandler('/common/'+method+'Info',usershop,null,null,null,callBack,false,false);
 }
+
+
+//添加平台信息
+    function saveReminder(isNew,callBack)
+    {
+
+        showWait();
+        var reminder = new Object();
+        reminder.infoType = 'reminder';
+        reminder.msg_content = $("#msg_content").val();
+        reminder.msg_status = $("input[name='msg_status']:checked").val();
+        var method='add';
+        
+        dataHandler('/common/'+method+'Info',reminder,null,null,null,callBack,false,false);
+    }
+//添加平台信息
+    function editReminder(isNew,callBack)
+    {
+
+        showWait();
+        var reminder = new Object();
+        reminder.infoType = 'reminder';
+        reminder.msg_content = $("#msg_content").val();
+        reminder.msg_status = $("input[name='msg_status']:checked").val();
+        reminder.msg_id = $("#msg_id").val();
+        var method='modify';
+        
+        dataHandler('/common/'+method+'Info',reminder,null,null,null,callBack,false,false);
+    }
 
 
 

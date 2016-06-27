@@ -98,7 +98,7 @@
 
     <div class="row cl">
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;">
       </div>
     </div>
   </form>

@@ -86,7 +86,8 @@
         <td>纬度 </td>
         <td><?php echo $shopdata->shopLat?></td>
       </tr>
-     
+      
+      <?php if($shopdata->shopWifiStatus == 1):?>
       <tr>
         <td>wifi账号 </td>
         <td><?php echo $shopdata->shopWifiUsername?></td>
@@ -94,7 +95,8 @@
       <tr>
         <td>wifi密码 </td>
         <td><?php echo $shopdata->shopWifiPassword?></td>
-      </tr> 
+      </tr>
+      <?php endif;?> 
        <tr>
         <td>店铺添加时间</td>
         <td>

@@ -76,7 +76,7 @@
    
     <div class="row cl">
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;">
       </div>
     </div>
   </form>
@@ -102,7 +102,7 @@ $(function(){
       //alert('ok');
 			// form[0].submit();
       saveActivity(false,function(){
-        alert('保存成功！');
+        alert('提交成功！');
         var index = parent.layer.getFrameIndex(window.name);
         parent.window.location.reload();
         parent.layer.close(index);

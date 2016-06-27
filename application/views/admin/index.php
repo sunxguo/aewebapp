@@ -61,13 +61,11 @@
 				<ul>
 					<li><a _href="/admin/productlistAll" href="javascript:void(0)">商品管理</a></li>
 					<li><a _href="/admin/categorylistAll" href="javascript:void(0)">分类管理</a></li>
-					
-
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 卖家管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe62d;</i> 店铺管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="/admin/supermarketlistAll" href="javascript:void(0)">店铺管理</a></li>
@@ -87,11 +85,11 @@
 		</dl>
 	
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe6ca;</i> 优惠券管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe6ca;</i> 插件管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="/admin/couponlist" href="javascript:;">优惠券管理</a></li>
-					<li><a _href="/admin/wordlist" href="javascript:;">口令集管理</a></li>
+					<li><a _href="/admin/couponlist" href="javascript:;">优惠券</a></li>
+					<li><a _href="/admin/wordlist" href="javascript:;">口令集</a></li>
 				</ul>
 			</dd>
 		</dl>

@@ -1,38 +1,23 @@
-<title>添加分类特征</title>
+<title>发送审核信息</title>
 <link href="/assets/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="pd-20">
   <form class="form form-horizontal" id="form-member-add">
     <input id="role" value="0" type="hidden">
-    <div class="row cl">
-    
-    <!-- <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>选择分类：</label>
-      <div class="formControls col-5">
-        <span class="select-box">
-          <select id="feature_category_id" class="select" size="1" name="demo1" datatype="*" nullmsg="请选择分类！">
-              <option value="" selected>请选择分类</option>
-              <?php foreach($category as $cate):?>
-                 <option value="<?php echo $cate->id;?>"><?php echo $cate->name;?></option>
-              <?php endforeach;?>
-          </select>
-        </span> 
-      </div>
-      <div class="col-4"> </div>
-    </div> -->
+    <input id="phone" value="<?php echo $phone;?>" type="hidden">
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>分类特征名：</label>
-        <div class="formControls col-5">
-          <input type="text" class="input-text" value="" placeholder="" id="feature_name" name="feature_name" datatype="*2-16" nullmsg="分类特征不能为空">
-        </div>
+      <label class="form-label col-3"><span class="c-red">*</span>审核内容：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="" placeholder="" id="message" name="message" datatype="*1-100000" nullmsg="审核内容不能为空">
+      </div>
       <div class="col-4"> </div>
     </div>
 
     <div class="row cl">
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
+        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;发送&nbsp;&nbsp;">
       </div>
     </div>
   </form>
@@ -46,7 +31,7 @@ $(function(){
   $('.skin-minimal input').iCheck({
     checkboxClass: 'icheckbox-blue',
     radioClass: 'iradio-blue',
-    increaseArea: '20%'
+    increaseArea: '20%'b 
   });
   
   $("#form-member-add").Validform({
@@ -54,7 +39,7 @@ $(function(){
     callback:function(form){
       // alert('ok');
       // form[0].submit();
-      saveCateFeature(true,function(){
+    addMessage(true,function(){
         alert('添加成功！');
         var index = parent.layer.getFrameIndex(window.name);
         // parent.$('.btn-refresh').click();
