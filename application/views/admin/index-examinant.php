@@ -3,20 +3,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 店铺审核员管理 <span class="c-gray en">&gt;</span> 店铺审核员管理列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	 <!-- <div class="text-c"> 注册时间：
-		<input type="text" value="<?php echo isset($_GET['startTime'])?$_GET['startTime']:'';?>" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" value="<?php echo isset($_GET['endTime'])?$_GET['endTime']:'';?>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-		 性别：
-		<select id="gender" class="select" name="admin-role" size="1" style="height:31px;width:inherit;vertical-align:middle;">
-			<option value="-1" <?php echo !isset($_GET['gender'])?'selected':'';?>>所有</option>
-			<option value="0" <?php echo isset($_GET['gender']) && $_GET['gender']=='0'?'selected':'';?>>男</option>
-			<option value="1" <?php echo isset($_GET['gender']) && $_GET['gender']=='1'?'selected':'';?>>女</option>
-			<option value="NULL" <?php echo isset($_GET['gender']) && $_GET['gender']=='NULL'?'selected':'';?>>未知</option>
-		</select>
-		<input type="text" value="<?php echo isset($_GET['keywords'])?$_GET['keywords']:'';?>" id="keywords" class="input-text" style="width:250px" placeholder="输入用户昵称、手机"name="">
-		<button onclick="searchBuyer();" type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div>  -->
+	 
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
 			<a href="javascript:;" onclick="member_add('添加管理员','/admin/shopAdminAdd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加店铺管理员</a>

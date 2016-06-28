@@ -699,6 +699,23 @@ class GetData{
 		return $buyers;
 	}
 
+	//查出所有的年费审核员
+	public function getAnnuityAduits($parameters){
+		$condition=array(
+			'table'=>'admin',
+			'result'=>$parameters['result']
+		);
+		$condition['where']['grade'] = '3';
+		$condition['where']['type']  = '7';
+		$buyers=$this->getData($condition);
+        if($parameters['result']=='data'){
+			foreach ($buyers as $key => $value) {
+				$value->typename=$this->getAdmintype('admintype',$value->type);
+			}
+		}
+		return $buyers;
+	}
+
 
 	   //查出所有的商铺管理员
 	public function getRecommendAduits($parameters){
@@ -1348,6 +1365,31 @@ class GetData{
 		$reminder=$this->getData($condition);
 		return $reminder;
 	}
+
+	/*查出所有的提交年费的店铺*/
+	public function getAnnualShop($parameters){
+		$condition=array(
+			'table'=>'annuityshop',
+			'result'=>$parameters['result']
+		);
+		$condition['where']['annuity_status']=$parameters['status'];
+		
+		$reminder=$this->getData($condition);
+
+		if($parameters['result']=='data')
+		{
+			foreach ($reminder as $key => $value)
+			{	
+				$value->usershop=$this->getContent('usershop',$value->annuity_shop_id);
+			}
+		}
+
+		return $reminder;
+
+	}
+
+
+	
 
 
 

@@ -68,6 +68,14 @@ class Admin extends CI_Controller {
 				'data'=>array('usertype'=>'shop1')
 				);
 			}
+			elseif($usertype == '7' && $grade == '3')
+			{
+				//等级为1 是该模块的管理
+				$parameters=array(
+				'view'=>'examinant-list',
+				'data'=>array('usertype'=>'shop3')
+				);
+			}
 	        //关注审核管理
 			if($usertype == '3' && $grade == '1')
 			{
@@ -337,8 +345,17 @@ class Admin extends CI_Controller {
 	*/
     public function shopAdminAdd(){
 
-	$parameters=array(
+		$parameters=array(
 			'view'=>'shopAdmin-add',
+			'data'=>array()
+		);
+		$this->adminCommonHandler($parameters);
+	}
+    /*年费审核员*/
+	 public function annuityAdminAdd(){
+
+		$parameters=array(
+			'view'=>'annuityAdmin-add',
 			'data'=>array()
 		);
 		$this->adminCommonHandler($parameters);
@@ -347,11 +364,11 @@ class Admin extends CI_Controller {
 	//添加关注审核员
     public function attentionAdminAdd(){
 
-	$parameters=array(
+		$parameters=array(
 			'view'=>'attentionAdmin-add',
 			'data'=>array()
 		);
-	$this->adminCommonHandler($parameters);
+		$this->adminCommonHandler($parameters);
 	}
 
 	//添加附近管理员
@@ -2206,7 +2223,7 @@ class Admin extends CI_Controller {
 			$this->adminCommonHandler($parameters);
 	}
 
-	 //查出所有的店铺审核员
+	//查出所有的店铺审核员
     public function shopauditall(){
 
 		$bannerParameters=array(
@@ -2225,6 +2242,31 @@ class Admin extends CI_Controller {
 
 		$parameters=array(
 			'view'=>'index-examinant',
+			'data'=>array('admins'=>$admins,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	//查出所有的年费审核员
+    public function annuityadmin(){
+
+		$bannerParameters=array(
+			'result'=>'count',
+			'orderBy'=>array('addtime'=>'AESC')
+		);
+		$amount=$this->getdata->getAnnuityAduits($bannerParameters);
+		$baseUrl='/admin/buyerlist?placeholder=true';
+		$selectUrl='/admin/buyerlist?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$bannerParameters['result']='data';
+		// $bannerParameters['limit']=$pageInfo['limit'];
+		$admins=$this->getdata->getAnnuityAduits($bannerParameters);
+
+		$parameters=array(
+			'view'=>'annuityadmin-list',
 			'data'=>array('admins'=>$admins,'pageInfo'=>$pageInfo)
 		);
 
@@ -2314,7 +2356,32 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
     }
 
+    /*查出提交年费的店铺*/
+    public function annualAudit()
+    {
+    	$status=$_GET['status'];
 
+		$parameters=array(
+			'result'=>'count',
+			'status'=>$status,
+			'orderBy'=>array('annuity_addtime'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getAnnualShop($parameters);
+		$baseUrl='/audit/annualAudit?placeholder=true';
+		$selectUrl='/audit/annualAudit?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+		$annualAudit=$this->getdata->getAnnualShop($parameters);
+
+		$parameters=array(
+			'view'=>'annualAudit-list',
+			'data'=>array('annualAudit'=>$annualAudit,'pageInfo'=>$pageInfo)
+		);
+		$this->adminCommonHandler($parameters);
+    }
 	
 	
 }

@@ -421,6 +421,30 @@ function saveShopAdmin(isNew,callBack){
     
 }
 
+//操作年费审核员
+function saveAnnuityAdmin(isNew,callBack){
+
+    showWait();
+    var admin = new Object(); 
+    admin.infoType = 'shopadmin';
+    admin.username = $("#username").val();
+    admin.password = $("#password").val();
+    admin.type = 7;
+    admin.grade=3;
+    admin.status=1;
+    var method='add';
+    if(!isNew){
+        admin.old_usename=$("#old_username").val();
+        admin.id = $("#id").val();
+        admin.status = $("input[name='status']:checked").val();
+        method = 'modify';
+
+    }
+    dataHandler('/common/'+method+'AdminInfo',admin,null,null,null,callBack,false,false);
+    
+}
+
+
 //操作关注审核员
 function saveAttentionAdmin(isNew,callBack){
 

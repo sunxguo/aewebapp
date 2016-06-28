@@ -41,32 +41,32 @@
 		        <?php for($i=0;$i<=100;$i++):?> 
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->priceStatus==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?> 
-			</select> * 广告费占排序百分比
+			</select> x 广告费占排序百分比
 			<select id="price_percent">
 		        <?php for($i=1;$i<=100;$i++):?>
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->pricePercent==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?> 
-			</select> * 广告费 + 议价启用占比
+			</select> x 广告费 + 议价启用占比
 			<select id="bargain_status">
 		        <?php for($i=0;$i<=100;$i++):?>
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->bargainStatus==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?> 
-			</select> * 议价占排序百分比
+			</select> x 议价占排序百分比
 			<select id="bargain_percent">
 		        <?php for($i=1;$i<=100;$i++):?>
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->bargainPercent==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?> 
-			</select> * 议价+关注量启用占比
+			</select> x 议价+关注量启用占比
 			<select id="care_num_status">
 		        <?php for($i=0;$i<=100;$i++):?>
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->careNumStatus==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?> 
-			</select> * 关注量占排序百分比
+			</select> x 关注量占排序百分比
 			<select id="care_num_percent">
 		        <?php for($i=1;$i<=100;$i++):?>
 		            <option value="<?php echo $i/100;?>" <?php echo $sortord->careNumPercent==$i/100 ?'selected':'';?>><?php echo $i;?>%</option>
 				<?php endfor;?>
-			</select>  *关注量 
+			</select> x 关注量 
 			<a title="编辑"  onclick="updateSortord();" type="submit" style="text-align:center; margin:100px;">
             	<img src="http://127.0.0.1/assets/images/shangpintupian.png" width="70" />
           	</a>

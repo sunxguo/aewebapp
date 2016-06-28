@@ -432,6 +432,10 @@ class Common extends CI_Controller {
 			case "shopadmin":
 				$table="admin";
 				$time=date("Y-m-d H:i:s");
+				if($this->getdata->isExist('admin',array('username'=>$data->username))){
+					echo json_encode(array("result"=>"failed","message"=>"该用户名已存在！"));
+					return false;
+				}
 				$info=array(
 					"username"=>$data->username,
 					"password"=>MD5($data->password),
@@ -618,6 +622,7 @@ class Common extends CI_Controller {
 				$where=array('collect_id'=>$data->collect_id);
 				$info=array('collect_addtime'=>date("Y-m-d H:i:s"));
 				$info['collect_status']=$data->collect_status;
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
 			break;
 
 			case "follow":
@@ -625,6 +630,15 @@ class Common extends CI_Controller {
 				$where=array('follow_id'=>$data->follow_id);
 				$info=array('follow_addtime'=>date("Y-m-d H:i:s"));
 				$info['follow_status']=$data->follow_status;
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+			break;
+
+			case "annual":
+				$table="annuityshop";
+				$where=array('annuity_id'=>$data->id);
+				$info=array('annuity_endtime'=>date("Y-m-d H:i:s"));
+				$info['annuity_status']=$data->annuity_status;
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
 			break;
 
 			case "adtime":

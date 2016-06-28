@@ -17,7 +17,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>管理员旧密码：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="old_password" name="old_password" datatype="*2-16" nullmsg="管理员密码不能为空">
+        <input type="password" class="input-text" value="" placeholder="" id="old_password" name="old_password" datatype="*2-16" nullmsg="管理员密码不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -25,7 +25,7 @@
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>管理员新密码：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="password" name="password" datatype="*2-16" nullmsg="新密码不能为空">
+        <input type="password" class="input-text" value="" placeholder="" id="password" name="password" datatype="*2-16" nullmsg="新密码不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
