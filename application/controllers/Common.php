@@ -57,7 +57,7 @@ class Common extends CI_Controller {
 					"ad_time"=>$data->ad_time,
 					"ad_addtime"=>$time,
 					"ad_edittime"=>$time,
-					"ad_time_status"=>'0'
+					"ad_time_status"=>'1'
 				);
 				$result=$this->dbHandler->insertData($table,$info);
 			break;
@@ -638,7 +638,79 @@ class Common extends CI_Controller {
 				$where=array('annuity_id'=>$data->id);
 				$info=array('annuity_endtime'=>date("Y-m-d H:i:s"));
 				$info['annuity_status']=$data->annuity_status;
-				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+				/*查出店铺余额*/
+				$shopid=$data->shopid;
+                $Parameters=array(
+					'result'=>'data'	
+				);
+				$Parameters['account_shop_id']=$shopid;
+				$account_money=$this->getdata->getAccountMoneyByShopId($Parameters);
+				if(!empty($account_money))
+				{
+					$shopMoney=$account_money[0]->account_money;
+					$account_id=$account_money[0]->account_id;
+				}
+				else
+				{
+					echo json_encode(array("result"=>"failed","message"=>"请申请店铺账户！"));
+					return false;
+				}
+				/*获取申请的年费金额*/
+				$annuity_price=$data->annuity_price;
+				/*判断余额和年费金额大小*/
+				if(bccomp($shopMoney , $annuity_price)== -1)
+				{
+					echo json_encode(array("result"=>"failed","message"=>"店铺账户余额不足，请充值！"));
+					return false;
+				}
+				else
+				{
+					/*金额减去年费金额*/
+					$money=bcsub($shopMoney,$annuity_price,2);
+				}
+                /*修改店铺余额*/
+                $monrytable='shopaccount';
+				$money=array('account_money'=>$money);
+				//var_dump($money);
+				$monrywhere=array('account_id'=>$account_id);
+                $moneyresult=$this->dbHandler->updateData(array('table'=>$monrytable,'where'=>$monrywhere,'data'=>$money));
+                if($moneyresult == 1)
+                {
+                	/*添加店铺的消费记录*/
+                	$expensetable="shopexpense"; 
+                    $time=date("Y-m-d H:i:s");
+                    /*判断添加的分类特征是否存在*/ 
+
+					$object=array();
+					$object=array(
+						"expense_shop_id"=>$shopid,
+						"expense_type"=>'2',
+						"expense_name"=>'年费',
+						"expense_money"=>$annuity_price,
+						"expense_modified"=>'-',
+						"expense_time"=>$time
+						);
+
+					$expenseresult=$this->dbHandler->insertData($expensetable,$object);
+					if($expenseresult == 1)
+					{
+						$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+					}
+					else
+					{
+						echo json_encode(array("result"=>"failed","message"=>"信息修改失败"));
+						return false;
+					}
+
+                }
+                else
+                {
+                	echo json_encode(array("result"=>"failed","message"=>"信息修改失败"));
+                	return false;
+                }
+
+                
+				
 			break;
 
 			case "adtime":

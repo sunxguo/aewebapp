@@ -8,7 +8,7 @@
     
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>广告时间：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>广告时间（天数）：</label>
       <div class="formControls col-5">
         <!-- <span id="supermarketname"></span> -->
         <input type="text" class="input-text" value="" placeholder="" id="ad_time" name="ad_time" datatype="*2-16" nullmsg="广告时间不能为空">

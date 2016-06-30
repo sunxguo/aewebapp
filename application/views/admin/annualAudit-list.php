@@ -19,6 +19,7 @@
 		</thead>
 		<tbody>
 			<?php foreach($annualAudit as $shops):?>
+				
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $shops->annuity_id;?>" name="id"></td>
 
@@ -53,7 +54,7 @@
 
 				<td class="td-manage">
 					<?php if($shops->annuity_status=='0'):?>
-						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $shops->annuity_id;?>')" href="javascript:;" title="通过审核">
+						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $shops->annuity_id;?>',<?php echo $shops->annuity_shop_id;?>,<?php echo $shops->annuity_price;?>)" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a> 
 					<?php endif;?>
@@ -98,7 +99,7 @@ function member_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		var shops = new Object(); 
 	    shops.infoType = 'shops';
-	    shops.id = id;
+	    shops.id = id; 
 	    shops.status = 1;
 	    dataHandler('/common/modifyInfo',shops,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
@@ -110,14 +111,16 @@ function member_stop(obj,id){
 }
 
 /*用户-启用*/
-function member_start(obj,id){
+function member_start(obj,id,shopid,price){
 	layer.confirm('确认通过审核吗？',function(index){
 		var shops = new Object(); 
 	    shops.infoType = 'annual';
 	    shops.id = id;
 	    shops.annuity_status = 1;
+	    shops.shopid = shopid;
+	    shops.annuity_price = price;
 	    dataHandler('/common/modifyInfo',shops,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+			// $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');
 			$(obj).remove();
 			layer.msg('已审核!',{icon: 6,time:1000});

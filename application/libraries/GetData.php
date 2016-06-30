@@ -1565,6 +1565,18 @@ class GetData{
 		return $admindata;
 	}
 
+	//查出店铺余额信息根据店铺id
+	public function getAccountMoneyByShopId($parameters){
+		$condition=array(
+			'table'=>'shopaccount',
+			'result'=>$parameters['result']	
+		);
+
+	    $condition['where']['account_shop_id']=$parameters['account_shop_id'];
+		$admindata=$this->getData($condition);
+		return $admindata;
+	}
+
 
 }
 

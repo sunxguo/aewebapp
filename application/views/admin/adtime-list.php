@@ -31,33 +31,27 @@
 
 				<td>
 					<?php if(!empty($buyer->ad_time)):?>
-						<?php echo $buyer->ad_time;?>
-					<?php else:?>
-				    	暂无广告时间
+						<?php echo $buyer->ad_time;?> 天
+					
 				    <?php endif;?>
 				</td>
 
 				<td>
 				    <?php if(!empty($buyer->admin->username)):?>
 						<?php echo $buyer->admin->username;?>
-					<?php else:?>
-				    	暂无管理员
 				    <?php endif;?>		
 				</td>
 				
 				<td>
 					<?php if(!empty($buyer->ad_addtime)):?>
 						<?php echo $buyer->ad_addtime;?>
-					<?php else:?>
-						暂无添加时间
-
+				
 					<?php endif;?>
 				</td>
 				<td>
 					<?php if(!empty($buyer->ad_edittime)):?>
 						<?php echo $buyer->ad_edittime;?>
-					<?php else:?>
-						暂无更新时间
+					
 					<?php endif;?>
 				</td>
 
