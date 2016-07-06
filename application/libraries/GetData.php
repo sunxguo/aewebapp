@@ -461,28 +461,9 @@ class GetData{
 			'table'=>'admintype',
 			'result'=>$parameters['result']
 		);
-		if(isset($parameters['sid'])){
-			$condition['where']['sid']=$parameters['sid'];
-		}
-		if(isset($parameters['categoryid'])){
-			$condition['where']['categoryid']=$parameters['categoryid'];
-		}
+		
 		if(isset($parameters['orderBy'])){
 			$condition['order_by']=$parameters['orderBy'];
-		}
-		if(isset($parameters['keywords'])){
-			$condition['or_like_bracket']['name']=$parameters['keywords'];
-		}
-		if(isset($parameters['limit'])){
-			$condition['limit']=$parameters['limit'];
-		}
-		if(isset($parameters['time'])){
-			if(isset($parameters['time']['begin'])){
-				$condition['where']['addtime >=']=$parameters['time']['begin'];
-			}
-			if(isset($parameters['time']['end'])){
-				$condition['where']['addtime <=']=$parameters['time']['end'];
-			}
 		}
         $condition['where']['grade']='2';
 		$admintype=$this->getData($condition);
@@ -912,6 +893,23 @@ class GetData{
 /*
  *商铺管理员结束---------------------------------------------------------------------------------------------------------------
 */
+
+
+/*-----------------------财务管理------------------------------*/
+ 	//查出所有的财务审核员
+	public function financeadmin($parameters){
+		$condition=array(
+			'table'=>'admin',
+			'result'=>$parameters['result']
+		);
+		
+		
+		$condition['where']['grade'] = '1';
+		$condition['where']['type']  = '8';
+		$buyers=$this->getData($condition);
+		return $buyers;
+	}
+
 
 	/*搜索管理员权限----------------------------------------------------------------------------------------------*/
 
@@ -1470,6 +1468,127 @@ class GetData{
 		$supermarkets=$this->getData($condition);
 		return $supermarkets;
 	}
+	/*店铺充值流水*/
+	public function getShopRechargeAll($parameters){
+		$condition=array(
+			'table'=>'shoprecharge',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['shopid'])){
+			$condition['where']['recharge_shop_id']=$parameters['shopid'];
+		}
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		$supermarkets=$this->getData($condition);
+		return $supermarkets;
+	}
+
+	/*店铺提现流水*/
+	public function getShopCashOutAll($parameters){
+		$condition=array(
+			'table'=>'shopcashout',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['shopid'])){
+			$condition['where']['cash_shop_id']=$parameters['shopid'];
+		}
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		$supermarkets=$this->getData($condition);
+		return $supermarkets;
+	}
+
+	/*店铺消费流水*/
+	public function getShopExpenseAll($parameters){
+		$condition=array(
+			'table'=>'shopexpense',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['shopid'])){
+			$condition['where']['expense_shop_id']=$parameters['shopid'];
+		}
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		$supermarkets=$this->getData($condition);
+		if($parameters['result']=='data'){
+			foreach ($supermarkets as $key => $value)
+			{	
+				$value->usershop=$this->getContent('usershop',$value->expense_shop_id);
+			}
+		}
+		return $supermarkets;
+	}
+
+	/*店铺余额查询*/
+	public function getCurrentMoney($parameters){
+		$condition=array(
+			'table'=>'shopaccount',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['shopid'])){
+			$condition['where']['account_shop_id']=$parameters['shopid'];
+		}
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		$supermarkets=$this->getData($condition);
+		// if($parameters['result']=='data'){
+		// 	foreach ($supermarkets as $key => $value)
+		// 	{	
+		// 		$value->usershop=$this->getContent('usershop',$value->expense_shop_id);
+		// 	}
+		// }
+		return $supermarkets;
+	}
+
+	/*店铺余额查询*/
+	public function goodFinancelist($parameters){
+		$condition=array(
+			'table'=>'shopcashout',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['cash_status'])){
+			$condition['where']['cash_status']=$parameters['cash_status'];
+		}
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		$supermarkets=$this->getData($condition);
+		if($parameters['result']=='data'){
+			foreach ($supermarkets as $key => $value)
+			{	
+				$value->usershop=$this->getContent('usershop',$value->cash_shop_id);
+			}
+		}
+		return $supermarkets;
+	}
+
+	/*举报店铺查询*/
+	public function insertReportShop($parameters){
+		$condition=array(
+			'table'=>'reportshop',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['orderBy'])){
+			$condition['order_by']=$parameters['orderBy'];
+		}
+		// if(isset($parameters['grderBy'])){
+		// 	$condition['grord_by']=$parameters['grderBy'];
+		// }
+		$supermarkets=$this->getData($condition);
+		if($parameters['result']=='data'){
+			foreach ($supermarkets as $key => $value)
+			{	
+				$value->user=$this->getUser('user',$value->report_user_id);
+				$value->usershop=$this->getContent('usershop',$value->report_shop_id);
+			}
+		}
+		return $supermarkets;
+	}
+
 
 
 	public function checkCode($code){

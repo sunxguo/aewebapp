@@ -17,10 +17,12 @@ function adminLogin () {
         showAlert('danger','密码不能为空！','');
         return false;
     }
+	/*0706
     if($("#verificationCode").val()==''){
         showAlert('danger','验证码不能为空！','');
         return false;
     }
+	*/
     var admin = new Object();   
     admin.username = $("#username").val();
     admin.password = $("#password").val();
@@ -360,6 +362,7 @@ function saveAdmin(isNew,callBack){
     var admin = new Object();
     admin.infoType = 'admin';
     admin.username = $("#username").val();
+    admin.password = $("#password").val();
     admin.type = $("#admintype").val();
 
     //alert(admin.type);
@@ -1726,3 +1729,28 @@ function saveShopData(callBack)
 //     if($("#keywords").val()!="") extUrl+="&keywords="+$("#keywords").val();
 //     location.href=baseUrl+extUrl;
 // }
+
+
+//操作店铺审核员
+function saveFinance(isNew,callBack){
+
+    showWait();
+    var admin = new Object(); 
+    admin.infoType = 'shopadmin';
+    admin.username = $("#username").val();
+    admin.password = $("#password").val();
+    admin.type = 8;
+    admin.grade=1;
+    admin.status=1;
+    //alert(admin.status);
+    var method='add';
+    if(!isNew){
+        admin.old_usename=$("#old_username").val();
+        admin.id = $("#id").val();
+        admin.status = $("input[name='status']:checked").val();
+        method = 'modify';
+
+    }
+    dataHandler('/common/'+method+'AdminInfo',admin,null,null,null,callBack,false,false);
+    
+}

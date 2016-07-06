@@ -148,6 +148,24 @@ class Admin extends CI_Controller {
 				'data'=>array('usertype'=>'search2')
 				);
 			}
+
+			//财务审核管理
+			if($usertype == '8' && $grade == '1')
+			{
+				//搜索审核管理
+				$parameters=array(
+				'view'=>'finance-list',
+				'data'=>array('usertype'=>'finance1')
+				);
+			}
+			elseif($usertype == '8' && $grade == '2')
+			{
+
+				$parameters=array(
+				'view'=>'finance-list',
+				'data'=>array('usertype'=>'finance2')
+				);
+			}
 			
 		}
 		else
@@ -1325,6 +1343,8 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
 	}
 
+	
+
 	//修改店铺的基本信息
 	public function getShopDataEdit()
 	{
@@ -2324,6 +2344,31 @@ class Admin extends CI_Controller {
 		$this->adminCommonHandler($parameters);
 	}
 
+	//被举报的店铺的店铺
+	public function insertReportShop()
+	{
+		$bannerParameters=array(
+			'result'=>'count',
+			'orderBy'=>array('report_addtime'=>'AESC')
+		);
+		
+		$amount=$this->getdata->insertReportShop($bannerParameters);
+		$baseUrl='/audit/insertReportShop?placeholder=true';
+		$selectUrl='/audit/insertReportShop?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$bannerParameters['result']='data';
+		$report=$this->getdata->insertReportShop($bannerParameters);
+
+		$parameters=array(
+			'view'=>'report-list',
+			'data'=>array('report'=>$report,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
 	/*查出商铺的活动*/
     public function getshopActivity()
     {
@@ -2382,8 +2427,205 @@ class Admin extends CI_Controller {
 		);
 		$this->adminCommonHandler($parameters);
     }
+
+     /*根据店铺id查出充值流水*/
+    public function getShopRechargeAll(){
+	    
+	    $shopid=$_SESSION['shopid'];
+
+		$parameters=array(
+			'result'=>'count',
+			'shopid'=>$shopid,
+			'orderBy'=>array('recharge_time'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getShopRechargeAll($parameters);
+		$baseUrl='/audit/getShopRechargeAll?placeholder=true';
+		$selectUrl='/audit/getShopRechargeAll?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+		$recharge=$this->getdata->getShopRechargeAll($parameters);
+		//var_dump($recharge);
+		$parameters=array(
+			'view'=>'recharge-list',
+			'data'=>array('recharge'=>$recharge,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	 /*根据店铺id查出提现流水*/
+    public function getShopCashOutAll(){
+	    
+	    $shopid=$_SESSION['shopid'];
+
+		$parameters=array(
+			'result'=>'count',
+			'shopid'=>$shopid,
+			'orderBy'=>array('cash_time'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getShopCashOutAll($parameters);
+		$baseUrl='/audit/getShopCashOutAll?placeholder=true';
+		$selectUrl='/audit/getShopCashOutAll?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+		$cashout=$this->getdata->getShopCashOutAll($parameters);
+		//var_dump($cashout);
+		$parameters=array(
+			'view'=>'cashout-list',
+			'data'=>array('cashout'=>$cashout,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	 /*根据店铺id查出提现流水*/
+    public function getShopExpenseAll(){
+	    
+	    $shopid=$_SESSION['shopid'];
+
+		$parameters=array(
+			'result'=>'count',
+			'shopid'=>$shopid,
+			'orderBy'=>array('expense_time'=>'AESC')
+		);
+		
+		$amount=$this->getdata->getShopExpenseAll($parameters);
+		$baseUrl='/audit/getShopExpenseAll?placeholder=true';
+		$selectUrl='/audit/getShopExpenseAll?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+		$expense=$this->getdata->getShopExpenseAll($parameters);
+		//var_dump($cashout);
+		$parameters=array(
+			'view'=>'expense-list',
+			'data'=>array('expense'=>$expense,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	//查出店铺余额信息
+	public function getCurrentMoney()
+	{
+        $shopid=$_SESSION['shopid'];
+		$parameters=array(
+			'result'=>'count',
+			'shopid'=>$shopid
+			
+		);	
+		$amount=$this->getdata->getCurrentMoney($parameters);
+		$baseUrl='/audit/getCurrentMoney?placeholder=true';
+		$selectUrl='/audit/getCurrentMoney?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$parameters['result']='data';
+		$shopdata=$this->getdata->getCurrentMoney($parameters);
+		//var_dump($cashout);
+		$parameters=array(
+			'view'=>'current-list',
+			'data'=>array('shopdata'=>$shopdata,'pageInfo'=>$pageInfo)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+/*财务管理-------------------------------------------------------------------------------------------*/	
 	
+	 //查出所有搜索审核员
+    public function financeadmin(){
+
+		$bannerParameters=array(
+			'result'=>'count',
+			'orderBy'=>array('addtime'=>'AESC')
+		);
+		
+		$amount=$this->getdata->financeadmin($bannerParameters);
+		$baseUrl='/admin/financeadmin?placeholder=true';
+		$selectUrl='/admin/financeadmin?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$bannerParameters['result']='data';
+		//$bannerParameters['limit']=$pageInfo['limit'];
+		$admins=$this->getdata->financeadmin($bannerParameters);
+
+		$parameters=array(
+			'view'=>'financeadmin-list',
+			'data'=>array('admins'=>$admins)
+		);
+
+		$this->adminCommonHandler($parameters);
+	}
+
+	public function financeadd(){
+
+		$parameters=array(
+			'view'=>'finance-add',
+			'data'=>array()
+		);
+		$this->adminCommonHandler($parameters);
+	}
 	
+    /*提现审核*/
+	public function goodFinancelist(){
+        $status=$_GET['status'];
+        $bannerParameters=array(
+			'result'=>'count',
+			'cash_status'=>$status,
+			'orderBy'=>array('cash_time'=>'DESC')
+		);
+		
+		$amount=$this->getdata->goodFinancelist($bannerParameters);
+		$baseUrl='/admin/goodFinancelist?placeholder=true';
+		$selectUrl='/admin/goodFinancelist?placeholder=true';
+		$currentPage=isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+		$amountPerPage=20;
+		$pageInfo=$this->getdata->getPageLink($baseUrl,$selectUrl,$currentPage,$amountPerPage,$amount);
+		$bannerParameters['result']='data';
+		//$bannerParameters['limit']=$pageInfo['limit'];
+		$admins=$this->getdata->goodFinancelist($bannerParameters);
+		$parameters=array(
+			'view'=>'shopfinance-list',
+			'data'=>array('admins'=>$admins,'pageInfo'=>$pageInfo)
+		);
+		$this->adminCommonHandler($parameters);
+	}
+
+	/**店铺充值 支付宝sdk调用*/
+ //    public function shoprecharge()
+ //    {
+ //        $this->load->library('alipay/aop/AopClient');
+	// 	$c = new AopClient;
+	// 	$c->gatewayUrl = "fd@fengdukeji.com";
+	// 	$c->appId = "2088421202338058";
+	// 	/*私钥*/
+	// 	$c->privateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAL0CKL1Yln99dMVA1QHNZ/hp/BIlpB7nsPOuIDrjtiZIpKSwvCKSt26xsgpjqrqfnfKFDckBP6iEx2cjp6a8HE94oLfGip2iP4cFgXHRG5ClQldzxOpIwKFWcIRR/J6W6oh9W9izWV33WrDU6irCsQV9jlrLAGNLBTvGKWSlRIslAgMBAAECgYBni0pESMbR+ynAcj7/KMc/qNhGHMbng2hGZusTN/Ju0LcZ3hSDIDtLch+mX2mFqbH+zXN63atBJ9SRpU/QIRekZJCR8ojHpCuG/zl8WZvxyJwzbIGvrIDB3ukxFeA3Gy8XyVquYXNZaPYC7KOZkhCcuGsgSvv9K2+rX+2voBcklQJBAOdSlPRHeQF3zItnlAz6t08J/Pwuljbb+vv9juTY7YpFoEUgzMOVXjOV7RLVEvy9z5WGutmmUul6Wd8IGN8qzHcCQQDRK/pmFw/qMVsYrQ2uZJsK1qV1ditaufGSzoMXUubPJp1yqQp3gBkW5BMiqKy/3devoUkJoOjnjt6gMnnjIThDAkAPhRXjUcxHke8SR0/CkyurTONBVCrV4Wp0b62fowJE7aj0GmBCmwnn8h4mzk7o0B9WS+TLZ4JWkdPnx9ZLWsa/AkA6cHUG7M6Pebaf0EmQPZ9rici0Zo16TZUGlRfe/lRp77nxfPTlqi5YTORjvIh3Gn3WHdOQExq/BxV/4FpZcMCNAkBX2GuItGx4wSMXncpbEYLzzh2RGe1L00B96JVnbCwTSqqucOpykRWCtQjDRnhZTLPLAFzcWbLiR5w0g7vi0Ocj";
+	// 	$c->format = "json";
+	// 	$c->charset= "GBK";
+	// 	/*公钥*/
+	// 	$c->alipayPulicKey = "MIICWwIBAAKBgQC9Aii9WJZ/fXTFQNUBzWf4afwSJaQe57DzriA647YmSKSksLwikrdusbIKY6q6n53yhQ3JAT+ohMdnI6emvBxPeKC3xoqdoj+HBYFx0RuQpUJXc8TqSMChVnCEUfyeluqIfVvYs1ld91qw1OoqwrEFfY5aywBjSwU7xilkpUSLJQIDAQABAoGAZ4tKREjG0fspwHI+/yjHP6jYRhzG54NoRmbrEzfybtC3Gd4UgyA7S3Ifpl9phamx/s1zet2rQSfUkaVP0CEXpGSQkfKIx6Qrhv85fFmb8cicM2yBr6yAwd7pMRXgNxsvF8larmFzWWj2AuyjmZIQnLhrIEr7/Stvq1/tr6AXJJUCQQDnUpT0R3kBd8yLZ5QM+rdPCfz8LpY22/r7/Y7k2O2KRaBFIMzDlV4zle0S1RL8vc+VhrrZplLpelnfCBjfKsx3AkEA0Sv6ZhcP6jFbGK0NrmSbCtaldXYrWrnxks6DF1LmzyadcqkKd4AZFuQTIqisv93Xr6FJCaDo547eoDJ54yE4QwJAD4UV41HMR5HvEkdPwpMrq0zjQVQq1eFqdG+tn6MCRO2o9BpgQpsJ5/IeJs5O6NAfVkvky2eCVpHT58fWS1rGvwJAOnB1BuzOj3m2n9BJkD2fa4nItGaNek2VBpUX3v5Uae+58Xz05aouWEzkY7yIdxp91h3TkBMavwcVf+BaWXDAjQJAV9hriLRseMEjF53KWxGC884dkRntS9NAfeiVZ2wsE0qqrnDqcpEVgrUIw0Z4WUyzywBc3Fmy4kecNIO74tDnIw==";
+	// 	//实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.open.public.template.message.industry.modify
+	// 	$this->load->library('alipay/aop/request/AlipayOpenPublicTemplateMessageIndustryModifyRequest');
+	// 	$req = new AlipayOpenPublicTemplateMessageIndustryModifyRequest();
+	// 	//SDK已经封装掉了公共参数，这里只需要传入业务参数
+	// 	//此次只是参数展示，未进行字符串转义，实际情况下请转义
+	// 	$request->bizContent = "{
+	// 	    'primary_industry_name':'IT科技/IT软件与服务',
+	// 	    'primary_industry_code':'10001/20102',
+	// 	    'secondary_industry_code':'10001/20102',
+	// 	    'secondary_industry_name':'IT科技/IT软件与服务'
+	// 	  }";
+	// 	$response= $c->execute($req);
+	// }
+
 }
 
 ?>

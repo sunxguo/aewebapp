@@ -50,6 +50,8 @@
 				<ul>
 					<li><a _href="/admin/unapprove" href="javascript:;">未审核的店铺</a></li>
 					<li><a _href="/admin/Audittrue" href="javascript:;">审核通过的店铺</a></li>
+					<li><a _href="/admin/insertReportShop" href="javascript:;">举报的店铺</a></li>
+
 					
 				</ul>
 			</dd>

@@ -939,6 +939,61 @@ class Common extends CI_Controller {
 
 			break;
 
+			case "finance":
+				
+				$table='shopcashout';
+				$where=array('id'=>$data->id);
+				$info=array();
+				//var_dump($data->audit_status);
+				if(isset($data->status)){
+					$info['cash_status']=$data->status;
+				}
+				if(isset($data->cash_status_desc)){
+					$info['cash_status_desc']=$data->cash_status_desc;
+				}
+
+				$result=$this->dbHandler->updateData(array('table'=>$table,'where'=>$where,'data'=>$info));
+
+			break;
+
+			case "pay":
+			
+				$table='shopcashout';
+				$where=array('id'=>$data->id);
+				$condition=array(
+					'table'=>'shopcashout',
+					'where'=>array('id'=>$data->id)
+				);
+				$result=$this->CI->dbHandler->selectData($condition);
+				echo json_encode(array('result'=>$data->id));return false;
+				/*
+				$request_data = array();
+				$request_data['service'] = 'batch_trans_notify';
+				$request_data['partner'] = '2088421202338058';
+				$request_data['_input_charset'] = 'utf-8';
+				$request_data['sign_type'] = 'md5';
+				$request_data['sign'] = '';
+				$request_data['notify_url'] = $lang['java_url'] .
+            '/travel/sharersCashOut/alipayNotify';
+				$request_data['account_name'] = '太原市风度科技有限公司';
+        
+				for ($j = 0; $j < count($result); $j++) {
+					$detail_data .= $result[$j][0]['no'] . '^' . $result[$j][0]['accountAccount'] .
+						'^' . $result[$j][0]['accountOwnerName'] . '^' . $result[$j][0]['money'] .
+						'^nihao|';
+					$countFee += $result[$j][0]['money'];
+				}
+				$request_data['detail_data'] = substr($detail_data, 0, -1); 
+        
+				$request_data['batch_no'] = date('YmdHis');
+				$request_data['batch_num'] = count($result);
+				$request_data['batch_fee'] = $countFee;
+				$request_data['email'] = 'fd@fengdukeji.com';
+				$request_data['pay_date'] = date('Ymd');
+				$request_data = encode_json($request_data); 
+				redirect("batchAlipay/index.php?payresult=" . $result);
+				*/
+			break;
 			case "shopkeyword":
 				
 				$table='usershop';

@@ -19,6 +19,7 @@ class Adminajax extends CI_Controller {
 			echo json_encode(array("result"=>"failed","message"=>"请输入用户名和密码!"));
 			return false;
 		}
+		/*0706
 		if(!property_exists($this->_data, "verificationCode")){
 			echo json_encode(array("result"=>"failed","message"=>"请输入验证码!"));
 			return false;
@@ -27,7 +28,8 @@ class Adminajax extends CI_Controller {
 			echo json_encode(array("result"=>"failed","message"=>"验证码错误!"));
 			return false;
 		}
-
+		0706
+*/
 		$username=$this->_data->username;
 		$password=$this->_data->password;
 		$info=$this->getdata->getContentAdvance('admin',array('username'=>$username));

@@ -47,7 +47,8 @@
 				<ul>
 					<li><a _href="/admin/getShopDataByUserId" href="javascript:void(0)">店铺管理</a></li>
 					<li><a _href="/admin/getShopBasicDataByUserId" href="javascript:void(0)">店铺基本信息管理</a></li>
-				
+				    <!-- li><a _href="/admin/getCurrentMoney" href="javascript:void(0)">店铺流水</a></li> -->
+				    <!-- <li><a _href="/admin/getCurrentMoney" href="javascript:void(0)">店铺余额</a></li> -->
 				</ul>
 			</dd>
 		</dl>
@@ -94,6 +95,17 @@
 					<li><a _href="/admin/getWordListById" href="javascript:;">口令集</a></li>
 					<li><a _href="/admin/getCustomCount" href="javascript:;">自定义口令内容</a></li>
 					
+				</ul>
+			</dd>
+		</dl>
+
+		<dl id="menu-comments">
+			<dt><i class="Hui-iconfont">&#xe6ca;</i> 流水管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="/admin/getShopRechargeAll" href="javascript:;">充值流水</a></li>
+					<li><a _href="/admin/getShopCashOutAll" href="javascript:;">提现流水</a></li>
+					<li><a _href="/admin/getShopExpenseAll" href="javascript:;">消费流水</a></li>
 				</ul>
 			</dd>
 		</dl>

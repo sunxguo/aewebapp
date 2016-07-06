@@ -145,10 +145,10 @@ $(function(){
 	$("img.lazy").lazyload({effect: "fadeIn" , threshold :280});
 	//购物车
 	$('.ShoppingCarAdd').click(Common.ShoppingAdd);
-	//验证码
-	$('.VerifyChange').click(function(){
+	//验证码0706
+	//$('.VerifyChange').click(function(){
 
-		Common.Verify($(this));
+	//	Common.Verify($(this));
 
-	});
+	//});
 });
