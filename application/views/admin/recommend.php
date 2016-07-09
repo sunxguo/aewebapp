@@ -67,7 +67,7 @@
 
 				<td>
 					<?php if(!empty($buyer->ad_spot_pic)):?>
-						<img src="<?php echo $buyer->ad_spot_pic;?>" widdth="50">
+						<img src="<?php echo $buyer->ad_spot_pic;?>" width="50px" height="50px">
 					<?php else:?>
 						广告图片不存在
 					<?php endif;?>
@@ -162,11 +162,11 @@ $(function(){
 	});
 	$('.table-sort tbody').on( 'click', 'tr', function () {
 		if ( $(this).hasClass('selected') ) {
-			$(this).removeClass('selected');
+			//$(this).removeClass('selected');
 		}
 		else {
-			table.$('tr.selected').removeClass('selected');
-			$(this).addClass('selected');
+			//table.$('tr.selected').removeClass('selected');
+			//$(this).addClass('selected');
 		}
 	});
 });
@@ -188,9 +188,9 @@ function member_start(obj,id){
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000}); 
-			location.reload();
+			
 		},false,false);
-
+location.reload();
 	});
 }
 /*用户-编辑*/

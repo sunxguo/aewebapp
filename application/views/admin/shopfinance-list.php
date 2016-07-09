@@ -107,7 +107,7 @@
 						<i class="Hui-iconfont">&#xe631;</i>
 					</a> 
 				<?php elseif ($buyer->cash_status=='2'): ?>		
-					<a style="text-decoration:none" onClick="pay_start(this,'<?php echo $buyer->id;?>')" href="javascript:;" title="付款">
+					<a style="text-decoration:none" onClick="pay_edit('付款','/admin/getcashout','<?php echo $buyer->id;?>','800','650')" href="javascript:;" title="付款">
 						<i class="Hui-iconfont">&#xe6e1;</i>
 					</a> 
 					<a style="text-decoration:none" onClick="pay_stop(this,'<?php echo $buyer->id;?>')" href="javascript:;" title="拒绝付款">
@@ -172,33 +172,48 @@ function member_start(obj,id){
 /*
 	对审核通过的提现申请付款
 */
+// function pay_start(obj,id){
+// 	layer.confirm('确认付款吗？',function(index){
+// 		var category = new Object(); 
+// 	    category.infoType = 'pay';
+// 	    category.id = id;
+// 	 //    $.post(
+// 		// '/common/modifyInfo',
+// 		// {
+// 		// 	'data':JSON.stringify(category)
+// 		// },
+// 		function(data)
+// 		{
+// 			var result=eval("(" + data + ")");
+// 			//var result=data;
+			
+// 			console.log(result);
+// 			if(result.result=="success")
+// 			{
+// 				if(successMsg) showMsg(successMsg);
+// 				if(callBack) callBack(result.message);
+// 				if(refresh) location.reload();
+// 			}
+// 			else
+// 			{
+// 				alert(result.result);
+// 			}
+// 		});
+// 		location.reload();
+// 	});
+// }
+
 function pay_start(obj,id){
-	layer.confirm('确认付款吗？',function(index){
+	layer.confirm('确认审核通过吗？',function(index){
 		var category = new Object(); 
 	    category.infoType = 'pay';
-	    category.id = id;
-	    $.post(
-		'/common/modifyInfo',
-		{
-			'data':JSON.stringify(category)
-		},
-		function(data)
-		{
-			var result=eval("(" + data + ")");
-			//var result=data;
-			
-			console.log(result);
-			if(result.result=="success")
-			{
-				if(successMsg) showMsg(successMsg);
-				if(callBack) callBack(result.message);
-				if(refresh) location.reload();
-			}
-			else
-			{
-				alert(result.result);
-			}
-		});
+        category.id = id;
+	    category.cash_status_desc = '审核通过';
+	    dataHandler('/common/modifyInfo',category,null,null,null,function(){
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已付款</span>');
+			$(obj).remove();
+			layer.msg('已付款!',{icon: 6,time:1000});
+		},false,false);
 		location.reload();
 	});
 }
@@ -232,6 +247,11 @@ function member_edit(title,url,id,w,h){
 
 /*添加分类特征*/
 function feature_add(title,url,id,w,h){
+	layer_show(title,url+'?id='+id,w,h);
+}
+
+/*编辑*/
+function pay_edit(title,url,id,w,h){
 	layer_show(title,url+'?id='+id,w,h);
 }
 

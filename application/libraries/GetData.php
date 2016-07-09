@@ -421,27 +421,27 @@ class GetData{
 			'table'=>'admin',
 			'result'=>$parameters['result']
 		);
-		if(isset($parameters['gender'])){
-			$condition['where']['gender']=$parameters['gender']=="NULL"?NULL:$parameters['gender'];
-		}
-		if(isset($parameters['orderBy'])){
-			$condition['order_by']=$parameters['orderBy'];
-		}
-		if(isset($parameters['keywords'])){
-			$condition['or_like_bracket']['alias']=$parameters['keywords'];
-			$condition['or_like_bracket']['phone']=$parameters['keywords'];
-		}
-		if(isset($parameters['limit'])){
-			$condition['limit']=$parameters['limit'];
-		}
-		if(isset($parameters['time'])){
-			if(isset($parameters['time']['begin'])){
-				$condition['where']['user_addtime >=']=$parameters['time']['begin'];
-			}
-			if(isset($parameters['time']['end'])){
-				$condition['where']['user_addtime <=']=$parameters['time']['end'];
-			}
-		}
+		// if(isset($parameters['gender'])){
+		// 	$condition['where']['gender']=$parameters['gender']=="NULL"?NULL:$parameters['gender'];
+		// }
+		// if(isset($parameters['orderBy'])){
+		// 	$condition['order_by']=$parameters['orderBy'];
+		// }
+		// if(isset($parameters['keywords'])){
+		// 	$condition['or_like_bracket']['alias']=$parameters['keywords'];
+		// 	$condition['or_like_bracket']['phone']=$parameters['keywords'];
+		// }
+		// if(isset($parameters['limit'])){
+		// 	$condition['limit']=$parameters['limit'];
+		// }
+		// if(isset($parameters['time'])){
+		// 	if(isset($parameters['time']['begin'])){
+		// 		$condition['where']['user_addtime >=']=$parameters['time']['begin'];
+		// 	}
+		// 	if(isset($parameters['time']['end'])){
+		// 		$condition['where']['user_addtime <=']=$parameters['time']['end'];
+		// 	}
+		// }
 		$condition['where']['grade']='2';
 		$condition['where']['type >='] ='2';
 		$buyers=$this->getData($condition);
@@ -1499,6 +1499,19 @@ class GetData{
 		$supermarkets=$this->getData($condition);
 		return $supermarkets;
 	}
+
+	/*店铺提现流水*/
+	public function getcashout($parameters){
+		$condition=array(
+			'table'=>'shopcashout',
+			'result'=>$parameters['result']
+		);
+		if(isset($parameters['id'])){
+			$condition['where']['id']=$parameters['id'];
+		}
+		$supermarkets=$this->getData($condition);
+		return $supermarkets;
+	}	
 
 	/*店铺消费流水*/
 	public function getShopExpenseAll($parameters){

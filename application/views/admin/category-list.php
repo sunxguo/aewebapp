@@ -19,8 +19,8 @@
 				<th width="120">序号</th>
 				<th width="120">添加时间</th>
 				<th width="120">修改时间</th>
-				<!-- <th width="100">添加分类特征</th> -->
-				<th width="120">状态</th>
+				<!-- <th width="100">添加分类特征</th> 
+				<th width="120">状态</th>-->
 				<th width="80">操作</th>
 			</tr>
 		</thead>
@@ -39,12 +39,12 @@
 					    	添加
 					    </span>
 					</a>    
-				</td> -->
+				</td> 
 				<?php if($category->status=='0'):?>
 					<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>
 					<td class="td-status"><span class="label label-defaunt radius">已停用</span></td>
-				<?php endif;?>
+				<?php endif;?>-->
 				<td class="category-manage">
 				<!--修改状态-->
 				<?php if($category->status=='0'):?>

@@ -101,8 +101,10 @@ function upload($upload_file_name="files"){
 			}
 		}
 		$ymd = date("Ymd");
-		$save_path .= $ymd . "/";
-		$save_url .= $ymd . "/";
+		//$save_path .= $ymd . "/";
+		//$save_url .= $ymd . "/";
+		//$save_path .=  "/";
+		//$save_url .= "/";
 		if (!file_exists($save_path)) {
 			mkdir($save_path,0777);
 		}

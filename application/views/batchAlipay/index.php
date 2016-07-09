@@ -191,7 +191,7 @@ ul,ol{
 				<li class="last">3、确认完成</li>
             </ol>
         </div>
-        <form name='alipayment' action='<?php echo site_url('application/views/batchAlipay/alipayapi'); ?>' method='post' target="_blank">
+        <form name='alipayment' action='/admin/cashoutsubmint' method='post' target="_seif">
             <div id="body" style="clear:left">
                 <dl class="content">
                     <dt>付款账号：</dt>

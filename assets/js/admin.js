@@ -17,12 +17,12 @@ function adminLogin () {
         showAlert('danger','密码不能为空！','');
         return false;
     }
-	/*0706
+	
     if($("#verificationCode").val()==''){
         showAlert('danger','验证码不能为空！','');
         return false;
     }
-	*/
+	
     var admin = new Object();   
     admin.username = $("#username").val();
     admin.password = $("#password").val();

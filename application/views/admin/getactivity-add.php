@@ -37,7 +37,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>内容</label>
       <div class="formControls col-5">
-        <textarea class="input-text" value="" placeholder="" id="content" name="content" datatype="*2-16" nullmsg="内容不能为空" height="100" cols="20" rows="5"></textarea>
+        <textarea class="input-text" value="" placeholder="" id="content" name="content" nullmsg="内容不能为空" height="100" cols="20" rows="5"></textarea>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -58,7 +58,7 @@
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>有效期始：</label>
       <div class="formControls col-5"> 
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="coupon_beginvalid" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{\'%y-%M-%d\'}',maxDate:'#F{$dp.$D(\'coupon_endvalid\',{d:-1})}'})" id="coupon_beginvalid" class="input-text Wdate">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -66,7 +66,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>有效期止：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'coupon_beginvalid\',{d:1})||\'%y-%M-#{%d+1}\'}'})" id="coupon_endvalid" class="input-text Wdate">
       </div>
     </div>
 

@@ -27,7 +27,8 @@ require_once("lib/alipay_submit.class.php");
 /**************************请求参数**************************/
 
         //服务器异步通知页面路径
-        $notify_url = "183.185.65.76/userShop/alipayNotifyForCashOut";
+        //$notify_url = "183.185.65.76/userShop/alipayNotifyForCashOut";//公司服务器异步通知接口
+		$notify_url = "http://221.205.19.181:8080/AEWebApp/userShop/alipayNotifyForCashOut";
         //需http://格式的完整路径，不允许加?id=123这类自定义参数
 
         //付款账号

@@ -962,37 +962,13 @@ class Common extends CI_Controller {
 				$where=array('id'=>$data->id);
 				$condition=array(
 					'table'=>'shopcashout',
+					'result'=>'data',
 					'where'=>array('id'=>$data->id)
 				);
-				$result=$this->CI->dbHandler->selectData($condition);
+				$result=$this->dbHandler->selectData($condition);
+				var_dump($result);
 				echo json_encode(array('result'=>$data->id));return false;
-				/*
-				$request_data = array();
-				$request_data['service'] = 'batch_trans_notify';
-				$request_data['partner'] = '2088421202338058';
-				$request_data['_input_charset'] = 'utf-8';
-				$request_data['sign_type'] = 'md5';
-				$request_data['sign'] = '';
-				$request_data['notify_url'] = $lang['java_url'] .
-            '/travel/sharersCashOut/alipayNotify';
-				$request_data['account_name'] = '太原市风度科技有限公司';
-        
-				for ($j = 0; $j < count($result); $j++) {
-					$detail_data .= $result[$j][0]['no'] . '^' . $result[$j][0]['accountAccount'] .
-						'^' . $result[$j][0]['accountOwnerName'] . '^' . $result[$j][0]['money'] .
-						'^nihao|';
-					$countFee += $result[$j][0]['money'];
-				}
-				$request_data['detail_data'] = substr($detail_data, 0, -1); 
-        
-				$request_data['batch_no'] = date('YmdHis');
-				$request_data['batch_num'] = count($result);
-				$request_data['batch_fee'] = $countFee;
-				$request_data['email'] = 'fd@fengdukeji.com';
-				$request_data['pay_date'] = date('Ymd');
-				$request_data = encode_json($request_data); 
-				redirect("batchAlipay/index.php?payresult=" . $result);
-				*/
+				
 			break;
 			case "shopkeyword":
 				
@@ -1162,11 +1138,8 @@ class Common extends CI_Controller {
 			case "adstop":
 
 				$info=array('adSpotId'=>$data->adSpotId);
-				
 				$info['adSpotStatus']=$data->adSpotStatus;
 				$info['adSpotAdminId']=$_SESSION['userid'];
-				
-                
 				$adSpot=new stdClass;
                 $adSpot->adSpot=$info;
 				$url=API_IP."AEWebApp/advertis/modifyAdSpot";
@@ -1178,24 +1151,24 @@ class Common extends CI_Controller {
 
 			break;
 
-			case "adstop":
+			// case "adstop":
 
-				$info=array('adSpotId'=>$data->adSpotId);
+				// $info=array('adSpotId'=>$data->adSpotId);
 				
-				$info['adSpotStatus']=$data->adSpotStatus;
-				$info['adSpotAdminId']=$_SESSION['userid'];
+				// $info['adSpotStatus']=$data->adSpotStatus;
+				// $info['adSpotAdminId']=$_SESSION['userid'];
 				
                 
-				$adSpot=new stdClass;
-                $adSpot->adSpot=$info;
-				$url=API_IP."AEWebApp/advertis/modifyAdSpot";
- 				$partam='adSpot='.json_encode($adSpot);
- 				$header = array();
-				$marquee = httpPost($url,$partam,$header);
-				$results = json_decode($marquee);
-				$result=$results->data;
+				// $adSpot=new stdClass;
+                // $adSpot->adSpot=$info;
+				// $url=API_IP."AEWebApp/advertis/modifyAdSpot";
+ 				// $partam='adSpot='.json_encode($adSpot);
+ 				// $header = array();
+				// $marquee = httpPost($url,$partam,$header);
+				// $results = json_decode($marquee);
+				// $result=$results->data;
 
-			break;
+			// break;
 
 			case "businessdistrict":
 				$table="businessdistrict";
@@ -1771,6 +1744,7 @@ class Common extends CI_Controller {
 	public function setLanguage(){
 		$_SESSION['language']=$_POST['language'];
 	}
+	/*验证码*/
 	public function createVeriCode(){
 		veri_code();
 	}

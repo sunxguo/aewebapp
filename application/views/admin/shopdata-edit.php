@@ -135,7 +135,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>下午营业时间开始：</label>
       <div class="formControls col-5"> 
-        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="pmstart" class="input-text Wdate" value="<?php echo $pm[0]?>">
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="pmstart" class="input-text Wdate" value="<?php if($pm)echo $pm[0]?>">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -144,7 +144,7 @@
 
       <label class="form-label col-3"><span class="c-red">*</span>下午营业时间结束：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="pmstop" class="input-text Wdate" value="<?php echo $pm[1]?>">
+        <input type="text" onfocus="WdatePicker({dateFmt:' HH:mm',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="pmstop" class="input-text Wdate" value="<?php if($pm)echo $pm[1]?>">
       </div>
     </div> 
      <div class="row cl">
