@@ -124,7 +124,7 @@ function member_start(obj,id){
 	    word.id = id;
 	    word.status = 0;
 	    dataHandler('/common/modifyInfo',word,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+			//$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已上架</span>');
 			$(obj).remove();
 			layer.msg('已上架!',{icon: 6,time:1000});

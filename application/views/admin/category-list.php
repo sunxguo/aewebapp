@@ -6,6 +6,7 @@
 	
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
+			<a href="javascript:;" onclick="member_add('添加管理员','/admin/categoryadd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加一级分类</a>
 		</span>  	
 		<span class="r">共有数据：<strong><?php echo $pageInfo['amount'];?></strong> 条</span> 
 	</div>

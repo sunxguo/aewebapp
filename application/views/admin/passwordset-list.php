@@ -100,6 +100,7 @@
 						<a style="text-decoration:none" onClick="member_stop(this,'<?php echo $word->word_id;?>')" href="javascript:;" title="停用">
 							<i class="Hui-iconfont">&#xe631;</i>
 						</a> 
+                        
 					<?php endif;?>-->
 					<!--<a title="编辑" href="javascript:;" onclick="member_edit('修改用户信息','/admin/updateadmin','<?php echo $word->word_id;?>','600','270')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
@@ -107,7 +108,11 @@
 					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','/admin/changepassword','<?php echo $word->word_id;?>','600','270')" href="javascript:;" title="修改密码">
 						<i class="Hui-iconfont">&#xe63f;</i>
 					</a> -->
-
+                    <?php if($word->word_status=='1'):?>
+                    <a style="text-decoration:none" onClick="member_start(this,'<?php echo $word->word_id;?>')" href="javascript:;" title="通过审核">
+							<i class="Hui-iconfont">&#xe6e1;</i>
+					</a>
+    	           <?php endif;?>
 					<a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $word->word_id;?>')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a> 
@@ -168,11 +173,11 @@ function member_stop(obj,id){
 function member_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		var buyer = new Object(); 
-	    buyer.infoType = 'buyer';
+	    buyer.infoType = 'word';
 	    buyer.id = id;
-	    buyer.status = 0;
+	    buyer.status = 1;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+			//$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000});

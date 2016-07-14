@@ -17,7 +17,7 @@
 				<th width="50">使用条件</th>
 				<th width="80">有效期始</th>
 				<th width="80">有效期止</th>
-				<th width="130">添加时间</th>
+				<th width="130">发布状态</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 				
@@ -32,14 +32,22 @@
 				<td><?php echo '满￥'.$coupon->coupon_useprice;?></td>
 				<td><?php echo $coupon->coupon_beginvalid;?></td>
 				<td><?php echo $coupon->coupon_endvalid;?></td>
-				<td><?php echo $coupon->coupon_addtime;?></td>
-				<?php if($coupon->coupon_status=='1'):?>
+				<?php if($coupon->coupon_status=='0'):?>
+				<td class="td-status"><span class="label label-success radius">待发布</span></td>
+				<?php elseif($coupon->coupon_status=='1'):?>
+				<td class="td-status"><span class="label label-defaunt radius">发布中</span></td>
+                <?php elseif($coupon->coupon_status=='2'):?>
+				<td class="td-status"><span class="label label-defaunt radius">已过期</span></td>
+                <?php elseif($coupon->coupon_status=='3'):?>
+				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
+				<?php endif;?>
+				<?php if($coupon->audit_status=='1'):?>
 				<td class="td-status"><span class="label label-success radius">已审核</span></td>
 				<?php else:?>
 				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
 				<?php endif;?>
 				<td class="td-manage">
-					<?php if($coupon->coupon_status=='0'):?>
+					<?php if($coupon->audit_status=='0'):?>
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $coupon->coupon_id;?>')" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a>
@@ -88,7 +96,7 @@ function member_stop(obj,id){
 		var coupon = new Object(); 
 	    coupon.infoType = 'coupon';
 	    coupon.id = id;
-	    coupon.status = 1;
+	    coupon.status = 0;
 	    dataHandler('/common/modifyInfo',coupon,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
@@ -102,15 +110,16 @@ function member_stop(obj,id){
 function member_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		var seller = new Object(); 
-	    seller.infoType = 'seller';
+	    seller.infoType = 'coupon';
 	    seller.id = id;
-	    seller.status = 0;
+	    seller.status = 1;
 	    dataHandler('/common/modifyInfo',seller,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+			//$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000});
 		},false,false);
+        //location.reload();
 	});
 }
 /*用户-编辑*/

@@ -21,11 +21,9 @@
 				<th width="80">商品关键字</th>
 				<th width="80">商品图片</th>
 				<th width="80">商品分类</th>	
-				<th width="80">分类特征</th>	
+				<th width="80">商品特征</th>	
 				<th width="80">原价</th>
 				<th width="80">价格</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="80">简介</th>
 				<th width="80">销量</th>
 				<th width="50">状态</th>
@@ -40,12 +38,10 @@
 				<td><?php echo $product->detailedname;?></td>
 				<td><?php echo $product->keywords;?></td>
 				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('商品图片','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</u></td>
-				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('分类特征','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','360','380')">查看</u></td>
 				<td><?php echo $product->goodsCategory->name;?></td>
+                <td><u style="cursor:pointer" class="text-primary" onclick="member_show('商品属性','/admin/goodsFeatureShow','<?php echo $product->goodsId;?>','400','420')">查看</u></td>
 				<td>￥ <?php echo $product->originalPrice;?></td>
 				<td>￥ <?php echo $product->price;?></td>
-				<td><?php echo $product->addtime;?></td>
-				<td><?php echo $product->edittime;?></td>  
 				<td><?php echo $product->description;?></td>
 				<td><?php echo $product->sales;?></td>
 				<?php if($product->status=='0'):?>

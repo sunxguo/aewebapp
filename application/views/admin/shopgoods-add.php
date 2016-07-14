@@ -88,7 +88,7 @@
       </div>
       <div class="col-4"> </div>
     </div> 
-
+<!--
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>商品特征：</label>
       <div class="formControls col-5">
@@ -97,7 +97,7 @@
          <?php endforeach;?> 
       </div>
       <div class="col-4"> </div>
-    </div>
+    </div>-->
 
 
     <div class="row cl">

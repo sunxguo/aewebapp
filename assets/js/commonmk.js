@@ -121,6 +121,7 @@ function dataHandler(url,postDataObj,confirmMsg,cancelCallBack,successMsg,callBa
 			else
 			{
 				alert(result.message);
+                console.log(result.message);
 			}
 			if(ifShowWait)
 			{

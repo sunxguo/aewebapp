@@ -1,4 +1,4 @@
-<title>添加优惠�?/title>
+<title>添加优惠券</title>
 <link href="/assets/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -8,10 +8,10 @@
     
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>优惠券面�?/label>
+      <label class="form-label col-3"><span class="c-red">*</span>优惠券面值</label>
       <div class="formControls col-5">
         <!-- <span id="supermarketname"></span> -->
-        <input type="text" class="input-text" value="" placeholder="" id="coupon_facevalue" name="coupon_facevalue" datatype="*2-16" nullmsg="优惠券面值不能为�?>
+        <input type="text" class="input-text" value="" placeholder="" id="coupon_facevalue" name="coupon_facevalue" datatype="*2-16" nullmsg="优惠券面值不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -27,17 +27,17 @@
     </div>
 
      <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>有效期始�?/label>
+      <label class="form-label col-3"><span class="c-red">*</span>有效期始：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="coupon_beginvalid" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'coupon_endvalid\')||\'%y-%M-%d\'}'})" id="coupon_beginvalid" class="input-text Wdate">
       </div>
       <div class="col-4"> </div>
     </div>
 
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>有效期止�?/label>
+      <label class="form-label col-3"><span class="c-red">*</span>有效期止：</label>
       <div class="formControls col-5">
-        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate">
+        <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'coupon_beginvalid\')}'})" id="coupon_endvalid" class="input-text Wdate">
       </div>
     </div>
 
@@ -70,7 +70,7 @@ $(function(){
       //alert('ok');
 			// form[0].submit();
       saveCoupon(true,function(){
-        alert('添加成功�?);
+        alert('添加成功！');
         var index = parent.layer.getFrameIndex(window.name);
         parent.window.location.reload();
         parent.layer.close(index);

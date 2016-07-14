@@ -381,9 +381,11 @@ class Admin extends CI_Controller
     public function goodSearchlist()
     {
         $audit_status = $_GET['audit'];
+        $status = 2;
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
         $bannerParameters['audit_status'] = $audit_status;
+        $bannerParameters['status'] = $status;
         $amount = $this->getdata->getGoodSearchAll($bannerParameters);
         $baseUrl = '/admin/goodSearchlist?placeholder=true';
         $selectUrl = '/admin/goodSearchlist?placeholder=true';
@@ -434,7 +436,7 @@ class Admin extends CI_Controller
         $bannerParameters['result'] = 'data';
         // $bannerParameters['limit']=$pageInfo['limit'];
         $admins = $this->getdata->getWordAll($bannerParameters);
-        //var_dump($admins->worditem);
+        //var_dump($admins);
         $parameters = array('view' => 'passwordset-list', 'data' => array('admins' => $admins,
                     'pageInfo' => $pageInfo));
         $this->adminCommonHandler($parameters);
@@ -1018,8 +1020,6 @@ class Admin extends CI_Controller
                 }
             }
         }
-
-
         //var_dump($amstart);
         $shopdata = '';
         if (!empty($shopdatas->data) && isset($shopdatas->data)) {
@@ -1061,23 +1061,24 @@ class Admin extends CI_Controller
     public function shopgoodsadd()
     {
         $shopid = $_SESSION['shopid'];
-        $url = API_IP . 'AEWebApp/userShop/queryShopCategoryListByShopId?categoryShopId=' .
-            $shopid;
+        $url = API_IP . 'AEWebApp/userShop/queryShopCategoryListByShopId?shopId=' . $shopid;
         $header = array();
         $param = array();
         $shopcateJSON = httpGet($url, $header, $param);
-        $shopcate = json_decode($shopcateJSON)->data;
+        $shopcate = (object)array();
+        if (json_decode($shopcateJSON)) {
+            $shopcate = json_decode($shopcateJSON)->data;
+        }
         //根据店铺的id查出他的店铺分类
         $shopid = $_SESSION['shopid'];
         $parameters = array('shopid' => $shopid, 'result' => 'data');
         $shopCate = $this->getdata->getShopCateById($parameters);
         $cateid = $shopCate[0]->shop_category_id;
         /*根据商铺分类id查出所属的分类特征*/
-        $feaparameters = array('cateid' => $cateid, 'result' => 'data');
-        $feature = $this->getdata->getFeatureByShopId($feaparameters);
+        //$feaparameters = array('cateid' => $cateid, 'result' => 'data');
+        //        $feature = $this->getdata->getFeatureByShopId($feaparameters);
         // var_dump($feature);
-        $parameters = array('view' => 'shopgoods-add', 'data' => array('shopcate' => $shopcate,
-                    'feature' => $feature));
+        $parameters = array('view' => 'shopgoods-add', 'data' => array('shopcate' => $shopcate));
         $this->adminCommonHandler($parameters);
     }
     //店铺修改商品
@@ -1085,12 +1086,15 @@ class Admin extends CI_Controller
     {
         //根据shopid查出他的分类
         $shopid = $_SESSION['shopid'];
-        $url = API_IP . 'AEWebApp/userShop/queryShopCategoryListByShopId?categoryShopId=' .
-            $shopid;
+        $url = API_IP . 'AEWebApp/userShop/queryShopCategoryListByShopId?shopId=' . $shopid;
         $header = array();
         $param = array();
         $shopcateJSON = httpGet($url, $header, $param);
-        $shopcate = json_decode($shopcateJSON)->data;
+        $shopcate = (object)array();
+        if (json_decode($shopcateJSON)) {
+            $shopcate = json_decode($shopcateJSON)->data;
+        }
+
         //查出要修改的是商品
         $goodsid = $_GET['goodsId'];
         $goodsurl = API_IP . 'AEWebApp/userShop/queryGoodsListByGoodsid?goodsId=' . $goodsid;
@@ -1118,14 +1122,33 @@ class Admin extends CI_Controller
         $title = $_GET['title'];
         $goodsurl = API_IP . 'AEWebApp/userShop/queryGoodsListByGoodsid?goodsId=' . $goodsid;
         $header = array();
-        $param = array();
         $goodsJSON = httpGet($goodsurl, $header, $param);
         $goods = json_decode($goodsJSON)->data;
-        //var_dump($goodsJSON);
+        //获取所有商品特征和特征值
+        $feature = API_IP . 'AEWebApp/common/queryFeature';
+        $header = array();
+        $featureJSON = httpGet($feature, $header, $param);
+        $featureData = json_decode($featureJSON, true);
+        //获取  被点击的  商品特征和特征值
+        $checkFeature = API_IP .
+            'AEWebApp/userShop/queryGoodsFeatureListByGoodsId?goodsId=' . $goodsid;
+        $checkFeatureJSON = httpGet($checkFeature);
+        $checkFeatureData = json_decode($checkFeatureJSON, true);
+        var_dump($checkFeatureData['data']);
+        $checkFeatureData = $checkFeatureData['data'];
+        for ($i = 0; $i < count($checkFeatureData); $i++) {
+            for ($j = 0; $j < count($checkFeatureData['eigenList']); $j++) {
+                
+            }
+        }
+        //var_dump($featureData['data']);
         /*根据title 将数据存到不同得页面*/
-        if ($title == '分类特征') {
-            $parameters = array('view' => 'shopgoods-feature', 'data' => array('goods' => $goods,
-                        'shopdata' => $shopdata));
+        if ($title == '商品属性') {
+            $parameters = array('view' => 'shopgoods-feature', 'data' => array(
+                    'featureData' => $featureData['data'],
+                    'checkFeatureData' => $checkFeatureData,
+                    'goodsid' => $goodsid,
+                    'shopdata' => $shopdata));
         } elseif ($title == '商品图片') {
             $parameters = array('view' => 'shopgoods-pic', 'data' => array('goods' => $goods,
                         'shopdata' => $shopdata));
@@ -1397,13 +1420,12 @@ class Admin extends CI_Controller
         $url = API_IP . 'AEWebApp/user/getAllMyOrder?orderShopId=' . $shopid;
         $header = array();
         $param = array();
-        $shoporder=(object)array();
+        $shoporder = (object)array();
         $shoporderJSON = httpGet($url, $header, $param);
         if (json_decode($shoporderJSON)) {
             $shoporder = json_decode($shoporderJSON)->data;
             $amount = count($shoporder);
         }
-
         /*分页效果*/
         $amount = 0;
         $baseUrl = '/admin/getOrderByShopId?placeholder=true';
