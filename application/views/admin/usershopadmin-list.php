@@ -56,7 +56,9 @@
       </tr>
       <tr>
         <td>店铺二维码 </td>
-        <td><img src="<?php echo base64_decode($shopdata->shopQrcode)?>" width="200"></td>
+        <td><div id="qrContent" style="display: none;"><?php echo base64_decode($shopdata->shopQrcode)?></div>
+            <div id="output"></div>
+        </td>
       </tr>
       <tr>
         <td>营业时间 </td>
@@ -126,8 +128,31 @@
 
   </table>
 </div>
+<script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
   /*用户-编辑*/
+  function utf16to8(str) {  
+    var out, i, len, c;  
+    out = "";  
+    len = str.length;  
+    for(i = 0; i < len; i++) {  
+    c = str.charCodeAt(i);  
+    if ((c >= 0x0001) && (c <= 0x007F)) {  
+        out += str.charAt(i);  
+    } else if (c > 0x07FF) {  
+        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+        out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    } else {  
+        out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    }  
+    }  
+    return out;  
+}
+  $(function(){
+	$('#output').qrcode({width:120,height:120,text:utf16to8($('#qrContent').text())});
+})
   function member_edit(title,url,id,w,h){
     layer_show(title,url,w,h);
   }

@@ -23,7 +23,7 @@
              <?php foreach($cate['eigenvalueList'] as $val):?>
             <input type="checkbox" name="category[]" id="category" 
             <?php foreach($checkFeatureData as $data):?>
-            <?php if($goodsid==$data['goodsId']&&$data['featureId']==$cate['featureId']&&in_array($val['eigenId'],$featureValId)){?>checked="checked"<?php }?>
+            <?php if($goodsid==$data['goodsId']&&$data['featureId']==$cate['featureId']&&in_array($val['eigenId'],$data['featrueValIp'])){?>checked="checked"<?php }?>
             <?php endforeach;?> 
             onclick="member_start(this,'<?php echo $val['eigenId']?>','<?php echo $goodsid?>','<?php echo $cate['featureId']?>')"/><?php echo $val['eigenName']?>
             <?php endforeach;?> 

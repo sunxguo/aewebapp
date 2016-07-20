@@ -166,7 +166,15 @@ class GetData
             'where' => array('admin_id' => $contentId));
         return $this->getOneData($condition);
     }
-
+    //根据id查出年费信息
+    public function getannuitybyid($type, $contentId)
+    {
+        $condition = array(
+            'table' => $type,
+            'result' => 'data',
+            'where' => array('annuity_id' => $contentId));
+        return $this->getOneData($condition);
+    }
     public function getUser($type, $contentId)
     {
         $condition = array(
@@ -438,6 +446,14 @@ class GetData
         return $buyers;
     }
 
+    //获取年费信息
+    public function getAnnuity($parameters)
+    {
+        $condition = array('table' => 'annuity', 'result' => $parameters['result']);
+        $buyers = $this->getData($condition);
+
+        return $buyers;
+    }
 
     //查出所有的管理员分类
     public function getAllAdmintype($parameters)
@@ -865,6 +881,15 @@ class GetData
 
         if (isset($parameters['shop_audit_status'])) {
             $condition['where']['shop_audit_status'] = $parameters['shop_audit_status'];
+        }
+        if (isset($parameters['shop_apply'])) {
+
+            if ($parameters['shop_apply'] == '1') {
+                $condition['sql'] = 'shop_apply!=3';
+            } else {
+                $condition['where']['shop_apply'] = $parameters['shop_apply'];
+            }
+
         }
         $buyers = $this->getData($condition);
         if ($parameters['result'] == 'data') {

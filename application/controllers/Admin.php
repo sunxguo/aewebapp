@@ -103,6 +103,10 @@ class Admin extends CI_Controller
                 $parameters = array('view' => 'finance-list', 'data' => array('usertype' =>
                             'finance2'));
             }
+            //年费管理
+            if ($usertype == '9' && $grade == '2') {
+                $parameters = array('view' => 'fee', 'data' => array('usertype' => 'fee'));
+            }
         } else {
             $parameters = array('view' => 'shop-admin', 'data' => array());
         }
@@ -124,6 +128,24 @@ class Admin extends CI_Controller
         $bannerParameters['result'] = 'data';
         $admins = $this->getdata->getAdmins($bannerParameters);
         $parameters = array('view' => 'admin_list', 'data' => array('admins' => $admins,
+                    'pageInfo' => $pageInfo));
+        $this->adminCommonHandler($parameters);
+    }
+    //年费管理员管理列表的数据页面 根据参数不同显示不同数据
+    public function fee_all()
+    {
+        $bannerParameters = array('result' => 'count');
+        $amount = $this->getdata->getAnnuity($bannerParameters);
+        $baseUrl = '/admin/fee_all?placeholder=true';
+        $selectUrl = '/admin/fee_all?placeholder=true';
+        $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] :
+            1;
+        $amountPerPage = 20;
+        $pageInfo = $this->getdata->getPageLink($baseUrl, $selectUrl, $currentPage, $amountPerPage,
+            $amount);
+        $bannerParameters['result'] = 'data';
+        $admins = $this->getdata->getAnnuity($bannerParameters);
+        $parameters = array('view' => 'fee_list', 'data' => array('admins' => $admins,
                     'pageInfo' => $pageInfo));
         $this->adminCommonHandler($parameters);
     }
@@ -362,7 +384,12 @@ class Admin extends CI_Controller
     {
         $bannerParameters = array('result' => 'count', 'orderBy' => array('shop_addtime' =>
                     'AESC'));
-        $bannerParameters['shop_audit_status'] = $_GET['audit'];
+        if (isset($_GET['status'])) {
+            if ($_GET['status'] != '') {
+                $bannerParameters['shop_audit_status'] = $_GET['status'];
+            }
+        }
+        $bannerParameters['shop_apply'] = $_GET['audit'];
         $amount = $this->getdata->getShopSearchAll($bannerParameters);
         $baseUrl = '/admin/shopSearchlist?placeholder=true';
         $selectUrl = '/admin/shopSearchlist?placeholder=true';
@@ -381,11 +408,16 @@ class Admin extends CI_Controller
     public function goodSearchlist()
     {
         $audit_status = $_GET['audit'];
-        $status = 2;
+
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
         $bannerParameters['audit_status'] = $audit_status;
-        $bannerParameters['status'] = $status;
+        if (isset($_GET['status'])) {
+            if ($_GET['status']) {
+                $status = $_GET['status'];
+                $bannerParameters['status'] = $status;
+            }
+        }
         $amount = $this->getdata->getGoodSearchAll($bannerParameters);
         $baseUrl = '/admin/goodSearchlist?placeholder=true';
         $selectUrl = '/admin/goodSearchlist?placeholder=true';
@@ -406,6 +438,9 @@ class Admin extends CI_Controller
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
         $bannerParameters['audit_status'] = $_GET['audit'];
+        if(isset($_GET['status'])){
+            $bannerParameters['status'] = $_GET['status'];
+        }
         $amount = $this->getdata->getActivityKeyAll($bannerParameters);
         $baseUrl = '/admin/getActivityKeylist?placeholder=true';
         $selectUrl = '/admin/getActivityKeylist?placeholder=true';
@@ -829,6 +864,12 @@ class Admin extends CI_Controller
             $amount);
         $couponParameters['result'] = 'data';
         $coupons = $this->getdata->getCoupons($couponParameters);
+        foreach ($coupons as $key => $value) {
+            if (!(array )$value->usershop) {
+                $value->usershop->shop_name = '';
+                $value->usershop->shop_branch_name = '';
+            }
+        }
         $parameters = array('view' => 'coupon-list', 'data' => array('coupons' => $coupons,
                     'pageInfo' => $pageInfo));
         $this->adminCommonHandler($parameters);
@@ -936,6 +977,14 @@ class Admin extends CI_Controller
         $admintype = $this->getdata->getAdmintypes(false, false);
         $parameters = array('view' => 'admin-edit', 'data' => array('admin' => $admin,
                     'admintype' => $admintype));
+        $this->adminCommonHandler($parameters);
+    }
+    //修改年费信息
+    public function updatefee()
+    {
+        $admin_id = $_GET['annuity_id'];
+        $admin = $this->getdata->getannuitybyid('annuity', $admin_id);
+        $parameters = array('view' => 'annuity-edit', 'data' => array('admin' => $admin));
         $this->adminCommonHandler($parameters);
     }
     //修改密码
@@ -1094,7 +1143,6 @@ class Admin extends CI_Controller
         if (json_decode($shopcateJSON)) {
             $shopcate = json_decode($shopcateJSON)->data;
         }
-
         //查出要修改的是商品
         $goodsid = $_GET['goodsId'];
         $goodsurl = API_IP . 'AEWebApp/userShop/queryGoodsListByGoodsid?goodsId=' . $goodsid;
@@ -1134,11 +1182,10 @@ class Admin extends CI_Controller
             'AEWebApp/userShop/queryGoodsFeatureListByGoodsId?goodsId=' . $goodsid;
         $checkFeatureJSON = httpGet($checkFeature);
         $checkFeatureData = json_decode($checkFeatureJSON, true);
-        var_dump($checkFeatureData['data']);
         $checkFeatureData = $checkFeatureData['data'];
         for ($i = 0; $i < count($checkFeatureData); $i++) {
-            for ($j = 0; $j < count($checkFeatureData['eigenList']); $j++) {
-                
+            for ($j = 0; $j < count($checkFeatureData[$i]['eigenList']); $j++) {
+                $checkFeatureData[$i]['featrueValIp'][$j] = $checkFeatureData[$i]['eigenList'][$j]['goodsEigenId'];
             }
         }
         //var_dump($featureData['data']);

@@ -33,7 +33,6 @@
 				<th width="70">实际支付</th>
 				<th width="80">支付方式</th>
 				<th width="150">下单时间</th>
-				<th width="150">更新时间</th>
 				<th width="150">支付时间</th>
 				<th width="150">取消原因</th>
 				<th width="60">状态</th>
@@ -124,12 +123,6 @@
 				<td>
 					<?php if(isset($order->orderAddtime)):?>
                          <?php echo $order->orderAddtime;?>
-					<?php endif;?>	
-				</td>
-
-				<td>
-					<?php if(isset($order->orderEdittime)):?>
-                         <?php echo $order->orderEdittime;?>
 					<?php endif;?>	
 				</td>
 

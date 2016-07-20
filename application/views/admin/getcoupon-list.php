@@ -27,7 +27,13 @@
 			<?php foreach($coupons as $coupon):?>
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $coupon->coupon_id;?>" name="id"></td>
-				<td><?php echo $coupon->usershop->shop_name.' - '.$coupon->usershop->shop_branch_name;?></td>
+				<td>
+                <?php if(isset($coupon->usershop->shop_name)):?>
+                <?php echo $coupon->usershop->shop_name?> <?php endif;?>- 
+                <?php if(isset($coupon->usershop->shop_name)):?>
+                <?php $coupon->usershop->shop_branch_name;?>
+                <?php endif;?>
+                </td>
 				<td><?php echo '￥'.$coupon->coupon_facevalue;?></td>
 				<td><?php echo '满￥'.$coupon->coupon_useprice;?></td>
 				<td><?php echo $coupon->coupon_beginvalid;?></td>
@@ -51,6 +57,10 @@
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $coupon->coupon_id;?>')" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a>
+                        <?php else:?>
+                        <a style="text-decoration:none" onClick="member_stop(this,'<?php echo $coupon->coupon_id;?>')" href="javascript:;" title="通过审核">
+							<i class="Hui-iconfont">&#xe631;</i>
+						</a>
 					<?php endif;?> 
 					
 				</td>
@@ -65,7 +75,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -114,7 +124,7 @@ function member_start(obj,id){
 	    seller.id = id;
 	    seller.status = 1;
 	    dataHandler('/common/modifyInfo',seller,null,null,null,function(){
-			//$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000});

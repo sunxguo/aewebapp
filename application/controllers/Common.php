@@ -470,6 +470,22 @@ class Common extends CI_Controller
                     'data' => $info));
                 //var_dump($result);
                 break;
+            case "fee":
+                $table = "annuity";
+                $where = array('annuity_id' => $data->admin_id);
+                $info = array('annuity_edittime' => date("Y-m-d H:i:s"));
+                if (isset($data->username)) {
+                    $info['annuity_content'] = $data->old_usename;
+                }
+                if (isset($data->status)) {
+                    $info['annuity_price'] = $data->status;
+                }
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                //var_dump($result);
+                break;
             case "admindata":
                 $table = "admin";
                 $where = array('admin_id' => $data->admin_id);
@@ -527,6 +543,51 @@ class Common extends CI_Controller
                 $where = array('follow_id' => $data->follow_id);
                 $info = array('follow_addtime' => date("Y-m-d H:i:s"));
                 $info['follow_status'] = $data->follow_status;
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                break;
+            case "stopAnnualshop":
+                $table = "annuityshop";
+                $where = array('annuity_id' => $data->id);
+                $info['annuity_status'] = $data->status;
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                break;
+            case "stopSupermarket":
+                $table = "usershop";
+                $where = array('shop_id' => $data->id);
+                $info['shop_status'] = '1';
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                break;
+            case "startSupermarket":
+                $table = "usershop";
+                $where = array('shop_id' => $data->id);
+                $info['shop_status'] = '0';
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                break;
+            case "stopBuyer":
+                $table = "user";
+                $where = array('user_id' => $data->id);
+                $info['user_status'] = '1';
+                $result = $this->dbHandler->updateData(array(
+                    'table' => $table,
+                    'where' => $where,
+                    'data' => $info));
+                break;
+            case "startBuyer":
+                $table = "user";
+                $where = array('user_id' => $data->id);
+                $info['user_status'] = '0';
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
                     'where' => $where,
@@ -797,6 +858,7 @@ class Common extends CI_Controller
                 if (isset($data->audit_status)) {
                     $info['audit_status'] = $data->audit_status;
                 }
+                $info['status'] = '0';
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
                     'where' => $where,
@@ -849,6 +911,7 @@ class Common extends CI_Controller
                 if (isset($data->audit_status)) {
                     $info['audit_status'] = $data->audit_status;
                 }
+                $info['status'] = '0';
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
                     'where' => $where,
@@ -950,21 +1013,18 @@ class Common extends CI_Controller
                 $result = $results->data;
                 break;
             case "delFeature":
-                $info = array('goodsid' => $data->goodsid);
-                $info['featureId'] = $data->featureId;
+                $info = array('goodsId' => $data->goodsid);
+                $info['goodsFeatureId'] = $data->featureId;
                 $info['eigenId'] = $data->eigenId;
-                $adSpot = new stdClass;
-                $adSpot->feature = $info;
-                $url = API_IP . "AEWebApp/userShop/addGoodsEigenValue?goodsId=" . $data->
-                    goodsid . "&goodsFeatureId=" . $data->featureId . "&eigenValueId=" . $data->
-                    eigenId;
-                //$partam =json_encode($info);
-                //die(json_encode(array("result" => "f", "message" => $partam)));
+                $url = API_IP . "AEWebApp/userShop/deleteValueAndFeatureById";
+                $partam = 'delete=' . json_encode($info);
+                //die(json_encode(array('result' => 'dsad', 'message' => $partam)));
                 $header = array();
-                $partam = array();
+                //$partam = array();
                 $marquee = httpPost($url, $partam, $header);
                 $results = json_decode($marquee);
                 $result = $results->data;
+
                 break;
             case "word":
                 $table = 'wordlist';
@@ -1047,6 +1107,7 @@ class Common extends CI_Controller
                 break;
                 /*通过广告审核并把它放到排期表内*/
             case "adstop":
+            
                 $info = array('adSpotId' => $data->adSpotId);
                 $info['adSpotStatus'] = $data->adSpotStatus;
                 $info['adSpotAdminId'] = $_SESSION['userid'];
@@ -1054,6 +1115,7 @@ class Common extends CI_Controller
                 $adSpot->adSpot = $info;
                 $url = API_IP . "AEWebApp/advertis/modifyAdSpot";
                 $partam = 'adSpot=' . json_encode($adSpot);
+                //die(json_encode(array('result'=>'da','message'=>$partam)));
                 $header = array();
                 $marquee = httpPost($url, $partam, $header);
                 $results = json_decode($marquee);

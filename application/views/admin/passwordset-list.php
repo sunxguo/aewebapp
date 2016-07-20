@@ -1,4 +1,10 @@
 <title>口令集管理</title>
+<style>
+.p1{
+text-align: center;height: 35px;
+text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+}
+</style>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 附近审核管理 <span class="c-gray en">&gt;</span> 口令集信息列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -66,11 +72,17 @@
 				</td>
 
 				<td>
+                <div class="p1" title="<?php if(!empty($word->worditem->word_item_name)):?>
+						<?php echo $word->worditem->word_item_name;?>
+					<?php else:?>
+						暂无口令内容
+					<?php endif;?>">
 					<?php if(!empty($word->worditem->word_item_name)):?>
 						<?php echo $word->worditem->word_item_name;?>
 					<?php else:?>
 						暂无口令内容
 					<?php endif;?>
+                    </div>
 				</td>
 
 				<td>

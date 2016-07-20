@@ -12,7 +12,7 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>
-				<th width="100">申请店铺</th>
+				<th width="100">申请店铺1</th>
 				<th width="90">申请活动</th>
 				<th width="90">申请商品</th>
 				<th width="90">广告位类型</th>
@@ -139,6 +139,10 @@
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $buyer->ad_spot_id;?>')" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a>
+                        <?php else:?>
+                        <a style="text-decoration:none" onClick="member_stop(this,'<?php echo $buyer->ad_spot_id;?>')" href="javascript:;" title="通过审核">
+							<i class="Hui-iconfont">&#xe631;</i>
+						</a>
 					<?php endif;?>
 					
 					</a> 
@@ -188,6 +192,24 @@ function member_start(obj,id){
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000}); 
+			
+		},false,false);
+location.reload();
+	});
+}
+
+/*广告-停用*/
+function member_stop(obj,id){
+	layer.confirm('确认要通过审核吗？',function(index){
+		var buyer = new Object(); 
+	    buyer.infoType = 'adstop';
+	    buyer.adSpotId = id;
+	    buyer.adSpotStatus = 0;
+	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
+			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已停用</span>');
+			$(obj).remove();
+			layer.msg('已停用!',{icon: 6,time:1000}); 
 			
 		},false,false);
 location.reload();

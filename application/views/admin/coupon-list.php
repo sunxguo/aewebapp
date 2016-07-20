@@ -32,10 +32,14 @@
 				<td><?php echo $coupon->coupon_beginvalid;?></td>
 				<td><?php echo $coupon->coupon_endvalid;?></td>
 				<td><?php echo $coupon->coupon_addtime;?></td>
-				<?php if($coupon->coupon_status=='1'):?>
-				<td class="td-status"><span class="label label-defaunt radius">已使用</span></td>
-				<?php else:?>
-				<td class="td-status"><span class="label label-success radius">未使用</span></td>
+				<?php if($coupon->coupon_status=='0'):?>
+				<td class="td-status"><span class="label label-defaunt radius">待发布</span></td>
+                <?php elseif($coupon->coupon_status == 1):?>
+                <td class="td-status"><span class="label label-success radius">发布中</span></td>
+                <?php elseif($coupon->coupon_status== 2):?>
+                <td class="td-status"><span class="label label-success radius">已过期</span></td>
+                <?php elseif($coupon->coupon_status == 3):?>
+                <td class="td-status"><span class="label label-success radius">审核中</span></td>      
 				<?php endif;?>
 			</tr>
 			<?php endforeach;?>

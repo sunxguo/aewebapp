@@ -59,14 +59,14 @@
 			<dt><i class="Hui-iconfont">&#xe60d;</i>店铺关键字列表<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>	
-					<li><a _href="/admin/shopSearchlist?audit=3" href="javascript:;">未审核店铺关键字</a></li>	 
+					<li><a _href="/admin/shopSearchlist?audit=3&status=0" href="javascript:;">未审核店铺关键字</a></li>	 
 					<li><a _href="/admin/shopSearchlist?audit=1" href="javascript:;">已审核店铺关键字</a></li>
 				</ul>
 			</dd>
 			<dt><i class="Hui-iconfont">&#xe60d;</i>活动关键字列表<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>	
-					<li><a _href="/admin/getActivityKeylist?audit=0" href="javascript:;">未审核活动关键字</a></li>	 
+					<li><a _href="/admin/getActivityKeylist?audit=0&&status=3" href="javascript:;">未审核活动关键字</a></li>	 
 					<li><a _href="/admin/getActivityKeylist?audit=1" href="javascript:;">已审核活动关键字</a></li>
 				</ul>
 			</dd>

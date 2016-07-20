@@ -21,7 +21,9 @@
 				<th width="130">注册时间</th>
 				<th width="130">更新时间</th>
 				<th width="70">状态</th>
+                <?php if(isset($_GET['status'])):?>
 				<th width="100">操作</th>
+                <?php endif;?>
 			</tr>
 		</thead>
 		
@@ -85,14 +87,15 @@
 				<?php else:?>
 					<td class="td-status"><span class="label label-success radius">已审核</span></td>
 				<?php endif;?>
-				
+				<?php if($buyer->audit_status=='0'):?>
 				<td class="td-manage">
-					<?php if($buyer->audit_status=='0'):?>
+					
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $buyer->goods_id;?>')" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a> 	
-					<?php endif;?>
+					
 				</td>
+                <?php endif;?>
 			</tr>
 			<?php endforeach;?>
 		</tbody>

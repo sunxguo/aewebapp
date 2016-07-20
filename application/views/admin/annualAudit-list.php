@@ -53,11 +53,16 @@
 				<?php endif;?>
 
 				<td class="td-manage">
-					<?php if($shops->annuity_status=='0'):?>
-						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $shops->annuity_id;?>',<?php echo $shops->annuity_shop_id;?>,<?php echo $shops->annuity_price;?>)" href="javascript:;" title="通过审核">
-							<i class="Hui-iconfont">&#xe6e1;</i>
+                        <?php if($shops->annuity_status=='1'):?>
+					    <a style="text-decoration:none" onClick="member_stop(this,'<?php echo $shops->annuity_id;?>')" href="javascript:;" title="停用">
+							<i class="Hui-iconfont">&#xe631;</i>
 						</a> 
-					<?php endif;?>
+				        <?php elseif($shops->annuity_status=='0'):?>
+					       <a style="text-decoration:none" onClick="member_start(this,'<?php echo $shops->annuity_id;?>')" href="javascript:;" title="通过审核">
+							<i class="Hui-iconfont">&#xe6e1;</i>
+						   </a> 
+			 	        <?php endif;?>
+                        
 				</td>
 			</tr>
 			<?php endforeach;?>
@@ -98,11 +103,11 @@ function member_show(title,url,id,w,h){
 function member_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		var shops = new Object(); 
-	    shops.infoType = 'shops';
+	    shops.infoType = 'stopAnnualshop';
 	    shops.id = id; 
-	    shops.status = 1;
+	    shops.status = 0;
 	    dataHandler('/common/modifyInfo',shops,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+			//$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 			$(obj).remove();
 			layer.msg('已停用!',{icon: 5,time:1000});
@@ -114,9 +119,9 @@ function member_stop(obj,id){
 function member_start(obj,id,shopid,price){
 	layer.confirm('确认通过审核吗？',function(index){
 		var shops = new Object(); 
-	    shops.infoType = 'annual';
+	    shops.infoType = 'stopAnnualshop';
 	    shops.id = id;
-	    shops.annuity_status = 1;
+	    shops.status = 1;
 	    shops.shopid = shopid;
 	    shops.annuity_price = price;
 	    dataHandler('/common/modifyInfo',shops,null,null,null,function(){

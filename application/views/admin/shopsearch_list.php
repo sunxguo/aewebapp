@@ -21,7 +21,9 @@
 				<th width="130">注册时间</th>
 				<th width="130">更新时间</th>
 				<th width="70">状态</th>
+                <?php if (isset($_GET['status'])):?>
 				<th width="100">操作</th>
+                <?php endif;?>
 			</tr>
 		</thead>
 		
@@ -76,19 +78,24 @@
 					<?php endif;?>
 				</td>
 
-				<?php if($buyer->shop_audit_status=='0'):?>
-					<td class="td-status"><span class="label label-defaunt radius">未审核</span></td>
-				<?php else:?>
-					<td class="td-status"><span class="label label-success radius">已审核</span></td>
+				<?php if($buyer->shop_apply=='0'):?>
+					<td class="td-status"><span class="label label-defaunt radius">未提交</span></td>
+				<?php elseif($buyer->shop_apply=='1'):?>
+                <td class="td-status"><span class="label label-success radius">已审核</span></td>
+                <?php elseif($buyer->shop_apply=='2'):?>
+                <td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
+                <?php else:?>
+					<td class="td-status"><span class="label label-defaunt radius">关键字审核中</span></td>
 				<?php endif;?>
-				
+				<?php if($buyer->shop_audit_status=='0'&&$buyer->shop_apply=='3'):?>
 				<td class="td-manage">
-					<?php if($buyer->shop_audit_status=='0'):?>
+					
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $buyer->shop_id;?>')" href="javascript:;" title="审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a> 
-					<?php endif;?> 
+					
 				</td>
+                <?php endif;?> 
 			</tr>
 			<?php endforeach;?>
 		</tbody>
@@ -99,7 +106,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -146,7 +153,7 @@ function member_start(obj,id){
 		var buyer = new Object(); 
 	    buyer.infoType = 'shopkeyword';
 	    buyer.shop_id = id;
-	    buyer.shop_audit_status = 1;
+	    buyer.shop_audit_status = 2;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
 			
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');

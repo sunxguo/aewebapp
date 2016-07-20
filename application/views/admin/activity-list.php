@@ -1,4 +1,10 @@
 <title>优惠活动</title>
+<style>
+.p1{
+text-align: center;
+text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+}
+</style>
 </head>
 <body>
 <nav class="breadcrumb">
@@ -19,14 +25,14 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				<th width="80">店铺</th>
-				<th width="150">活动标题</th>
+				<th width="10%">活动标题</th>
 				<th width="60">活动简介图</th>
 				<th width="60">活动关键字</th>
-				<th width="50">内容</th>
+				<th width="20%">内容</th>
 				<th width="80">有效期始</th>
 				<th width="80">有效期止</th>
-				<th width="50">状态</th>
-				<th width="50">关键字审核状态</th>
+				<th width="5%">状态</th>
+				<th width="5%">关键字审核状态</th>
 				
 			</tr>
 		</thead>
@@ -45,15 +51,18 @@
 				<td><?php echo $coupon->activity_name;?></td>
 				<td><img src="<?php echo $coupon->thumbnail1;?>" width="50"></td>
 				<td><?php echo $coupon->activity_keyword;?></td>
-				<td><?php echo $coupon->content;?></td>
+				<td><div class="p1"style="height:34px;" title="<?php echo $coupon->content;?>"><?php echo $coupon->content;?></div></td>
 				<td><?php echo $coupon->addtime;?></td>
 				<td><?php echo $coupon->dittime;?></td>
+                
 				<?php if($coupon->status=='0'):?>
 					<td class="td-status"><span class="label label-defaunt radius">待发布</span></td>
 				<?php elseif($coupon->status=='1'):?>
 					<td class="td-status"><span class="label label-success radius">进行中</span></td>
 				<?php elseif($coupon->status=='2'):?>
 					<td class="td-status"><span class="label label-defaunt radius">已过期</span></td>
+                <?php else:?>
+                    <td class="td-status"><span class="label label-defaunt radius">关键字审核中</span></td>
 				<?php endif;?>
 				<?php if($coupon->audit_status=='0'):?>
 					<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>

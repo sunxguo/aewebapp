@@ -26,6 +26,7 @@
 				<th width="50">纬度</th>
 				<th width="130">添加时间</th>
 				<th width="70">状态</th>
+                <th width="70">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +51,17 @@
 				<?php else:?>
 				<td class="td-status"><span class="label label-defaunt radius">已停用</span></td>
 				<?php endif;?>
+                <td class="td-manage">
+                    <?php if($superMarket->shop_status=='0'):?>
+					<a style="text-decoration:none" onClick="member_stop(this,'<?php echo $superMarket->shop_id;?>')" href="javascript:;" title="停用">
+						<i class="Hui-iconfont">&#xe631;</i>
+					</a>
+					<?php else:?>
+					<a style="text-decoration:none" onClick="member_start(this,'<?php echo $superMarket->shop_id;?>')" href="javascript:;" title="启用">
+						<i class="Hui-iconfont">&#xe6e1;</i>
+					</a> 
+					<?php endif;?>
+                </td>
 			</tr>
 			<?php endforeach;?>
 		</tbody>
@@ -81,7 +93,7 @@ function member_show(title,url,id,w,h){
 function member_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		var supermarket = new Object(); 
-	    supermarket.infoType = 'supermarket';
+	    supermarket.infoType = 'stopSupermarket';
 	    supermarket.id = id;
 	    supermarket.status = 1;
 	    dataHandler('/common/modifyInfo',supermarket,null,null,null,function(){
@@ -97,7 +109,7 @@ function member_stop(obj,id){
 function member_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		var supermarket = new Object(); 
-	    supermarket.infoType = 'supermarket';
+	    supermarket.infoType = 'startSupermarket';
 	    supermarket.id = id;
 	    supermarket.status = 0;
 	    dataHandler('/common/modifyInfo',supermarket,null,null,null,function(){

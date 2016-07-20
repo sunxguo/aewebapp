@@ -44,8 +44,14 @@
 				    <?php endif;?>     	
 				</td>
 				<td>
-				    <?php echo $product->shopInfo->shopName;?>--<?php echo $product->shopInfo->shopBranchName;?>
-				    	
+                    <?php if($product->shopInfo):?>
+				    <?php echo $product->shopInfo->shopName;?>
+                  
+                    <?php endif;?>
+                    --
+                    <?php if($product->shopInfo):?>
+                    <?php echo $product->shopInfo->shopBranchName;?>
+                    <?php endif;?>
 				</td>
 				<td>￥ <?php echo $product->price;?></td>
 				<td><?php echo $product->addtime;?></td>

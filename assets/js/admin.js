@@ -377,7 +377,27 @@ function saveAdmin(isNew,callBack){
     dataHandler('/common/'+method+'Info',admin,null,null,null,callBack,false,false);
     
 }
+//操作年费信息
+function saveFee(isNew,callBack){
+    //alert(87643);
+    showWait();
+    var admin = new Object();
+    admin.infoType = 'fee';
+    admin.username = $("#annuity_content").val();
+    admin.password = $("#annuity_price").val();
 
+    //alert(admin.type);
+    var method='add';
+    if(!isNew){
+        admin.old_usename=$("#annuity_content").val();
+        admin.admin_id = $("#annuity_id").val();
+        admin.status = $("#annuity_price").val();
+        method = 'modify';
+        ///alert(method);
+    }
+    dataHandler('/common/'+method+'Info',admin,null,null,null,callBack,false,false);
+    
+}
 
 //修改管理员密码
 function savePassword(isNew,callBack){

@@ -1,4 +1,10 @@
 <title>口令集</title>
+<style>
+.p1{
+text-align: center;height: 35px;
+text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+}
+</style>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 口令集 <span class="c-gray en">&gt;</span> 口令集 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -33,9 +39,13 @@
 				<td><?php echo $coupon->word_good;?></td>
 				<td><?php echo $coupon->word_prime_cost;?></td>
 				<td>
+                    <div class="p1" title="<?php if(!empty($coupon->content->word_item_name)):?>
+						<?php echo $coupon->content->word_item_name;?>
+					<?php endif;?>">
 				    <?php if(!empty($coupon->content->word_item_name)):?>
 						<?php echo $coupon->content->word_item_name;?>
 					<?php endif;?>	
+                    </div>
 				</td>
 				<td><?php echo $coupon->word_addtime;?></td>
 				<td><?php echo $coupon->word_eidttime;?></td>
@@ -50,6 +60,8 @@
 				<td class="td-status"><span class="label label-success radius">已发布</span></td>
 			<?php elseif($coupon->word_status=='2'):?>
 				<td class="td-status"><span class="label label-success radius">已过期</span></td>
+                <?php else:?>
+                    <td class="td-status"><span class="label label-success radius">审核中</span></td>
 				<?php endif;?>
 			</tr>
 			<?php endforeach;?> 
@@ -62,7 +74,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

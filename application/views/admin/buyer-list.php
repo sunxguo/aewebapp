@@ -20,6 +20,7 @@
 				<th width="130">更新时间</th>
 				<th width="130">最后登录时间</th>
 				<th width="70">状态</th>
+                <th width="70">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -102,17 +103,17 @@
 				<?php else:?>
 				<td class="td-status"><span class="label label-defaunt radius">已停用</span></td>
 				<?php endif;?>
-				<!--
+				
 				<td class="td-manage">
 					<?php if($buyer->user_status=='0'):?>
 					<a style="text-decoration:none" onClick="member_stop(this,'<?php echo $buyer->user_id;?>')" href="javascript:;" title="停用">
 						<i class="Hui-iconfont">&#xe631;</i>
-					</a> 
+					</a>
 					<?php else:?>
 					<a style="text-decoration:none" onClick="member_start(this,'<?php echo $buyer->user_id;?>')" href="javascript:;" title="启用">
 						<i class="Hui-iconfont">&#xe6e1;</i>
 					</a> 
-					<?php endif;?>
+					<?php endif;?> <!--
 					<a title="编辑" href="javascript:;" onclick="member_edit('修改用户信息','/admin/member-add.html','4','','510')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
@@ -121,8 +122,8 @@
 					</a>  
 					<a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $buyer->user_id;?>')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
-					</a> 
-				</td>-->
+					</a> -->
+				</td>
 			</tr>
 			<?php endforeach;?>
 		</tbody>
@@ -162,7 +163,7 @@ function member_show(title,url,id,w,h){
 function member_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
 		var buyer = new Object(); 
-	    buyer.infoType = 'buyer';
+	    buyer.infoType = 'stopBuyer';
 	    buyer.id = id;
 	    buyer.status = 1;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
@@ -178,7 +179,7 @@ function member_stop(obj,id){
 function member_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		var buyer = new Object(); 
-	    buyer.infoType = 'buyer';
+	    buyer.infoType = 'startBuyer';
 	    buyer.id = id;
 	    buyer.status = 0;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){

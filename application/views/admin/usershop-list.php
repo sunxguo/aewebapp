@@ -14,15 +14,12 @@
 				<th width="25"><input type="checkbox" name="id" value=""></th>、
 				<th width="100">店铺名</th>
 				<th width="100">分店名</th>
-				<th width="100">wifi账号</th>
-				<th width="100">wifi密码</th>
 				<th width="60">店长姓名</th>
 				<th width="100">身份证号码</th>
 				<th width="60">身份证图片</th>
 				<th width="60">营业执照图片</th>
 				<th width="60">其他证照</th>
 				<th width="50">是否开通年费</th>
-				<th width="50">是否有实体店</th>
 				
 			</tr>
 		</thead>
@@ -32,15 +29,12 @@
 				<td><input type="checkbox" value="<?php echo $superMarket->shop_id;?>" name="id"></td>
 				<td><?php echo $superMarket->shop_name;?></td>
 				<td><?php echo $superMarket->shop_branch_name;?></td>
-				<td><?php echo $superMarket->shop_wifi_username;?></td>
-				<td><?php echo $superMarket->shop_wifi_username;?></td>
 				<td><?php echo $superMarket->shop_buinour_name;?></td>
 				<td><?php echo $superMarket->shop_identity_card;?></td>
 				<td><img src="<?php echo $superMarket->shop_identity_card_pic;?>" width="100"></td>
 				<td><img src="<?php echo $superMarket->shop_business_license_pic;?>" width="100"></td>
 				<td><img src="<?php echo $superMarket->shop_other_license1;?>;?>" width="100"></td>
 				<td><?php if($superMarket->shop_annuity == 1):?> <span class="label label-success radius">是</span> <?php else:?> <span class="label label-defaunt radius">否</span> <?php endif;?></td>
-				<td><?php if($superMarket->shop_has_shiti_dian == 1):?><span class="label label-success radius">是</span><?php else:?><span class="label label-defaunt radius">否</span> <?php endif;?></td>
 			</tr>
 			<?php endforeach;?>
 		</tbody>
@@ -51,7 +45,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 13, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

@@ -1,4 +1,10 @@
 <title>店铺活动管理</title>
+<style>
+.p1{
+text-align: center;height: 36px;
+text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+}
+</style>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠管理 <span class="c-gray en">&gt;</span> 店铺活动管理 <a class="btn btn-success radius r mr-20 btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -40,7 +46,7 @@
 					<td><?php echo $activity->activityName;?></td>
 					<td><?php echo $activity->activityKeyword;?></td>
 					<td><img src="<?php echo $activity->thumbnail1;?>" width="100"></td>
-					<td><?php echo $activity->content;?></td>
+					<td><div class="p1"><?php echo $activity->content;?></div></td>
 					<!-- <td><?php echo $activity->site;?></td> -->
 					<td><?php echo $activity->activityBegintime;?></td>
 					<td><?php echo $activity->activityEndtime;?></td>
