@@ -1,7 +1,7 @@
 <title>口令集</title>
 <style>
 .p1{
-text-align: center;height: 35px;
+text-align: center;height: 36px;
 text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
 }
 </style>
@@ -23,8 +23,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<th width="40">口令商品</th>
 				<th width="50">商品原价</th>
 				<th width="80">口令内容</th>
-				<th width="80">添加时间</th>
-				<th width="130">修改时间</th>
 				<th width="130">审核状态</th>
 				<th width="130">口令状态</th>
 				
@@ -47,8 +45,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 					<?php endif;?>	
                     </div>
 				</td>
-				<td><?php echo $coupon->word_addtime;?></td>
-				<td><?php echo $coupon->word_eidttime;?></td>
 				<?php if($coupon->audit_status=='0'):?>
 				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
 				<?php else:?>

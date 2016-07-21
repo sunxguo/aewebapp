@@ -32,8 +32,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<!-- <th width="80">位置</th> -->
 				<th width="80">活动开始时间</th>
 				<th width="80">活动结束时间</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -50,8 +48,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 					<!-- <td><?php echo $activity->site;?></td> -->
 					<td><?php echo $activity->activityBegintime;?></td>
 					<td><?php echo $activity->activityEndtime;?></td>
-					<td><?php echo $activity->addtime;?></td>
-					<td><?php echo $activity->dittime;?></td>  
 
 					<?php if($activity->status=='0'):?>
 						<td class="td-status">

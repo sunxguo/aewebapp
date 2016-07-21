@@ -1,7 +1,7 @@
 <title>口令集管理</title>
 <style>
 .p1{
-text-align: center;height: 35px;
+text-align: center;height: 36px;
 text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
 }
 </style>
@@ -26,8 +26,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<th width="90">口令商品</th>
 				<th width="90">商品原价</th>
 				<th width="130">口令内容</th>
-				<th width="130">添加时间</th>
-				<th width="130">修改时间</th>
 				<th width="70">口令状态</th>
 				<th width="100">操作</th>
 			</tr>
@@ -85,21 +83,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
                     </div>
 				</td>
 
-				<td>
-					<?php if(!empty($word->word_addtime)):?>
-						<?php echo $word->word_addtime;?>
-					<?php else:?>
-						暂无添加时间
-					<?php endif;?>
-				</td>
-
-				<td>
-					<?php if(!empty($word->word_eidttime)):?>
-						<?php echo $word->word_eidttime;?>
-					<?php else:?>
-						暂无修改时间
-					<?php endif;?>
-				</td>
 
 				<?php if($word->word_status=='0'):?>
 				<td class="td-status"><span class="label label-success radius">已使用</span></td>
@@ -139,7 +122,7 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

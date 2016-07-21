@@ -18,8 +18,6 @@
 				<th width="100">昵称</th>	
 				<th width="40">等级</th>
 				<th width="90">角色</th>
-				<th width="130">注册时间</th>
-				<th width="130">更新时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
@@ -49,22 +47,6 @@
 				</td>
 				<td>
 					关注审核员		
-				</td>
-				
-				<td>
-					<?php if(!empty($buyer->addtime)):?>
-						<?php echo $buyer->addtime;?>
-					<?php else:?>
-						暂无注册时间
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($buyer->edittime)):?>
-						<?php echo $buyer->edittime;?>
-					<?php else:?>
-						暂无注册时间
-					<?php endif;?>
 				</td>
 
 				<?php if($buyer->status=='1'):?>

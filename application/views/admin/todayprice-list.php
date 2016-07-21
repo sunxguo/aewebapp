@@ -19,8 +19,6 @@
 				<th width="50">商品名称</th>
 				<th width="50">今日最低价</th>
 				<th width="80">今日最高价</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="80">操作</th>
 				
 			</tr>
@@ -32,8 +30,6 @@
 				<td><?php echo $price->todayGoodsName;?></td>
 				<td>￥ <?php echo $price->todayMinPrice;?></td>
 				<td>￥ <?php echo $price->todayMaxPrice;?></td>
-				<td><?php echo $price->todayAddtime;?></td>
-				<td><?php echo $price->todayEdittime;?></td>  
 				<td class="td-manage">
 					<a title="编辑" href="javascript:;" onclick="member_edit('修改商品信息','/admin/todaypriceedit','<?php echo $price->todayId;?>','','550')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
@@ -52,7 +48,7 @@
 <script type="text/javascript">  
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

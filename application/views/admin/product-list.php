@@ -22,8 +22,6 @@
 				<th width="80">商品分类</th>
 				<th width="80">店铺名</th>
 				<th width="80">价格</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="80">简介</th>
 				<th width="80">销量</th>
 				<th width="50">状态</th>
@@ -54,8 +52,6 @@
                     <?php endif;?>
 				</td>
 				<td>￥ <?php echo $product->price;?></td>
-				<td><?php echo $product->addtime;?></td>
-				<td><?php echo $product->edittime;?></td>  
 				<td><?php echo $product->description;?></td>
 				<td><?php echo $product->sales;?></td>
 				<?php if($product->status=='0'):?>

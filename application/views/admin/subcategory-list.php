@@ -19,8 +19,6 @@
 				<th width="120">二级分类</th>
 				<th width="120">所属一级分类</th>
 				<th width="120">分类描述</th>
-				<th width="120">添加时间</th>
-				<th width="120">修改时间</th>
                 <!-- <th width="100">添加分类特征</th> -->
 				<th width="120">状态</th>
 				<th width="80">操作</th>
@@ -33,8 +31,6 @@
 				<td><?php echo $category->name;?></td>
 				<td><?php echo $category->category->name;?></td>
 				<td><?php echo $category->describe_shop;?></td>
-				<td><?php echo $category->addtime;?></td>
-				<td><?php echo $category->edittime;?></td>
 				<!-- <td>
 					<a href="javascript:;" onclick="feature_add('添加分类特征','/admin/featureaddByChoice','<?php echo $category->twoid;?>','800','500','<?php echo $category->id;?>')" class="ml-5" style="text-decoration:none">
 					    <span class="label label-success radius">

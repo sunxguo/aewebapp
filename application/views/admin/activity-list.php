@@ -51,7 +51,7 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<td><?php echo $coupon->activity_name;?></td>
 				<td><img src="<?php echo $coupon->thumbnail1;?>" width="50"></td>
 				<td><?php echo $coupon->activity_keyword;?></td>
-				<td><div class="p1"style="height:34px;" title="<?php echo $coupon->content;?>"><?php echo $coupon->content;?></div></td>
+				<td><div class="p1"style="height:36px;" title="<?php echo $coupon->content;?>"><?php echo $coupon->content;?></div></td>
 				<td><?php echo $coupon->addtime;?></td>
 				<td><?php echo $coupon->dittime;?></td>
                 

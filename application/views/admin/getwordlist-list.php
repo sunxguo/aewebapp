@@ -30,10 +30,8 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<th width="80">口令内容</th>
 				<th width="80">有效期始</th>
 				<th width="80">有效期止</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="50">审核状态</th>
-				<th width="50">状态</th>
+				<th width="50">口令状态</th>
 				<th width="80">操作</th>
 			</tr>
 		</thead>
@@ -48,8 +46,6 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<td><div class="p1"><?php echo $word->count->word_item_name;?></div></td>
 				<td><?php echo $word->word_begintime;?></td>
 				<td><?php echo $word->word_endtime;?></td>
-				<td><?php echo $word->word_addtime;?></td>
-				<td><?php echo $word->word_eidttime;?></td>
 
 				<?php if($word->audit_status=='0'):?>
 				<td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
@@ -63,6 +59,8 @@ text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;dis
 				<td class="td-status"><span class="label label-success radius">已发布</span></td>
 				<?php elseif($word->word_status=='2'):?>
 				<td class="td-status"><span class="label label-defaunt radius">已过期</span></td>
+                <?php else:?>
+                <td class="td-status"><span class="label label-defaunt radius">审核中</span></td>
 				<?php endif;?>
 				<td class="td-manage">
 				    

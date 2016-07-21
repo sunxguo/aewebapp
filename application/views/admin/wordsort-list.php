@@ -11,16 +11,14 @@
 	</div>
 
 	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort" width="2500">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="id" value=""></th>
-				<th width="100">口令分类名称</th>
-				<th width="100">查看分类详情</th>
-				<th width="130">添加时间</th>
-				<th width="130">更新时间</th>
-				<th width="130">状态</th>
-				<th width="100">操作</th>
+				<th width="5%"><input type="checkbox" name="id" value=""></th>
+				<th>口令分类名称</th>
+				<th width="10%">查看分类详情</th>
+				<th width="10%">状态</th>
+				<th width="10%">操作</th>
 			</tr>
 		</thead>
 		
@@ -39,20 +37,6 @@
                 	<u style="cursor:pointer" class="text-primary" onclick="member_show('商铺活动信息','/admin/worditemlist','<?php echo $shop->wordSortId;?>','1200','500')">查看分类详情</u>
                 </td>
 				
-				<td>
-					<?php if(!empty($shop->wordSortAddtime)):?>
-						<?php echo $shop->wordSortAddtime;?>
-					<?php else:?>
-						暂无注册时间
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($shop->wordSortEdittime)):?>
-						<?php echo $shop->wordSortEdittime;?>	
-				
-					<?php endif;?>
-				</td>
 				
 				<?php if($shop->wordSortStatus=='0'):?>
 						<td class="td-status">
@@ -92,7 +76,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

@@ -294,6 +294,22 @@ class Admin extends CI_Controller
         $parameters = array('view' => 'search-add', 'data' => array());
         $this->adminCommonHandler($parameters);
     }
+    //修改搜索管理员
+    public function searchedit()
+    {
+        if (!empty($_GET['id'])) {
+            $adminid = $_GET['id'];
+            unset($_SESSION['admin_id']);
+            $_SESSION['admin_id'] = $adminid;
+        } else {
+            $adminid = $_SESSION['admin_id'];
+        }
+        /*根据id查出管理员信息*/
+        $parameters = array('id' => $adminid, 'result' => 'data');
+        $admindata = $this->getdata->getAdminDataById($parameters);
+        $parameters = array('view' => 'subadmin-edit', 'data' => array('admindata' => $admindata));
+        $this->adminCommonHandler($parameters);
+    }
     //添加推荐管理员
     public function adAdminadd()
     {
@@ -438,7 +454,7 @@ class Admin extends CI_Controller
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
         $bannerParameters['audit_status'] = $_GET['audit'];
-        if(isset($_GET['status'])){
+        if (isset($_GET['status'])) {
             $bannerParameters['status'] = $_GET['status'];
         }
         $amount = $this->getdata->getActivityKeyAll($bannerParameters);
@@ -1846,6 +1862,7 @@ class Admin extends CI_Controller
         $pageInfo = $this->getdata->getPageLink($baseUrl, $selectUrl, $currentPage, $amountPerPage,
             $amount);
         $bannerParameters['result'] = 'data';
+
         $admins = $this->getdata->getUnAuditshop($bannerParameters);
         $parameters = array('view' => 'unapprove-list', 'data' => array('admins' => $admins,
                     'pageInfo' => $pageInfo));
@@ -1865,9 +1882,35 @@ class Admin extends CI_Controller
         $pageInfo = $this->getdata->getPageLink($baseUrl, $selectUrl, $currentPage, $amountPerPage,
             $amount);
         $bannerParameters['result'] = 'data';
+        $bannerParameters['groupBy'] = 'report_shop_id';
         $report = $this->getdata->insertReportShop($bannerParameters);
-        $parameters = array('view' => 'report-list', 'data' => array('report' => $report,
-                    'pageInfo' => $pageInfo));
+        
+        $parameters = array('view' => 'report-list', 'data' => array(
+                'report' => $report,
+                'pageInfo' => $pageInfo));
+        $this->adminCommonHandler($parameters);
+    }
+    
+    /*根据店铺id查出所有举报内容*/
+    public function getReportDetail()
+    {
+        $bannerParameters = array('result' => 'count', 'orderBy' => array('report_addtime' =>
+                    'AESC'));
+        $amount = $this->getdata->insertReportShop($bannerParameters);
+        $baseUrl = '/audit/insertReportShop?placeholder=true';
+        $selectUrl = '/audit/insertReportShop?placeholder=true';
+        $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] :
+            1;
+        $amountPerPage = 20;
+        $pageInfo = $this->getdata->getPageLink($baseUrl, $selectUrl, $currentPage, $amountPerPage,
+            $amount);
+        $bannerParameters['result'] = 'data';
+        $bannerParameters['report_shop_id']=$_GET['phone'];
+        $report = $this->getdata->insertReportShop($bannerParameters);
+        
+        $parameters = array('view' => 'reportDetail-list', 'data' => array(
+                'report' => $report,
+                'pageInfo' => $pageInfo));
         $this->adminCommonHandler($parameters);
     }
     /*查出商铺的活动*/
@@ -1875,12 +1918,25 @@ class Admin extends CI_Controller
     {
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
-        $shopid = $_GET['shop_id'];
+        $shopid = $_GET['phone'];
         $bannerParameters['shopid'] = $shopid;
         $bannerParameters['result'] = 'data';
         $activitys = $this->getdata->getactivityByshopid($bannerParameters);
         //var_dump($activitys);
         $parameters = array('view' => 'shopactivity-show', 'data' => array('activitys' =>
+                    $activitys));
+        $this->adminCommonHandler($parameters);
+    }
+    /*查出某一商铺详情*/
+    public function getshopDetail()
+    {
+        $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
+                    'AESC'));
+        $shopid = $_GET['phone'];
+        $bannerParameters['shopid'] = $shopid;
+        $bannerParameters['result'] = 'data';
+        $activitys = $this->getdata->getShopDetailByshopid($bannerParameters);
+        $parameters = array('view' => 'shopdetail-show', 'data' => array('activitys' =>
                     $activitys));
         $this->adminCommonHandler($parameters);
     }

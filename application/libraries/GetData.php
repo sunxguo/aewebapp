@@ -643,6 +643,16 @@ class GetData
         return $buyers;
     }
 
+    /*根据店铺查出店铺详情*/
+    public function getShopDetailByshopid($parameters)
+    {
+        $condition = array('table' => 'usershop', 'result' => $parameters['result']);
+        $condition['where']['shop_id'] = $parameters['shopid'];
+        $buyers = $this->getData($condition);
+
+        return $buyers;
+    }
+
     //查出所有的商铺审核员
     public function getShopaduits($parameters)
     {
@@ -1446,9 +1456,15 @@ class GetData
         if (isset($parameters['orderBy'])) {
             $condition['order_by'] = $parameters['orderBy'];
         }
-        // if(isset($parameters['grderBy'])){
-        // 	$condition['grord_by']=$parameters['grderBy'];
-        // }
+        if (isset($parameters['groupBy'])) {
+            $condition['group_by'] = $parameters['groupBy'];
+        }
+        if (isset($parameters['report_shop_id'])) {
+            $condition['where']['report_shop_id'] = $parameters['report_shop_id'];
+        } else {
+            $condition['select'] = "*,count(report_shop_id) as sumcount";
+        }
+
         $supermarkets = $this->getData($condition);
         if ($parameters['result'] == 'data') {
             foreach ($supermarkets as $key => $value) {
@@ -1456,6 +1472,7 @@ class GetData
                 $value->usershop = $this->getContent('usershop', $value->report_shop_id);
             }
         }
+        //var_dump($supermarketsarray);
         return $supermarkets;
     }
 

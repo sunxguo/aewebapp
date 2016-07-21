@@ -103,6 +103,7 @@
 					<li><a _href="/admin/getAdtime" href="javascript:;">广告时间管理</a></li>
 					<li><a _href="/admin/getAdcategory" href="javascript:;">广告类型管理</a></li>
 					<li><a _href="/admin/getSortord" href="javascript:;">广告排序管理</a></li>	
+                    <li><a _href="/admin/recommendSortord" href="javascript:;">推荐广告管理</a></li>
 				</ul>
 			</dd>
 		</dl>

@@ -18,8 +18,6 @@
 				<th width="80">审核员id</th>
 				<th width="100">用户名</th>
 				<th width="90">角色</th>
-				<th width="130">注册时间</th>
-				<th width="130">更新时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
@@ -39,19 +37,6 @@
 
 				<td>
 					年费审核员		
-				</td>
-				
-				<td>
-					<?php if(!empty($buyer->addtime)):?>
-						<?php echo $buyer->addtime;?>
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($buyer->edittime)):?>
-						<?php echo $buyer->edittime;?>
-					<?php else:?>
-						暂无注册时间
-					<?php endif;?>
 				</td>
 
 				<?php if($buyer->status=='1'):?>

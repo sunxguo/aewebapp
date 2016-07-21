@@ -19,7 +19,6 @@
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				<th width="100">所属分类特征</th>
 				<th width="80">特征数据</th>
-				<th width="80">添加时间</th>
 				<th width="80">操作</th>
 			</tr>
 		</thead>
@@ -29,7 +28,6 @@
 				<td><input type="checkbox" value="<?php echo $cate->eigen_id;?>" name="id"></td>
 				<td><?php echo $cate->category;?></td>
 				<td><?php echo $cate->eigen_name;?></td>
-				<td><?php echo $cate->eigen_addtime;?></td>
 				<td class="td-manage">
 					<a title="编辑" href="javascript:;" onclick="member_edit('修改活动信息','/admin/catevalueedit','<?php echo $cate->eigen_id;?>','','550')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>

@@ -17,9 +17,7 @@
 				<th width="50">使用条件</th>
 				<th width="80">有效期始</th>
 				<th width="80">有效期止</th>
-				<th width="130">添加时间</th>
 				<th width="50">状态</th>
-				
 			</tr>
 		</thead>
 		<tbody>
@@ -31,7 +29,6 @@
 				<td><?php echo '满￥'.$coupon->coupon_useprice;?></td>
 				<td><?php echo $coupon->coupon_beginvalid;?></td>
 				<td><?php echo $coupon->coupon_endvalid;?></td>
-				<td><?php echo $coupon->coupon_addtime;?></td>
 				<?php if($coupon->coupon_status=='0'):?>
 				<td class="td-status"><span class="label label-defaunt radius">待发布</span></td>
                 <?php elseif($coupon->coupon_status == 1):?>

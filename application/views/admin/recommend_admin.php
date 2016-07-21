@@ -1,11 +1,11 @@
-<title>推荐审核员管�?/title>
+<title>推荐审核员管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 推荐管理 <span class="c-gray en">&gt;</span> 推荐审核员列�?<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 推荐管理 <span class="c-gray en">&gt;</span> 推荐审核员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
-			<a href="javascript:;" onclick="member_add('添加管理�?,'/admin/adAdminadd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加推荐审核�?/a>
+			<a href="javascript:;" onclick="member_add('添加管理员','/admin/adAdminadd','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加推荐审核员</a>
 		</span>  
 	</div>
 	<div class="mt-20">
@@ -19,7 +19,7 @@
 				<th width="90">角色</th>
 				<th width="130">添加时间</th>
 				<th width="130">更新时间</th>
-				<th width="70">状�?/th>
+				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -46,7 +46,7 @@
 				    <?php endif;?>
 				</td>
 				<td>
-					推荐审核�?
+					推荐审核员
 				</td>
 				
 				<td>
@@ -66,9 +66,9 @@
 				</td>
 
 				<?php if($buyer->status=='1'):?>
-				<td class="td-status"><span class="label label-success radius">已启�?/span></td>
+				<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>
-				<td class="td-status"><span class="label label-defaunt radius">已停�?/span></td>
+				<td class="td-status"><span class="label label-defaunt radius">已停用</span></td>
 				<?php endif;?>
 				
 				<td class="td-manage">
@@ -97,12 +97,12 @@
 	</table>
 	</div>
 </div>
-<script type="text/javascript" src="/assets/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排�?
-		"bStateSave": true,//状态保�?
+		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
 		  {"orderable":false,"aTargets":[0]}// 制定列不参与排序
@@ -128,32 +128,32 @@ function member_show(title,url,id,w,h){
 }
 /*用户-停用*/
 function member_stop(obj,id){
-	layer.confirm('确认要停用吗�?,function(index){
+	layer.confirm('确认要停用吗？',function(index){
 		var buyer = new Object(); 
 	    buyer.infoType = 'admindata';
 	    buyer.admin_id = id;
 	    buyer.status = 0;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停�?/span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 			$(obj).remove();
-			layer.msg('已停�?',{icon: 5,time:1000});
+			layer.msg('已停用!',{icon: 5,time:1000});
 		},false,false);
 	});
 }
 
 /*用户-启用*/
 function member_start(obj,id){
-	layer.confirm('确认要启用吗�?,function(index){
+	layer.confirm('确认要启用吗？',function(index){
 		var buyer = new Object(); 
 	    buyer.infoType = 'admindata';
 	    buyer.admin_id = id;
 	    buyer.status = 1;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启�?/span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
-			layer.msg('已启�?',{icon: 6,time:1000});
+			layer.msg('已启用!',{icon: 6,time:1000});
 		},false,false);
 	});
 }
@@ -167,13 +167,13 @@ function change_password(title,url,id,w,h){
 }
 /*用户-删除*/
 function member_del(obj,id){
-	layer.confirm('确认要删除吗�?,function(index){
+	layer.confirm('确认要删除吗？',function(index){
 		var buyer = new Object(); 
 	    buyer.infoType = 'shopadmin';
 	    buyer.id = id;
 		dataHandler('/common/deleteInfo',buyer,null,null,null,function(){
 			$(obj).parents("tr").remove();
-			layer.msg('已删�?',{icon:1,time:1000});
+			layer.msg('已删除!',{icon:1,time:1000});
 		},false,false);
 	});
 }
@@ -184,10 +184,10 @@ function member_del_bulk(){
         memberArray.push($(this).val()); 
     });
     if(memberArray.length<1){
-       layer.alert('请选择要删除的用户�?);
+       layer.alert('请选择要删除的用户！');
         return false;
     }
-	layer.confirm('确认要删除这些用户吗�?,function(index){
+	layer.confirm('确认要删除这些用户吗？',function(index){
 	    var buyers = new Object();
 	    buyers.infoType = 'buyers';
 	    buyers.idArray = memberArray;
@@ -195,7 +195,7 @@ function member_del_bulk(){
 	    	$("input[name='id']:checked").each(function(){
 		        $(this).parents("tr").remove();
 		    });
-			layer.msg('已删�?',{icon:1,time:1000});
+			layer.msg('已删除!',{icon:1,time:1000});
 	    },false,false);
 	});
 }

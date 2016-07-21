@@ -1,4 +1,5 @@
 <title>店铺信息</title>
+
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
@@ -56,7 +57,11 @@
       </tr>
       <tr>
         <td>店铺二维码 </td>
-        <td><div id="qrContent" style="display: none;"><?php echo base64_decode($shopdata->shopQrcode)?></div>
+     <!--   <td><div id="qrContent" style="display: none;"><?php echo base64_decode($shopdata->shopQrcode)?></div>
+            <div id="output"></div>
+        </td>
+-->        
+        <td><div id="qrContent" style="display: none;"><?php echo $shopdata->shopQrcode?></div>
             <div id="output"></div>
         </td>
       </tr>
@@ -130,7 +135,6 @@
 </div>
 <script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
-  /*用户-编辑*/
   function utf16to8(str) {  
     var out, i, len, c;  
     out = "";  

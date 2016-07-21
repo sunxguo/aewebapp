@@ -19,8 +19,6 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				<th width="100">提示内容</th>
-				<th width="80">修改时间</th>
-				<th width="80">添加时间</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -30,8 +28,6 @@
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $count->msg_id;?>" name="id"></td>	
 				<td><?php echo $count->msg_content;?></td>
-				<td><?php echo $count->msg_addtime;?></td>
-				<td><?php echo $count->msg_edittime;?></td>
 				<?php if($count->msg_status=='1'):?>
 				<td class="td-status"><span class="label label-success radius">显示中</span></td>
 				<?php else:?>

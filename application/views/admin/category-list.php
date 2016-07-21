@@ -14,14 +14,12 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="id" value=""></th>
+				<th width="25"><input type="checkbox" name="id" value=""/></th>
 				<th width="120">一级分类</th>
 				<th width="120">分类描述</th>
 				<th width="120">序号</th>
-				<th width="120">添加时间</th>
-				<th width="120">修改时间</th>
-				<!-- <th width="100">添加分类特征</th> 
-				<th width="120">状态</th>-->
+				<!-- <th width="100">添加分类特征</th> -->
+				<th width="120">状态</th>
 				<th width="80">操作</th>
 			</tr>
 		</thead>
@@ -32,20 +30,18 @@
 				<td><?php echo $category->name;?></td>
 				<td><?php echo $category->describe_shop;?></td>
 				<td><?php echo $category->orders;?></td>
-				<td><?php echo $category->addtime;?></td>
-				<td><?php echo $category->edittime;?></td>
 				<!-- <td>
 					<a href="javascript:;" onclick="feature_add('添加分类特征','/admin/catefeatureaddByid','<?php echo $category->id;?>','500','300')" class="ml-5" style="text-decoration:none">
 					    <span class="label label-success radius">
 					    	添加
 					    </span>
 					</a>    
-				</td> 
+				</td> -->
 				<?php if($category->status=='0'):?>
 					<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>
 					<td class="td-status"><span class="label label-defaunt radius">已停用</span></td>
-				<?php endif;?>-->
+				<?php endif;?>
 				<td class="category-manage">
 				<!--修改状态-->
 				<?php if($category->status=='0'):?>
@@ -74,7 +70,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 4, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

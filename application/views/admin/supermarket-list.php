@@ -17,14 +17,13 @@
 				<th width="50">轮播图片详情</th>
 				<th width="100">店铺名</th>
 				<th width="100">分店名</th>
-				<th width="100">营业时间</th>
+				<th width="100">关注量</th>
 				<th width="60">省</th>
 				<th width="60">市</th>
 				<th width="60">区</th>
 				<th width="150">详细地址</th>
-				<th width="50">经度</th>
-				<th width="50">纬度</th>
-				<th width="130">添加时间</th>
+				<th width="50">店长手机号</th>
+                <th width="70">审核状态</th>
 				<th width="70">状态</th>
                 <th width="70">操作</th>
 			</tr>
@@ -38,14 +37,21 @@
 				<td><u style="cursor:pointer" class="text-primary label label-success radius" onclick="member_show('轮播图片信息','/admin/shopPic','<?php echo $superMarket->shop_id;?>','450','650')">轮播详情</u></td>
 				<td><?php echo $superMarket->shop_name;?></td>
 				<td><?php echo $superMarket->shop_branch_name;?></td>
-				<td><?php echo $superMarket->shop_business_hours;?></td>
+				<td><?php echo $superMarket->shop_care_num;?></td>
 				<td><?php echo $superMarket->shop_province;?></td>
 				<td><?php echo $superMarket->shop_city;?></td>
 				<td><?php echo $superMarket->shop_area;?></td>
 				<td><?php echo $superMarket->shop_detail_address;?></td>
-				<td><?php echo $superMarket->shop_lng;?></td>
-				<td><?php echo $superMarket->shop_lat;?></td>
-				<td><?php echo $superMarket->shop_addtime;?></td>
+				<td><?php echo $superMarket->shop_buinour_phone;?></td>
+                <?php if($superMarket->shop_apply=='0'):?>
+				<td class="td-status1"><span class="label label-defaunt radius">未提交审核</span></td>
+				<?php elseif($superMarket->shop_apply=='1'):?>
+				<td class="td-status1"><span class="label label-success radius">审核成功</span></td>
+                <?php elseif($superMarket->shop_apply=='2'):?>
+				<td class="td-status1"><span class="label label-defaunt radius">审核中</span></td>
+                <?php else:?>
+				<td class="td-status1"><span class="label label-defaunt radius">关键字审核中</span></td>
+				<?php endif;?>
 				<?php if($superMarket->shop_status=='0'):?>
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>
@@ -98,7 +104,8 @@ function member_stop(obj,id){
 	    supermarket.status = 1;
 	    dataHandler('/common/modifyInfo',supermarket,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+			$(obj).parents("tr").find(".td-status1").html('<span class="label label-defaunt radius">关键字审核中</span>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 			$(obj).remove();
 			layer.msg('已停用!',{icon: 5,time:1000});
 		},false,false);
@@ -114,7 +121,8 @@ function member_start(obj,id){
 	    supermarket.status = 0;
 	    dataHandler('/common/modifyInfo',supermarket,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+			$(obj).parents("tr").find(".td-status1").html('<span class="label label-success radius">审核成功</span>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 			$(obj).remove();
 			layer.msg('已启用!',{icon: 6,time:1000});
 		},false,false);

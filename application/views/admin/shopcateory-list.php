@@ -19,8 +19,6 @@
 				<th width="80">分类名称</th>
 				<th width="150">分类描述</th>
 				<th width="80">序号</th>
-				<th width="100">添加时间</th>
-				<th width="100">修改时间</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -32,8 +30,6 @@
 				<td><?php echo $cate->name;?></td>
 				<td><?php echo $cate->describeShop;?></td>
 				<td><?php echo $cate->orders;?></td>
-				<td><?php echo $cate->addtime;?></td>
-				<td><?php echo $cate->edittime;?></td>  
 
 				<?php if($cate->status=='0'):?>
 						<td class="td-status">

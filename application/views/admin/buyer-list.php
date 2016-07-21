@@ -9,16 +9,12 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>
-				<th width="80">用户id</th>
 				<th width="100">昵称</th>
 				<th width="150">头像</th>	
 				<th width="40">性别</th>
 				<th width="90">手机</th>
 				<th width="90">用户默认城市</th>
 				<th width="60">设备类型</th>
-				<th width="130">注册时间</th>
-				<th width="130">更新时间</th>
-				<th width="130">最后登录时间</th>
 				<th width="70">状态</th>
                 <th width="70">操作</th>
 			</tr>
@@ -27,7 +23,6 @@
 			<?php foreach($buyers as $buyer):?>
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $buyer->user_id;?>" name="id"></td>
-				<td><?php echo $buyer->user_id;?></td>
 
 				<td>
 					<?php if(!empty($buyer->user_name)):?>
@@ -75,28 +70,7 @@
 				    	暂无设备信息
 				    <?php endif;?>
 				</td>
-				<td>
-					<?php if(!empty($buyer->user_addtime)):?>
-						<?php echo $buyer->user_addtime;?>
-					<?php else:?>
-						暂无注册时间
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($buyer->user_edittime)):?>
-						<?php echo $buyer->user_edittime;?>
-					<?php else:?>
-						暂无注册时间
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($buyer->user_lastlogintime)):?>
-						<?php echo $buyer->user_lastlogintime;?>
-					<?php else:?>
-						暂无最后登录时间
-					<?php endif;?>
-				</td>
+			
 
 				<?php if($buyer->user_status=='0'):?>
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
@@ -134,7 +108,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

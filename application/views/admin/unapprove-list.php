@@ -1,4 +1,5 @@
 <title>店铺管理</title>
+<script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 店铺管理 <span class="c-gray en">&gt;</span> 审核店铺列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -8,33 +9,21 @@
 	</div>
 
 	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort" width="2500">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="id" value=""></th>
-				<th width="80">店铺id</th>
-				<th width="100">店铺名称</th>
-				<th width="100">分店名称</th>
-				<th width="100">店铺类型</th>
-				<th width="90">门店座机电话</th>
-				<th width="90">店长手机号</th>
-				<th width="90">省</th>
-                <th width="90">市</th>
-                <th width="90">区</th>
-                <th width="130">详细地址</th>
-                <th width="130">营业时间</th>
-                <th width="80">店长姓名</th>
-                <th width="130">身份证号</th>
-                <th width="130">身份证图片</th> 
-                <th width="130">营业执照</th>
-                <th width="130">其他证件照</th>
-                <th width="110">查看店铺活动</th>
-                <th width="90">经度</th>
-				<th width="90">纬度</th>
-				<th width="130">添加时间</th>
-				<th width="130">更新时间</th>
+				<th width="4%"><input type="checkbox" name="id" value=""></th>
+				<th width="10%">店铺名称</th>
+                <th width="10%">分店名称</th>
+				<th width="10%">店铺类型</th>
+                <th width="10%">详细地址</th>
+                <th width="8%">身份证号</th>
+                <th width="10%">商户图片</th> 
+                <th>店铺二维码</th> 
+                <th width="10%">查看店铺活动</th>
+                <th width="10%">店铺详情</th>
 				<!-- <th width="130">发送审核消息</th> -->
-				<th width="100">操作</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		
@@ -43,7 +32,6 @@
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $shop->shop_id;?>" id="shop_id" name="id"></td>
 
-				<td><?php echo $shop->shop_id;?></td>
 
 				<td>
 					<?php if(!empty($shop->shop_name)):?>
@@ -52,15 +40,13 @@
 				    	暂无店名
 				    <?php endif;?>
 				</td>
-
-				<td>
+                <td>
 					<?php if(!empty($shop->shop_branch_name)):?>
-						<?php echo $shop->shop_branch_name;?>
+						<?php echo $shop->shop_name;?>
 					<?php else:?>
 				    	暂无分店名
 				    <?php endif;?>
 				</td>
-
 				<td>
 					<?php if(!empty($shop->category->type_name)):?>
 						<?php echo $shop->category->type_name;?>
@@ -68,60 +54,8 @@
 				    	暂无店铺类型
 				    <?php endif;?>
 				</td>	
-         
-				<td>
-					<?php if(!empty($shop->shop_tel)):?>
-						<?php echo $shop->shop_tel;?>
-					<?php else:?>
-				    	暂无座机号码
-				    <?php endif;?>
-				</td>
 
-				<td>
-					<?php if(!empty($shop->shop_buinour_phone)):?>
-						<?php echo $shop->shop_buinour_phone;?>
-					<?php else:?>
-				    	暂无手机号码
-				    <?php endif;?>
-				</td>
-				
-				<td>
-					<?php if(!empty($shop->shop_province)):?>
-						<?php echo $shop->shop_province;?>
-					<?php else:?>
-				    	暂无省份
-				    <?php endif;?>
-				</td>
-
-				<td>
-					<?php if(!empty($shop->shop_city)):?>
-						<?php echo $shop->shop_city;?>
-					<?php else:?>
-				    	暂无市名
-				    <?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($shop->shop_area)):?>
-						<?php echo $shop->shop_area;?>
-					<?php else:?>
-				    	暂无市区
-				    <?php endif;?>
-				</td>
-
-				<td>
-					<?php if(!empty($shop->shop_detail_address)):?>
-						<?php echo $shop->shop_detail_address;?>
-					<?php else:?>
-				    	暂无详细地址
-				    <?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($shop->shop_business_hours)):?>
-						<?php echo $shop->shop_business_hours;?>
-					<?php else:?>
-				    	暂无营业时间
-				    <?php endif;?>
-				</td>
+			
 				<td>
 					<?php if(!empty($shop->shop_buinour_name)):?>
 						<?php echo $shop->shop_buinour_name;?>
@@ -139,71 +73,32 @@
 
 				<td>
 					<?php if(!empty($shop->shop_identity_card_pic)):?>
-						<img src="<?php echo $shop->shop_identity_card_pic;?>" width="50">
+						<img src="<?php echo $shop->shop_logo;?>" width="50">
 					<?php else:?>
-				    	暂无身份证图片
+				    	暂无商户图片
 				    <?php endif;?>
 				</td>
-				<td>
-					<?php if(!empty($shop->shop_business_license_pic)):?>
-						<img src="<?php echo $shop->shop_business_license_pic;?>" width="50">
+                <td width="15%">
+					<?php if(!empty($shop->shop_qrcode)):?>
+                    <div class="qrContent" onclick="qrcodeCreate(this)"><?php echo $shop->shop_qrcode;?></div>
 					<?php else:?>
-				    	暂无营业执照
+				    	暂无商户二维码图片
 				    <?php endif;?>
 				</td>
-				<td>
-					<?php if(!empty($shop->shop_other_license1)):?>
-						<img src="<?php echo $shop->shop_other_license1;?>" width="50">
-					<?php else:?>
-				    	暂无其他证件照
-				    <?php endif;?>
-				</td>
-
 				<td>
                 	<u style="cursor:pointer" class="text-primary" onclick="member_show('商铺活动信息','/admin/getshopActivity','<?php echo $shop->shop_id;?>','1500','700')">查看商铺活动</u>
                 </td>
-                
+               
+
                 <td>
-					<?php if(!empty($shop->shop_lng)):?>
-						<?php echo $shop->shop_lng;?>
-					<?php else:?>
-						暂无经度
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($shop->shop_lat)):?>
-						<?php echo $shop->shop_lat;?>
-					<?php else:?>
-						暂无纬度
-
-					<?php endif;?>
-				</td>
-
-				
-				
-				<td>
-					<?php if(!empty($shop->addtime)):?>
-						<?php echo $shop->addtime;?>
-					<?php else:?>
-						暂无注册时间
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($shop->edittime)):?>
-						<?php echo $shop->edittime;?>
-					<?php else:?>
-						暂无编辑时间
-					<?php endif;?>
-				</td>
-
+                    <u style="cursor:pointer" class="text-primary" onclick="member_show('商铺详情','/admin/getshopDetail','<?php echo $shop->shop_id;?>','350','500')">查看商铺详情</u>
+                </td>    
 				<!-- <td>
 					<u style="cursor:pointer" class="text-primary" onclick="member_show('发送审核消息','/admin/sendMessage','<?$shop->shop_buinour_phone;?>','800','500')">发送审核消息</u>
 				</td>
  -->
 				<td class="td-manage">
-					<?php if($shop->shop_status=='0'):?>
+					<?php if($shop->shop_apply=='2'):?>
 						<a style="text-decoration:none" onClick="member_start(this,'<?php echo $shop->shop_id;?>')" href="javascript:;" title="通过审核">
 							<i class="Hui-iconfont">&#xe6e1;</i>
 						</a> 
@@ -219,8 +114,9 @@
 
 <script type="text/javascript">
 $(function(){
+    $('.qrContent').click();
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -236,7 +132,34 @@ $(function(){
 	// 		$(this).addClass('selected');
 	// 	}
 	// });
+    
 });
+function qrcodeCreate(obj){
+    //alert($(obj).text());
+    var con = $(obj).text();
+    $(obj).text('');
+    $(obj).qrcode({width:100,height:100,text:utf16to8(con)});
+    
+}
+ function utf16to8(str) {  
+    var out, i, len, c;  
+    out = "";  
+    len = str.length;  
+    for(i = 0; i < len; i++) {  
+    c = str.charCodeAt(i);  
+    if ((c >= 0x0001) && (c <= 0x007F)) {  
+        out += str.charAt(i);  
+    } else if (c > 0x07FF) {  
+        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+        out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    } else {  
+        out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    }  
+    }  
+    return out;  
+}
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
@@ -269,6 +192,7 @@ function member_start(obj,id){
 	    shop.infoType = 'shop';
 	    shop.shopid = id;
 	    shop.shopApply = 1;
+        shop.shop_audit_status = 1;
 	    dataHandler('/common/modifyInfo',shop,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');

@@ -18,8 +18,6 @@
           <th width="80">位置</th>
           <th width="80">活动开始时间</th>
           <th width="80">活动结束时间</th>
-          <th width="80">添加时间</th>
-          <th width="80">修改时间</th>
           <th width="50">状态</th>
           
         </tr>
@@ -37,11 +35,13 @@
                 <td><?php echo $activity->activity_keyword;?></td>
                 <td><img src="<?php echo $activity->thumbnail1;?>" width="100"></td>
                 <td><?php echo $activity->content;?></td>
-                <td><?php echo $activity->site;?></td>
+                <td>
+                <?php if(isset($activity->site)):?>
+                <?php echo $activity->site;?>
+                <?php endif;?>
+                </td>
                 <td><?php echo $activity->activity_begintime;?></td>
                 <td><?php echo $activity->activity_endtime;?></td>
-                <td><?php echo $activity->addtime;?></td>
-                <td><?php echo $activity->dittime;?></td>  
 
                 <?php if($activity->status=='0'):?>
                     <td class="td-status">

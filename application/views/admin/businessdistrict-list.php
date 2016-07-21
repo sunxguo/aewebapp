@@ -25,8 +25,6 @@
 				<th width="80">商业街</th>
 				<th width="80">经度</th>
 				<th width="80">纬度</th>
-				<th width="80">添加时间</th>
-				<th width="80">修改时间</th>
 				<th width="50">状态</th>
 				<th width="80">操作</th>
 			</tr>
@@ -46,8 +44,6 @@
 				<td><?php echo $data->business_street;?></td>
 				<td><?php echo $data->business_lng;?></td>
 				<td><?php echo $data->business_lat;?></td>
-				<td><?php echo $data->business_addtime;?></td>
-				<td><?php echo $data->business_edittime;?></td>  
 
 				<?php if($data->business_status=='0'):?>
 						<td class="td-status">

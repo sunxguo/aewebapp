@@ -561,6 +561,7 @@ class Common extends CI_Controller
                 $table = "usershop";
                 $where = array('shop_id' => $data->id);
                 $info['shop_status'] = '1';
+                $info['shop_apply'] = '3';
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
                     'where' => $where,
@@ -570,6 +571,7 @@ class Common extends CI_Controller
                 $table = "usershop";
                 $where = array('shop_id' => $data->id);
                 $info['shop_status'] = '0';
+                $info['shop_apply'] = '1';
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
                     'where' => $where,
@@ -896,8 +898,8 @@ class Common extends CI_Controller
                 $table = 'usershop';
                 $where = array('shop_id' => $data->shop_id);
                 $info = array('shop_edittime' => date("Y-m-d H:i:s"));
-                if (isset($data->shop_audit_status)) {
-                    $info['shop_audit_status'] = $data->shop_audit_status;
+                if (isset($data->shop_apply)) {
+                    $info['shop_apply'] = $data->shop_apply;
                 }
                 $result = $this->dbHandler->updateData(array(
                     'table' => $table,
@@ -1281,6 +1283,9 @@ class Common extends CI_Controller
                 $info = array('shopId' => $data->shopid);
                 if (isset($data->shopApply)) {
                     $info['shopApply'] = $data->shopApply;
+                }
+                if (isset($data->shop_audit_status)) {
+                    $info['shopAuditStatus'] = $data->shop_audit_status;
                 }
                 $usershop = new stdClass;
                 $usershop->shop = $info;

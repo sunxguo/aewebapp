@@ -137,7 +137,7 @@ function member_stop(obj,id){
 		var buyer = new Object(); 
 	    buyer.infoType = 'shopkeyword';
 	    buyer.shop_id = id;
-	    buyer.shop_audit_status = 1;
+	    buyer.shop_apply = 1;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
@@ -153,10 +153,10 @@ function member_start(obj,id){
 		var buyer = new Object(); 
 	    buyer.infoType = 'shopkeyword';
 	    buyer.shop_id = id;
-	    buyer.shop_audit_status = 2;
+	    buyer.shop_apply = 2;
 	    dataHandler('/common/modifyInfo',buyer,null,null,null,function(){
 			
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">审核中</span>');
 			$(obj).remove();
 			layer.msg('已审核!',{icon: 6,time:1000});
 		},false,false);

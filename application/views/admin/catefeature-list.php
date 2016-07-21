@@ -19,7 +19,6 @@
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				
 				<th width="80">特征名称</th>
-				<th width="80">添加时间</th>
 				<th width="80">操作</th>
 			</tr>
 		</thead>
@@ -28,7 +27,6 @@
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $cate->feature_id;?>" name="id"></td>
 				<td><?php echo $cate->feature_name;?></td>
-				<td><?php echo $cate->feature_addtime;?></td>
 				<td class="td-manage">
 					<a title="编辑" href="javascript:;" onclick="member_edit('修改分类特征','/admin/catefeatureedit','<?php echo $cate->feature_id;?>','','550')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>

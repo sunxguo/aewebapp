@@ -11,8 +11,8 @@
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				<th width="80">举报用户</th>
 				<th width="150">举报的店铺</th>	
-				<th width="100">举报次数</th>
-				
+				<th width="100">举报内容</th>
+				<th width="100">举报时间</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,8 +29,6 @@
                 
 				<td>
 	                
-                    <u style="cursor:pointer" class="text-primary" 
-                    onclick="member_show('商铺举报信息','/admin/getReportDetail','<?php echo $buyer->report_id;?>','600','700')">
                     <?php if(!empty($buyer->usershop->shop_name) && !empty($buyer->usershop->shop_branch_name)):?>
 						<?php echo $buyer->usershop->shop_name;?> - <?php echo $buyer->usershop->shop_branch_name;?>
 				    <?php elseif(!empty($buyer->usershop->shop_name)):?>
@@ -38,15 +36,18 @@
 				    <?php elseif(!empty($buyer->usershop->shop_branch_name)):?>
 				    	<?php echo $buyer->usershop->shop_branch_name;?>	
 				    <?php endif;?>
-                    </u>
 			    </td>
 
 				<td>
-					<?php if(!empty($buyer->sumcount)):?>
-						<?php echo $buyer->sumcount;?>
+					<?php if(!empty($buyer->report_name)):?>
+						<?php echo $buyer->report_name;?>
 				    <?php endif;?>
 				</td>
-				
+				<td>
+					<?php if(!empty($buyer->report_addtime)):?>
+						<?php echo $buyer->report_addtime;?>
+				    <?php endif;?>
+				</td>
 			</tr>
 
 			<?php endforeach;?>
@@ -76,9 +77,8 @@ $(function(){
 	// });
 });
 /*查看举报详情*/
-function member_show(title,url,shop_id,w,h){
-
-	layer_show(title,url+'?phone='+shop_id,w,h);
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
 }
 </script> 
 </body>

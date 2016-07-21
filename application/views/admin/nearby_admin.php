@@ -17,8 +17,6 @@
 				<th width="100">昵称</th>
 				<th width="40">等级</th>
 				<th width="90">角色</th>
-				<th width="130">注册时间</th>
-				<th width="130">更新时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
@@ -49,21 +47,6 @@
 					附近审核员		
 				</td>
 				
-				<td>
-					<?php if(!empty($buyer->addtime)):?>
-						<?php echo $buyer->addtime;?>
-					<?php else:?>
-						暂无注册时间
-
-					<?php endif;?>
-				</td>
-				<td>
-					<?php if(!empty($buyer->edittime)):?>
-						<?php echo $buyer->edittime;?>
-					<?php else:?>
-						暂无注册时间
-					<?php endif;?>
-				</td>
 
 				<?php if($buyer->status=='1'):?>
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
@@ -101,7 +84,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
