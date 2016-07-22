@@ -1402,7 +1402,6 @@ function saveBusinessdistrict(isNew,callBack)
     
     var value="";
     var thumbnail1=$("#thumbnail").attr('src');
-    alert($("#thumbnail").attr('src'));
     //经度纬度
     // var business_lng=$("#business_lng").attr('src');
     // var business_lat=$("#business_lat").attr('src');
