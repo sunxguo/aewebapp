@@ -1391,7 +1391,7 @@ function saveShopGoods(isNew,callBack)
 
     }
 
-    dataHandler('/common/'+method+'Info',product,null,null,null,callBack,false,false);
+    dataHandler('/common/'+method+'Info',product,null,null,null,callBack,true,false);
 }
 
 

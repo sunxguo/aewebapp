@@ -15,7 +15,7 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="id" value=""></th>
+				<th width="25"><input type="checkbox" name="id" value="0"></th>
 				<th width="50">商品名</th>
 				<th width="50">商品详细名</th>
 				<th width="80">商品关键字</th>
@@ -76,7 +76,7 @@
 <script type="text/javascript">  
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

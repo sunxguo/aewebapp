@@ -85,10 +85,10 @@
 				</td>
                 
                 <td>
-                	<u style="cursor:pointer" class="text-primary" onclick="member_show('商铺活动信息','/admin/getshopActivity','<?php echo $shop->shop_id;?>','1500','700')">查看商铺活动</u>
+                	<u style="cursor:pointer" class="text-primary" onclick="member_show('商铺活动信息','/admin/getshopActivity','<?php echo $shop->shop_id;?>','1350','700')">查看商铺活动</u>
                 </td>
                 <td>
-                    <u style="cursor:pointer" class="text-primary" onclick="member_show('商铺详情','/admin/getshopDetail','<?php echo $shop->shop_id;?>','350','500')">查看商铺详情</u>
+                    <u style="cursor:pointer" class="text-primary" onclick="member_show('商铺详情','/admin/getshopDetail','<?php echo $shop->shop_id;?>','400','500')">查看商铺详情</u>
                 </td>  
 
 				<?php if($shop->shop_status=='0'):?>

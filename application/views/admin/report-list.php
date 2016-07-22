@@ -30,7 +30,7 @@
 				<td>
 	                
                     <u style="cursor:pointer" class="text-primary" 
-                    onclick="member_show('商铺举报信息','/admin/getReportDetail','<?php echo $buyer->report_id;?>','600','700')">
+                    onclick="member_show('商铺举报信息','/admin/getReportDetail','<?php echo $buyer->report_shop_id;?>','1300','700')">
                     <?php if(!empty($buyer->usershop->shop_name) && !empty($buyer->usershop->shop_branch_name)):?>
 						<?php echo $buyer->usershop->shop_name;?> - <?php echo $buyer->usershop->shop_branch_name;?>
 				    <?php elseif(!empty($buyer->usershop->shop_name)):?>

@@ -87,5 +87,5 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 define('SERVER_IP', 'http://shop.fengdukeji.com');
 //define('SERVER_IP', 'http://shop.fengdukeji.com');
-//define('API_IP', 'http://192.168.1.105:8080/');
-define('API_IP', 'http://182.92.156.106:8080/');
+define('API_IP', 'http://192.168.1.105:8080/');
+//define('API_IP', 'http://182.92.156.106:8080/');

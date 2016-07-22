@@ -1918,7 +1918,7 @@ class Admin extends CI_Controller
     {
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
-        $shopid = $_GET['phone'];
+        $shopid = $_GET['shop_id'];
         $bannerParameters['shopid'] = $shopid;
         $bannerParameters['result'] = 'data';
         $activitys = $this->getdata->getactivityByshopid($bannerParameters);
@@ -1932,7 +1932,7 @@ class Admin extends CI_Controller
     {
         $bannerParameters = array('result' => 'count', 'orderBy' => array('addtime' =>
                     'AESC'));
-        $shopid = $_GET['phone'];
+        $shopid = $_GET['shop_id'];
         $bannerParameters['shopid'] = $shopid;
         $bannerParameters['result'] = 'data';
         $activitys = $this->getdata->getShopDetailByshopid($bannerParameters);

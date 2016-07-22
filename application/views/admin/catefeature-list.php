@@ -46,7 +46,7 @@
 
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

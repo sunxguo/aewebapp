@@ -102,34 +102,37 @@ function member_show(title,url,id,w,h){
 }
 /*用户-停用*/
 function member_stop(obj,id){
-	layer.confirm('确认要停用吗？',function(index){
+	layer.confirm('确认要取消审核吗？',function(index){
 		var coupon = new Object(); 
 	    coupon.infoType = 'coupon';
 	    coupon.id = id;
 	    coupon.status = 0;
+        coupon.coupon_status=3;
 	    dataHandler('/common/modifyInfo',coupon,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">审核中</span>');
 			$(obj).remove();
-			layer.msg('已停用!',{icon: 5,time:1000});
+			layer.msg('已取消审核!',{icon: 5,time:1000});
 		},false,false);
+        location.reload();
 	});
 }
 
 /*用户-启用*/
 function member_start(obj,id){
-	layer.confirm('确认要启用吗？',function(index){
+	layer.confirm('确认要通过审核吗？',function(index){
 		var seller = new Object(); 
 	    seller.infoType = 'coupon';
 	    seller.id = id;
 	    seller.status = 1;
+        seller.coupon_status=0;
 	    dataHandler('/common/modifyInfo',seller,null,null,null,function(){
 			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已审核</span>');
 			$(obj).remove();
-			layer.msg('已启用!',{icon: 6,time:1000});
+			layer.msg('已审核!',{icon: 6,time:1000});
 		},false,false);
-        //location.reload();
+        location.reload();
 	});
 }
 /*用户-编辑*/

@@ -122,6 +122,7 @@ class Common extends CI_Controller
                 $goods = json_encode($info);
                 $url = API_IP . 'AEWebApp/userShop/addGoods';
                 $partam = 'goods=' . $goods;
+                //die(json_encode(array('result'=>'222','message'=>$partam)));
                 $header = array();
                 $coupon = httpPost($url, $partam, $header);
                 $results = json_decode($coupon);
@@ -336,7 +337,7 @@ class Common extends CI_Controller
                 $result = $results->data;
                 break;
         }
-        if ($result == 1)
+        if ($result != 0)
             echo json_encode(array("result" => "success", "message" => "信息写入成功"));
         else
             echo json_encode(array("result" => "failed", "message" => "信息写入失败"));
@@ -837,6 +838,30 @@ class Common extends CI_Controller
                 } else {
                     $info['pic1'] = '';
                 }
+                if (!empty($data->pic2)) {
+                    $info['pic2'] = strstr($data->pic2, 'http') ? $data->pic2 : SERVER_IP . ($data->
+                        pic2);
+                } else {
+                    $info['pic2'] = '';
+                }
+                if (!empty($data->pic3)) {
+                    $info['pic3'] = strstr($data->pic3, 'http') ? $data->pic3 : SERVER_IP . ($data->
+                        pic3);
+                } else {
+                    $info['pic3'] = '';
+                }
+                if (!empty($data->pic4)) {
+                    $info['pic4'] = strstr($data->pic4, 'http') ? $data->pic4 : SERVER_IP . ($data->
+                        pic4);
+                } else {
+                    $info['pic4'] = '';
+                }
+                if (!empty($data->pic5)) {
+                    $info['pic5'] = strstr($data->pic5, 'http') ? $data->pic5 : SERVER_IP . ($data->
+                        pic5);
+                } else {
+                    $info['pic5'] = '';
+                }
                 if (isset($data->category_shop_id)) {
                     $info['categoryShopId'] = $data->category_shop_id;
                 }
@@ -986,7 +1011,7 @@ class Common extends CI_Controller
             case "coupon":
                 $info = array('couponId' => $data->id);
                 $info['auditStatus'] = $data->status;
-                $info['couponStatus'] = '0';
+                $info['couponStatus'] = $data->coupon_status;
                 $adSpot = new stdClass;
                 $adSpot->coupon = $info;
                 $url = API_IP . "AEWebApp/userShop/moidfyCounpon";
@@ -1156,7 +1181,8 @@ class Common extends CI_Controller
                 }
                 if (isset($data->business_logo)) {
                     $info['businessLogo'] = strstr($data->business_logo, 'http') ? $data->business_logo :
-                        SERVER_IP . ($data->business_logo);
+                        //SERVER_IP . ($data->business_logo);
+                        $data->business_logo;
                 }
                 if (isset($data->business_comments)) {
                     $info['businessComments'] = $data->business_comments;

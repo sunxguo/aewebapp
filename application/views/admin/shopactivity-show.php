@@ -55,6 +55,10 @@
                     <td class="td-status">
                       <span class="label label-defaunt radius">已过期</span>
                     </td>
+                <?php else:?>
+                    <td class="td-status">
+                      <span class="label label-defaunt radius">关键字审核中</span>
+                    </td>
                 <?php endif;?>
                
               </tr>

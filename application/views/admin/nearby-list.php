@@ -60,7 +60,7 @@
 			<dd>
 				<ul>
 					<li><a _href="/admin/getWordlist" href="javascript:;">口令集</a></li>
-					<li><a _href="/admin/getCouponlist" href="javascript:;">优惠券</a></li>
+					<!--<li><a _href="/admin/getCouponlist" href="javascript:;">优惠券</a></li>-->
 					<li><a _href="/admin/todayPricelist" href="javascript:;">今日市价</a></li>
 				</ul>
 			</dd>

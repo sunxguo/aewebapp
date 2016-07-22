@@ -7,8 +7,8 @@
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
-			<!-- <a href="javascript:;" onclick="member_del_bulk()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
-			<a href="javascript:;" onclick="member_add('添加平台提示','/admin/addreminder','','550')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加平台提示</a>
+			<!-- <a href="javascript:;" onclick="member_del_bulk()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  
+			<a href="javascript:;" onclick="member_add('添加平台提示','/admin/addreminder','','550')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加平台提示</a>-->
 		</span> 
 		<span class="r">共有数据：<strong><?php echo $pageInfo['amount'];?></strong> 条</span> 
 	</div>
