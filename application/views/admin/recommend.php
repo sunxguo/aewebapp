@@ -145,6 +145,8 @@
 						</a>
 					<?php endif;?>
 					
+					<a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $buyer->ad_spot_id;?>')" class="ml-5" style="text-decoration:none">
+						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a> 
 				</td>
 			</tr>
@@ -228,7 +230,7 @@ function change_password(title,url,id,w,h){
 function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		var buyer = new Object(); 
-	    buyer.infoType = 'adtime';
+	    buyer.infoType = 'adspot';
 	    buyer.id = id;
 		dataHandler('/common/deleteInfo',buyer,null,null,null,function(){
 			$(obj).parents("tr").remove();

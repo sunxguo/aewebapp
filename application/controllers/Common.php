@@ -1180,8 +1180,8 @@ class Common extends CI_Controller
                     $info['businessName'] = $data->business_name;
                 }
                 if (isset($data->business_logo)) {
-                    $info['businessLogo'] = strstr($data->business_logo, 'http') ? $data->business_logo :
-                        //SERVER_IP . ($data->business_logo);
+                    $info['businessLogo'] = strstr($data->business_logo, 'http') ? $data->
+                        business_logo : //SERVER_IP . ($data->business_logo);
                         $data->business_logo;
                 }
                 if (isset($data->business_comments)) {
@@ -1423,6 +1423,10 @@ class Common extends CI_Controller
                 $condition['table'] = "admin";
                 $condition['where'] = array("admin_id" => $data->id);
                 break;
+            case 'adspot':
+                $condition['table'] = "adspot";
+                $condition['where'] = array("ad_spot_id" => $data->id);
+                break;
             case 'cate':
                 $condition['table'] = "categoryfeature";
                 $condition['where'] = array("feature_id" => $data->activity_id);
@@ -1432,7 +1436,7 @@ class Common extends CI_Controller
                 $condition['table'] = "categoryeigenvalue";
                 $condition['where'] = array("eigen_feature_id" => $data->activity_id);
                 $result2 = $this->dbHandler->deleteData($condition);
-                if ($result1 == 1&&$result2==1)
+                if ($result1 == 1 && $result2 == 1)
                     echo json_encode(array("result" => "success", "message" => "信息删除成功"));
                 else
                     echo json_encode(array("result" => "failed", "message" => "信息删除失败"));
