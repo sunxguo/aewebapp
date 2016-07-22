@@ -1,4 +1,5 @@
 <title>用户管理</title>
+<script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en">&gt;</span> 用户列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -11,10 +12,8 @@
 				<th width="25"><input type="checkbox" name="id" value=""></th>
 				<th width="100">昵称</th>
 				<th width="150">头像</th>	
-				<th width="40">性别</th>
 				<th width="90">手机</th>
-				<th width="90">用户默认城市</th>
-				<th width="60">设备类型</th>
+                <th>店铺二维码</th> 
 				<th width="70">状态</th>
                 <th width="70">操作</th>
 			</tr>
@@ -40,13 +39,6 @@
 				    <?php endif;?>
 			    </td>
 
-				<td>
-				<?php if(!empty($buyer->user_sex)):?>
-						<?php echo $buyer->user_sex=='0'?'男':($buyer->sex=='1'?'女':'未知');?>
-	                <?php else:?>
-				    	未知
-				    <?php endif;?>
-				</td>
 
 				<td>
 					<?php if(!empty($buyer->user_phone)):?>
@@ -55,23 +47,13 @@
 				    	暂无手机号
 				    <?php endif;?>
 				</td>
-				<td>
-					<?php if(!empty($buyer->user_defaultsid)):?>
-						<?php echo $buyer->user_defaultsid;?>
+                <td width="10%">
+					<?php if(!empty($buyer->user_qrcode)):?>
+                    <div class="qrContent" onclick="qrcodeCreate(this)"><?php echo $buyer->user_qrcode;?></div>
 					<?php else:?>
-				    	暂无默认城市
+				    	暂无商户二维码图片
 				    <?php endif;?>
 				</td>
-				
-				<td>
-					<?php if(isset($buyer->user_devicetype)):?>
-						<?php echo $buyer->user_devicetype=='0'?'Android':($buyer->user_devicetype=='1'?'IOS':'未知');?>
-					<?php else:?>
-				    	暂无设备信息
-				    <?php endif;?>
-				</td>
-			
-
 				<?php if($buyer->user_status=='0'):?>
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<?php else:?>
@@ -107,6 +89,7 @@
 
 <script type="text/javascript">
 $(function(){
+    $('.qrContent').click();
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
@@ -125,6 +108,32 @@ $(function(){
 	// 	}
 	// });
 });
+function qrcodeCreate(obj){
+    //alert($(obj).text());
+    var con = $(obj).text();
+    $(obj).text('');
+    $(obj).qrcode({width:100,height:100,text:utf16to8(con)});
+    
+}
+ function utf16to8(str) {  
+    var out, i, len, c;  
+    out = "";  
+    len = str.length;  
+    for(i = 0; i < len; i++) {  
+    c = str.charCodeAt(i);  
+    if ((c >= 0x0001) && (c <= 0x007F)) {  
+        out += str.charAt(i);  
+    } else if (c > 0x07FF) {  
+        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+        out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    } else {  
+        out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));  
+        out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));  
+    }  
+    }  
+    return out;  
+}
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);

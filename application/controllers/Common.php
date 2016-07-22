@@ -1109,7 +1109,7 @@ class Common extends CI_Controller
                 break;
                 /*通过广告审核并把它放到排期表内*/
             case "adstop":
-            
+
                 $info = array('adSpotId' => $data->adSpotId);
                 $info['adSpotStatus'] = $data->adSpotStatus;
                 $info['adSpotAdminId'] = $_SESSION['userid'];
@@ -1395,6 +1395,20 @@ class Common extends CI_Controller
             case 'shopadmin':
                 $condition['table'] = "admin";
                 $condition['where'] = array("admin_id" => $data->id);
+                break;
+            case 'cate':
+                $condition['table'] = "categoryfeature";
+                $condition['where'] = array("feature_id" => $data->activity_id);
+                $result1 = $this->dbHandler->deleteData($condition);
+                if ($result1 != 1)
+                    echo json_encode(array("result" => "failed", "message" => "信息删除失败"));
+                $condition['table'] = "categoryeigenvalue";
+                $condition['where'] = array("eigen_feature_id" => $data->activity_id);
+                $result2 = $this->dbHandler->deleteData($condition);
+                if ($result1 == 1&&$result2==1)
+                    echo json_encode(array("result" => "success", "message" => "信息删除成功"));
+                else
+                    echo json_encode(array("result" => "failed", "message" => "信息删除失败"));
                 break;
             case 'admin':
                 $condition['table'] = "admin";

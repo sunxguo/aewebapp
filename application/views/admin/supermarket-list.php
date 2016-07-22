@@ -12,7 +12,6 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="id" value=""></th>、
-				<th width="40">店铺id</th>
 				<th width="100">店铺Logo</th>
 				<th width="50">轮播图片详情</th>
 				<th width="100">店铺名</th>
@@ -32,7 +31,6 @@
 			<?php foreach($superMarkets as $superMarket):?>	
 			<tr class="text-c">
 				<td><input type="checkbox" value="<?php echo $superMarket->shop_id;?>" name="id"></td>
-				<td><?php echo $superMarket->shop_id;?></td>
 				<td><img src="<?php echo $superMarket->shop_logo;?>" width="100"></td>
 				<td><u style="cursor:pointer" class="text-primary label label-success radius" onclick="member_show('轮播图片信息','/admin/shopPic','<?php echo $superMarket->shop_id;?>','450','650')">轮播详情</u></td>
 				<td><?php echo $superMarket->shop_name;?></td>
@@ -78,7 +76,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 13, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示

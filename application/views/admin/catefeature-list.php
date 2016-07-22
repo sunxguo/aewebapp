@@ -120,6 +120,7 @@ function member_del(obj,id){
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
 		},false,false);
+        location.reload();
 	});
 }
 /*seller-批量删除*/

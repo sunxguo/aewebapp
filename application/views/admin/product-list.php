@@ -25,13 +25,13 @@
 				<th width="80">简介</th>
 				<th width="80">销量</th>
 				<th width="50">状态</th>
-				
+				<th width="50">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach($products as $product):?>
 			<tr class="text-c">
-				<td><input type="checkbox" value="<?php echo $product->goodsId;?>" name="id"></td>
+				<td><input type="checkbox" value="<?php echo $product->goodsId;?>" name="id"/></td>
 				<td><?php echo $product->name;?></td>
 				<td><?php echo $product->detailedname;?></td>
 				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('商品图片信息','/admin/goodsPic','<?php echo $product->goodsId;?>','450','650')"><img src="<?php echo $product->pic1?>" width="100"></u></td>
@@ -63,7 +63,17 @@
 				<?php elseif($product->status=='3'):?>
 					<td class="td-status"><span class="label label-defaunt radius">已审核</span></td>
 				<?php endif;?>
-				
+                <td class="td-manage">
+                <?php if($product->status=='0'):?>
+					<a style="text-decoration:none" onClick="member_stop(this,'<?php echo $product->goodsId;?>')" href="javascript:;" title="停用">
+							<i class="Hui-iconfont">&#xe631;</i>
+					</a> 
+				<?php elseif($product->status=='1'):?>
+					<a style="text-decoration:none" onClick="member_start(this,'<?php echo $product->goodsId;?>')" href="javascript:;" title="启用">
+							<i class="Hui-iconfont">&#xe6e1;</i>
+					</a>
+				<?php endif;?>
+				</td>
 			</tr>
 			<?php endforeach;?>
 		</tbody>
@@ -74,7 +84,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 8, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -104,14 +114,15 @@ function member_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){
 		var product = new Object(); 
 	    product.infoType = 'product';
-	    product.id = id;
+	    product.goodsId = id;
 	    product.status = 1;
 	    dataHandler('/common/modifyInfo',product,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="上架"><i class="Hui-iconfont">&#xe603;</i></a>');
+			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="上架"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
 			$(obj).remove();
 			layer.msg('已下架!',{icon: 5,time:1000});
 		},false,false);
+        location.reload();
 	});
 }
 
@@ -120,14 +131,15 @@ function member_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
 		var product = new Object(); 
 	    product.infoType = 'product';
-	    product.id = id;
+	    product.goodsId = id;
 	    product.status = 0;
 	    dataHandler('/common/modifyInfo',product,null,null,null,function(){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe631;</i></a>');
 			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已上架</span>');
 			$(obj).remove();
 			layer.msg('已上架!',{icon: 6,time:1000});
 		},false,false);
+        location.reload();
 	});
 }
 /*用户-编辑*/

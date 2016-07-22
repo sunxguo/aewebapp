@@ -1402,6 +1402,7 @@ function saveBusinessdistrict(isNew,callBack)
     
     var value="";
     var thumbnail1=$("#thumbnail").attr('src');
+    alert($("#thumbnail").attr('src'));
     //经度纬度
     // var business_lng=$("#business_lng").attr('src');
     // var business_lat=$("#business_lat").attr('src');
@@ -1417,7 +1418,7 @@ function saveBusinessdistrict(isNew,callBack)
     businessdistrict.business_province = $("#cmbProvince").val();
     businessdistrict.business_city = $("#cmbCity").val();
     businessdistrict.business_area = $("#cmbArea").val();
-    businessdistrict.thumbnail = $("#thumbnail").attr('src');
+    businessdistrict.business_logo = $("#thumbnail").attr('src');
     businessdistrict.business_address = $("#business_address").val();
     businessdistrict.business_name = $("#business_name").val();
     businessdistrict.business_comments = $("#business_comments").val();
