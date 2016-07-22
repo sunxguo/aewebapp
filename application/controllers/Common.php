@@ -1175,7 +1175,8 @@ class Common extends CI_Controller
                 }
                 if (isset($data->business_status)) {
                     $info['businessStatus'] = $data->business_status;
-                }//die(json_encode(array('result'=>'dsad','message'=>SERVER_IP .$data->business_logo)));
+                }
+                //die(json_encode(array('result'=>'dsad','message'=>SERVER_IP .$data->business_logo)));
                 $business = new stdClass;
                 $business->business = $info;
                 $url = API_IP . "AEWebApp/common/modifyBusiness";
